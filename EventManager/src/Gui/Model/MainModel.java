@@ -1,9 +1,6 @@
 package Gui.Model;
 
 import BLL.BLLInterface;
-import javafx.collections.FXCollections;
-
-import java.util.HashMap;
 
 public class MainModel {
 
