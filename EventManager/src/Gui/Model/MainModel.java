@@ -1,24 +1,21 @@
 package Gui.Model;
 
 import BE.Admin;
+import BLL.BLLFacade;
 import BLL.BLLInterface;
-import BLL.BLLManager;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.util.List;
 
 public class MainModel {
 
-    private BLLInterface bllManager;
+    private BLLInterface bllfacade;
 
-    public MainModel(){
-        bllManager = new BLLManager();
-
-
-
-
+    public MainModel() throws SQLServerException {
+        bllfacade = new BLLFacade();
     }
 
     public List<Admin> getAdmins(){
-       return bllManager.getAdmins();
+       return bllfacade.getAdmins();
     }
 }
