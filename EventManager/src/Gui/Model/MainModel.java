@@ -1,5 +1,6 @@
 package Gui.Model;
 
+import BLL.BLLFacade;
 import BLL.BLLInterface;
 
 public class MainModel {
@@ -7,12 +8,6 @@ public class MainModel {
     private BLLInterface bllInterface;
 
     public MainModel(){
-        bllInterface = new BLLInterface() {
-
-
-            @Override
-            public void examplemethod() {}};
-
-
+        bllInterface = new BLLFacade();
     }
 }

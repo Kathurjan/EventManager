@@ -9,9 +9,19 @@ import java.sql.Connection;
 public class DatabaseConnector {
     private SQLServerDataSource dataSource;
 
-    public DatabaseConnector() {
+    private static DatabaseConnector dbCon;
+
+    public static DatabaseConnector getInstance(){
+        if(dbCon == null){
+            dbCon = new DatabaseConnector();
+        }
+        return dbCon;
+    }
+
+
+    private DatabaseConnector() {
         dataSource = new SQLServerDataSource();
-        dataSource.setDatabaseName("Our name");
+        dataSource.setDatabaseName("EventManager");
         dataSource.setUser("CSe21B_15");
         dataSource.setPassword("CSe21B_15");
         dataSource.setPortNumber(1433);
