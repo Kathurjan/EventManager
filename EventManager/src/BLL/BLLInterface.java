@@ -9,6 +9,4 @@ public interface BLLInterface {
     public void getallusers();
 
     public List getAdmins();
-
-    public String verifyUserName();
 }

@@ -22,9 +22,4 @@ public class DALManager implements DALInterface{
     public List<Admin> getallAdmins() {
         return dboUser.getAdmins();
     }
-
-    @Override
-    public String verifyUserName() {
-        return dboUser.verifyUserName();
-    }
 }

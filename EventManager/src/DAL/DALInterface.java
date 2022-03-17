@@ -11,6 +11,4 @@ public interface DALInterface {
     public void getallusers();
 
     public List<Admin> getallAdmins();
-
-    public String verifyUserName();
 }
