@@ -28,6 +28,11 @@ public class BLLManager implements BLLInterface{
     }
 
     @Override
+    public String verifyUserName() {
+        return dalManager.verifyUserName();
+    }
+
+    @Override
     public void getallusers() {
         dalManager.getallusers();
     }

@@ -21,4 +21,9 @@ public class MainModel {
     public List<Admin> getAdmins(){
        return bllManager.getAdmins();
     }
+
+
+    public String verifyUserName(){
+        return bllManager.verifyUserName();
+    }
 }
