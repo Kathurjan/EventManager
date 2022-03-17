@@ -11,7 +11,7 @@ public class DatabaseConnector {
 
     public DatabaseConnector() {
         dataSource = new SQLServerDataSource();
-        dataSource.setDatabaseName("Our name");
+        dataSource.setDatabaseName("EventMangager");
         dataSource.setUser("CSe21B_15");
         dataSource.setPassword("CSe21B_15");
         dataSource.setPortNumber(1433);

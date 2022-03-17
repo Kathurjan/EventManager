@@ -1,18 +1,24 @@
 package Gui.Model;
 
+import BE.Admin;
 import BLL.BLLInterface;
+import BLL.BLLManager;
+
+import java.util.List;
 
 public class MainModel {
 
-    private BLLInterface bllInterface;
+    private BLLInterface bllManager;
 
     public MainModel(){
-        bllInterface = new BLLInterface() {
+        bllManager = new BLLManager();
 
 
-            @Override
-            public void examplemethod() {}};
 
 
+    }
+
+    public List<Admin> getAdmins(){
+       return bllManager.getAdmins();
     }
 }
