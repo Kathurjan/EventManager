@@ -4,13 +4,14 @@ import BE.Person;
 import BLL.BLLFacade;
 import BLL.BLLInterface;
 import DAL.PersonDAO;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.util.List;
 
 public class PersonModel {
     private BLLInterface bllInterface;
 
-    public PersonModel(){
+    public PersonModel() throws SQLServerException {
         bllInterface = new BLLFacade();
     }
 

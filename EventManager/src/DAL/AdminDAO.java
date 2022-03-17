@@ -9,10 +9,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class DBOUser {
+public class AdminDAO {
     Connection con;
 
-    public DBOUser(Connection connection) {
+    public AdminDAO(Connection connection) {
         this.con = connection;
     }
 

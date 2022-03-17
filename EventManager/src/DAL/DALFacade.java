@@ -8,12 +8,12 @@ import java.util.List;
 
 public class DALFacade implements DALInterface{
 
-    private DBOUser dboUser;
+    private AdminDAO dboUser;
     private PersonDAO personDAO;
     private DatabaseConnector db = new DatabaseConnector();
 
     public DALFacade() throws SQLServerException {
-        dboUser = new DBOUser(db.getConnection());
+        dboUser = new AdminDAO(db.getConnection());
     }
 
     @Override
