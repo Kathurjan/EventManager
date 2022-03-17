@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class LoginController {
     public void signIn(ActionEvent actionEvent) throws IOException {
-        Parent part = FXMLLoader.load(getClass().getResource("/Gui/view/Classroom3.fxml"));
+        Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(part);
         stage.setScene(scene);
