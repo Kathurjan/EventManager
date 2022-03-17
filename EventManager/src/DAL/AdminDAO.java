@@ -49,7 +49,9 @@ public class AdminDAO {
         return adminlist;
 
     }
-    public String verifyUserName() {
+
+    // inital idea was to use this method to verify the login, to check if the username matched with the admin info input. 
+    /*public String verifyUserName() {
         String userName = "";
 
         try(Connection connection = con) {
@@ -73,6 +75,6 @@ public class AdminDAO {
             return null;
         }
 
-    }
+    }*/
 
 }
