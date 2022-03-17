@@ -1,14 +1,23 @@
 package DAL;
 
-
 import BE.Admin;
+import BE.Person;
 
 import java.util.List;
 
 public interface DALInterface {
 
 
-    public void getallusers();
+    void getallusers();
 
-    public List<Admin> getallAdmins();
+    List<Admin> getallAdmins();
+
+    List<Person> getAllPerson();
+
+    void addPerson(String username, String password, String name);
+
+    void deletePerson(Person selectedPerson);
+
+    void editPerson(Person selectedPerson, String username, String password, String name);
+
 }

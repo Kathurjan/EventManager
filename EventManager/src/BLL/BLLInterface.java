@@ -1,12 +1,19 @@
 package BLL;
 
+import BE.Person;
+
 import java.util.List;
 
 public interface BLLInterface {
 
-    void examplemethod();
+    List getAdmins();
 
-    public void getallusers();
+    List<Person> getAllPerson();
 
-    public List getAdmins();
+    void addPerson(String username, String password, String name);
+
+    void deletePerson(Person selectedPerson);
+
+    void editPerson(Person selectedPerson, String username, String password, String name);
+
 }
