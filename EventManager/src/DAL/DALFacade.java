@@ -1,15 +1,29 @@
 package DAL;
 
+import BE.Admin;
 import BE.Person;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.util.List;
 
 public class DALFacade implements DALInterface{
 
+    private DBOUser dboUser;
     private PersonDAO personDAO;
+    private DatabaseConnector db = new DatabaseConnector();
 
-    public DALFacade(){
-        personDAO = new PersonDAO();
+    public DALFacade() throws SQLServerException {
+        dboUser = new DBOUser(db.getConnection());
+    }
+
+    @Override
+    public void getallusers() {
+        dboUser.getAdmins();
+    }
+
+    @Override
+    public List<Admin> getallAdmins() {
+        return dboUser.getAdmins();
     }
 
     @Override

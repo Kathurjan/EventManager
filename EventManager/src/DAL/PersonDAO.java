@@ -7,9 +7,16 @@ import java.sql.*;
 import java.util.List;
 
 public class PersonDAO {
+
+    Connection db;
+
+    public PersonDAO(Connection connection) {
+        this.db = connection;
+    }
+
     public List<Person> getAllPerson() {
         List<Person> personList = FXCollections.observableArrayList();
-        try (Connection con = DatabaseConnector.getInstance().getConnection()) {
+        try (Connection con = db) {
             String sqlStatement = "SELECT * FROM Person";
             Statement statement = con.createStatement();
             if (statement.execute(sqlStatement)) {
@@ -33,7 +40,7 @@ public class PersonDAO {
 
     public void addPerson(String username, String password, String name) {
         String sqlStatement = "INSERT INTO Movie(username, password, name) VALUES (?,?,?)";
-        try(Connection con = DatabaseConnector.getInstance().getConnection()){
+        try(Connection con = db){
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
             pstm.setString(1, username);
             pstm.setString(2, password);
@@ -47,7 +54,7 @@ public class PersonDAO {
     }
 
     public Person editPerson(Person selectedPerson, String username, String password, String name) {
-        try (Connection con = DatabaseConnector.getInstance().getConnection()) {
+        try (Connection con = db) {
             String query = "UPDATE Person set username = ?,password = ?,name = ? WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, username);
@@ -62,7 +69,7 @@ public class PersonDAO {
     }
 
     public void deletePerson(Person selectedPerson){
-        try(Connection con = DatabaseConnector.getInstance().getConnection()){
+        try(Connection con = db){
             String query = "DELETE FROM Person WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1,selectedPerson.getID());
