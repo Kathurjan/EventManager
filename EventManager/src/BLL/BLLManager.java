@@ -8,6 +8,6 @@ public class BLLManager implements BLLInterface{
 
     @Override
     public void examplemethod() {
-        
+
     }
 }

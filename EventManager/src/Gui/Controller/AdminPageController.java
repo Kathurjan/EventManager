@@ -31,7 +31,7 @@ public class AdminPageController {
 
     private void setupPersonWindow(boolean edit) throws IOException, SQLServerException {
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("AddPersonView.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("../view/UserCreationView.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         UserCreationController addPersons = fxmlLoader.getController();
         addPersons.setController(this);
