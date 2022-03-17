@@ -8,22 +8,22 @@ import java.util.List;
 
 public class DALFacade implements DALInterface{
 
-    private AdminDAO dboUser;
+    private AdminDAO adminDAO;
     private PersonDAO personDAO;
     private DatabaseConnector db = new DatabaseConnector();
 
     public DALFacade() throws SQLServerException {
-        dboUser = new AdminDAO(db.getConnection());
+        adminDAO = new AdminDAO(db.getConnection());
     }
 
     @Override
     public void getallusers() {
-        dboUser.getAdmins();
+        adminDAO.getAdmins();
     }
 
     @Override
     public List<Admin> getallAdmins() {
-        return dboUser.getAdmins();
+        return adminDAO.getAdmins();
     }
 
     @Override
@@ -44,5 +44,10 @@ public class DALFacade implements DALInterface{
     @Override
     public void editPerson(Person selectedPerson, String username, String password, String name) {
         personDAO.editPerson(selectedPerson, username, password, name);
+    }
+
+    @Override
+    public String verifyUserName() {
+        return adminDAO.verifyUserName();
     }
 }

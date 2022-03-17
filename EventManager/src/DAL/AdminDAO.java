@@ -49,5 +49,30 @@ public class AdminDAO {
         return adminlist;
 
     }
+    public String verifyUserName() {
+        String userName = "";
+
+        try(Connection connection = con) {
+            String sqlStatement = "Select count(1) From userName";
+
+            Statement statement = connection.createStatement();
+            if (statement.execute(sqlStatement)){
+                ResultSet resultSet = statement.getResultSet();
+
+                while (resultSet.next()){
+                    userName = resultSet.getString("userName");
+
+                }
+            }
+            return userName;
+
+
+        }
+        catch (SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
+
+    }
 
 }

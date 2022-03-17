@@ -37,6 +37,11 @@ public class BLLFacade implements BLLInterface{
     }
 
     @Override
+    public String verifyUserName() {
+        return dalInterface.verifyUserName();
+    }
+
+    @Override
     public List<Admin> getAdmins(){
         return dalInterface.getallAdmins();
     }
