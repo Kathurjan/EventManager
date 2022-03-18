@@ -36,11 +36,21 @@ public LoginController() throws SQLServerException {
 
     public void signIn(ActionEvent actionEvent) throws IOException {
         if (UserName.getText().isBlank()){
-            wrongPassOrName.setText("Please type in a username and password");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning!");
+            alert.setHeaderText("Wrong username or password.");
+            alert.setContentText("Please try again.");
+            alert.getOwner();
+            alert.showAndWait();
         }
 
         else if (!UserName.getText().equals(mainModel.verifyUserName()) && !UserName.getText().equals(mainModel.verifyUserPassWord())){
-            wrongPassOrName.setText("Incorrect Password");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning!");
+            alert.setHeaderText("Wrong username or password.");
+            alert.setContentText("Please try again.");
+            alert.getOwner();
+            alert.showAndWait();
         }
 
         //System.out.println("userName: "+mainModel.verifyUserName());
