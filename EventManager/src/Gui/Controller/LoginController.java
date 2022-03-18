@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 
 
 public class LoginController implements Initializable {
+
     @FXML
     private Label wrongPassOrName;
     @FXML
@@ -27,11 +28,11 @@ public class LoginController implements Initializable {
     private Button closeButton;
 
     private MainModel mainModel;
-public LoginController() throws SQLServerException {
-    mainModel = new MainModel();
 
-}
+    public LoginController() throws SQLServerException {
+        mainModel = new MainModel();
 
+    }
 
     public void signIn(ActionEvent actionEvent) throws IOException {
         System.out.println("sign in");

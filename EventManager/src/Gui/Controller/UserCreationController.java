@@ -101,7 +101,6 @@ public class UserCreationController {
             if(password1stTxt.getText().length() > 4 && password1stTxt.getText().length() < 21){ // Checks against minimum and maximum input length.
                 for (int i = 0; i < password1stTxt.getText().length(); i++) { // Loops through the length of the input
                     if(Character.isDigit(password1stTxt.getText().charAt(i))){ // If a char in the input is a digit it returns true.
-                        System.out.println(password1stTxt.getText().charAt(i));
                         return true;
                     }
                 }

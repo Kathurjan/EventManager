@@ -27,9 +27,8 @@ public class PersonDAO {
                     String password = rs.getString("userPassWord");
                     String email = rs.getString("email");
 
-                    Person person = new Person(id, username,password, email);// Creating a movie object from the retrieved values
-                    personList.add(person); // Adding the movie to  list
-                    System.out.println(personList);
+                    Person person = new Person(id, username,password, email);// Creating a person object from the retrieved values
+                    personList.add(person); // Adding the person to  list
                 }
             }
         } catch (SQLException ex) {
@@ -40,7 +39,6 @@ public class PersonDAO {
     }
 
     public void addPerson(String username, String password, String email) {
-        System.out.println(username + password + email);
         String sqlStatement = "INSERT INTO Person(userName, userPassWord, email) VALUES (?,?,?)";
         try(Connection con = db){
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
@@ -52,7 +50,6 @@ public class PersonDAO {
         } catch(SQLException ex) {
             System.out.println(ex);
         }
-        Person person = new Person(1,username,password,email); // Creating a new movie object
     }
 
     public Person editPerson(Person selectedPerson, String username, String password, String email) {
@@ -62,7 +59,7 @@ public class PersonDAO {
             pstm.setString(1, username);
             pstm.setString(2, password);
             pstm.setString(3, email);
-            pstm.executeUpdate();
+            pstm.executeUpdate(); // Executing the prepared statement with the specified parameters
             return new Person(selectedPerson.getID(),username,password,email);
         } catch (SQLException ex) {
             System.out.println(ex);
