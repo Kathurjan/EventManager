@@ -35,6 +35,24 @@ public LoginController() throws SQLServerException {
 
 
     public void signIn(ActionEvent actionEvent) throws IOException {
+        if (UserName.getText().isBlank()){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning!");
+            alert.setHeaderText("Wrong username or password.");
+            alert.setContentText("Please try again.");
+            alert.getOwner();
+            alert.showAndWait();
+        }
+
+        else if (!UserName.getText().equals(mainModel.verifyUserName()) && !UserName.getText().equals(mainModel.verifyUserPassWord())){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning!");
+            alert.setHeaderText("Wrong username or password.");
+            alert.setContentText("Please try again.");
+            alert.getOwner();
+            alert.showAndWait();
+        }
+
         //System.out.println("userName: "+mainModel.verifyUserName());
         if (!UserName.getText().isBlank())
             if( UserName.getText().equals(mainModel.verifyUserName()))
@@ -48,15 +66,6 @@ public LoginController() throws SQLServerException {
         catch (NullPointerException ex){
             System.out.println(ex);
 
-        }
-        else {
-        // Nothing selected.
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Warning!");
-        alert.setHeaderText("Wrong username or password.");
-        alert.setContentText("Please try again.");
-        alert.getOwner();
-        alert.showAndWait();
         }
     }
 
