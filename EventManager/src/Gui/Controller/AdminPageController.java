@@ -29,6 +29,9 @@ public class AdminPageController {
         setupPersonWindow(false);
     }
 
+    public void editBTNPress(ActionEvent actionEvent) throws SQLServerException, IOException {
+        setupPersonWindow(true);
+    }
 
     private void setupPersonWindow(boolean edit) throws IOException, SQLServerException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -44,9 +47,6 @@ public class AdminPageController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }
-
-    public void editBTNPress(ActionEvent actionEvent) {
     }
 
     public void delBTNPress(ActionEvent actionEvent) {
