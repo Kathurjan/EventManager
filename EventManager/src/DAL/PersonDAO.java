@@ -25,9 +25,9 @@ public class PersonDAO {
                     int id = rs.getInt("id");
                     String username = rs.getString("username");
                     String password = rs.getString("password");
-                    String name = rs.getString("name");
+                    String email = rs.getString("email");
 
-                    Person person = new Person(id, username,password,name);// Creating a movie object from the retrieved values
+                    Person person = new Person(id, username,password, email);// Creating a movie object from the retrieved values
                     personList.add(person); // Adding the movie to  list
                 }
             }
@@ -38,30 +38,30 @@ public class PersonDAO {
         return personList;
     }
 
-    public void addPerson(String username, String password, String name) {
-        String sqlStatement = "INSERT INTO Movie(username, password, name) VALUES (?,?,?)";
+    public void addPerson(String username, String password, String email) {
+        String sqlStatement = "INSERT INTO Movie(username, password, email) VALUES (?,?,?)";
         try(Connection con = db){
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
             pstm.setString(1, username);
             pstm.setString(2, password);
-            pstm.setString(3, name);
+            pstm.setString(3, email);
             pstm.addBatch(); // Adding to the statement
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         } catch(SQLException ex) {
             System.out.println(ex);
         }
-        Person person = new Person(1,username,password,name); // Creating a new movie object
+        Person person = new Person(1,username,password,email); // Creating a new movie object
     }
 
-    public Person editPerson(Person selectedPerson, String username, String password, String name) {
+    public Person editPerson(Person selectedPerson, String username, String password, String email) {
         try (Connection con = db) {
             String query = "UPDATE Person set username = ?,password = ?,name = ? WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, username);
             pstm.setString(2, password);
-            pstm.setString(3, name);
+            pstm.setString(3, email);
             pstm.executeUpdate();
-            return new Person(selectedPerson.getID(),username,password,name);
+            return new Person(selectedPerson.getID(),username,password,email);
         } catch (SQLException ex) {
             System.out.println(ex);
             return null;

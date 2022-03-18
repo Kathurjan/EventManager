@@ -14,10 +14,10 @@ public interface DALInterface {
 
     List<Person> getAllPerson();
 
-    void addPerson(String username, String password, String name);
+    void addPerson(String username, String password, String email);
 
     void deletePerson(Person selectedPerson);
 
-    void editPerson(Person selectedPerson, String username, String password, String name);
+    void editPerson(Person selectedPerson, String username, String password, String email);
 
 }

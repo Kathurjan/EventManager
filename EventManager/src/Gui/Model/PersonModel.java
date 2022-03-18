@@ -19,15 +19,15 @@ public class PersonModel {
         return bllInterface.getAllPerson();
     }
 
-    public void addPerson(String username, String password, String name){
-        bllInterface.addPerson(username, password, name);
+    public void addPerson(String username, String password, String email){
+        bllInterface.addPerson(username, password, email);
     }
 
     public void deletePerson(Person selectedPerson){
         bllInterface.deletePerson(selectedPerson);
     }
 
-    public void editPerson(Person selectedPerson, String username, String password, String name){
-        bllInterface.editPerson(selectedPerson, username, password, name);
+    public void editPerson(Person selectedPerson, String username, String password, String email){
+        bllInterface.editPerson(selectedPerson, username, password, email);
     }
 }

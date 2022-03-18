@@ -49,6 +49,7 @@ public class UserCreationController {
     }
 
     public void onAddUserBTNPress(ActionEvent event) {
+
     }
 
     public void onCancelBTNPress(ActionEvent event) {

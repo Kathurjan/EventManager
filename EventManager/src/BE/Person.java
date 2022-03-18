@@ -4,14 +4,14 @@ public class Person {
     private final int ID;
     private String Username;
     private String Password;
-    private String name;
+    private String email;
 
 
-    public Person(int id,String username, String password, String name) {
+    public Person(int id,String username, String password, String email) {
         this.ID = id;
         Username = username;
         Password = password;
-        this.name = name;
+        this.email = email;
     }
 
     public int getID(){
@@ -34,11 +34,11 @@ public class Person {
         Password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
