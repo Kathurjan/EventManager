@@ -53,10 +53,21 @@ public class UserCreationController {
     public void onAddUserBTNPress(ActionEvent event) {
         if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) {
             if (emailTxt.getText() != null) {
-                if (!verifyPassword()) {
+                if (verifyPassword()) {
                     personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText());
+                    Stage stage =  (Stage) emailTxt.getScene().getWindow();
+                    stage.close();
+                }
+                else{
+                    System.out.println("Lmao pls fix password");
                 }
             }
+            else {
+                System.out.println("Lmao pls fix email");
+            }
+        }
+        else {
+            System.out.println("Lmao pls fix name");
         }
     }
 
