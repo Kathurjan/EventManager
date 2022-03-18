@@ -3,14 +3,15 @@ package DAL;
 import BE.Admin;
 import javafx.collections.FXCollections;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.List;
 
 public class AdminDAO {
-    Connection con;
+    DatabaseConnector con;
 
     public AdminDAO(Connection connection) {
-        this.con = connection;
+        con = new DatabaseConnector();
     }
 
 
@@ -18,8 +19,8 @@ public class AdminDAO {
     public List<Admin> getAdmins(){
         List<Admin> adminlist = FXCollections.observableArrayList();
 
-        try(Connection connection = con) {
-            String sqlStatement = "SELECT * From dbo.Admin ";
+        try(Connection connection = con.getConnection()) {
+            String sqlStatement = "SELECT * From dbo.Person ";
 
             Statement statement  = connection.createStatement();
 
@@ -52,12 +53,10 @@ public class AdminDAO {
     // inital idea was to use this method to verify the login, to check if the username matched with the admin info input. 
     public String verifyUserName() {
         String userName = "";
-        System.out.println("TEST DAO");
-        try(Connection connection = con) {
-            String sqlStatement = "SELECT * from dbo.Person where userName=?";
+        try(Connection connection = con.getConnection()) {
+            String sqlStatement = "SELECT userName from dbo.Person ";
 
             PreparedStatement statement = connection.prepareStatement(sqlStatement);
-            statement.setString(1,userName);
 
             ResultSet resultSet = statement.executeQuery();
 
@@ -82,17 +81,15 @@ public class AdminDAO {
 
     public String verifyUserPassWord() {
         String passWord = "";
-        System.out.println("TEST DAO");
-        try(Connection connection = con) {
-            String sqlStatement = "SELECT * from dbo.Person where userPassWord=?";
+        try(Connection connection = con.getConnection()) {
+            String sqlStatement = "SELECT userPassWord from dbo.Person";
 
             PreparedStatement statement = connection.prepareStatement(sqlStatement);
-            statement.setString(1,passWord);
 
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()){
-                passWord = resultSet.getString("userName");
+                passWord = resultSet.getString("userPassWord");
 
             }
 
@@ -105,7 +102,7 @@ public class AdminDAO {
             return null;
         }
         if(passWord.equals(""))
-            System.out.println("no such userName");
+            System.out.println("no such PassWord");
         return passWord;
     }
 }

@@ -38,7 +38,7 @@ public LoginController() throws SQLServerException {
 
 
     public void signIn(ActionEvent actionEvent) throws IOException {
-        System.out.println("userName: "+mainModel.verifyUserName());
+        //System.out.println("userName: "+mainModel.verifyUserName());
         if (!UserName.getText().isBlank())
             if( UserName.getText().equals(mainModel.verifyUserName()))
                 if (!PassWord.getText().isBlank())
@@ -70,6 +70,8 @@ public LoginController() throws SQLServerException {
     }
 
 
-
-
+    public void testButton(ActionEvent actionEvent) {
+        System.out.println(mainModel.verifyUserName());
+        System.out.println(mainModel.verifyUserPassWord());
+    }
 }
