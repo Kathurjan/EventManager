@@ -24,7 +24,7 @@ public class AdminPageController {
 
 
     @FXML
-    public void adduserBTNPress(ActionEvent event) throws IOException, SQLServerException {
+    public void addBTNPress(ActionEvent event) throws IOException, SQLServerException {
         setupPersonWindow(false);
     }
 
