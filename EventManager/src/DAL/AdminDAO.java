@@ -54,10 +54,11 @@ public class AdminDAO {
     public String verifyUserName() {
         String userName = "";
         try(Connection connection = con.getConnection()) {
-            String sqlStatement = "SELECT userName from dbo.Person ";
+            String sqlStatement = "SELECT count(1) from dbo.Person WHERE userName = ?";
 
             PreparedStatement statement = connection.prepareStatement(sqlStatement);
 
+            statement.setString(1, userName);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()){
@@ -82,9 +83,10 @@ public class AdminDAO {
     public String verifyUserPassWord() {
         String passWord = "";
         try(Connection connection = con.getConnection()) {
-            String sqlStatement = "SELECT userPassWord from dbo.Person";
+            String sqlStatement = "SELECT count(1) from dbo.Person WHERE userPassWord =?";
 
             PreparedStatement statement = connection.prepareStatement(sqlStatement);
+            statement.setString(1,passWord);
 
             ResultSet resultSet = statement.executeQuery();
 

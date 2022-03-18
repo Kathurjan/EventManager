@@ -51,6 +51,8 @@ public LoginController() throws SQLServerException {
             alert.setContentText("Please try again.");
             alert.getOwner();
             alert.showAndWait();
+            System.out.println(mainModel.verifyUserName());
+            System.out.println(mainModel.verifyUserPassWord());
         }
 
         //System.out.println("userName: "+mainModel.verifyUserName());
