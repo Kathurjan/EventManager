@@ -14,6 +14,7 @@ public class DALFacade implements DALInterface{
 
     public DALFacade() throws SQLServerException {
         adminDAO = new AdminDAO(db.getConnection());
+        personDAO = new PersonDAO(db.getConnection());
     }
 
     @Override
