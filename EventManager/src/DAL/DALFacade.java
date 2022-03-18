@@ -50,4 +50,16 @@ public class DALFacade implements DALInterface{
     public String verifyUserName() {
         return adminDAO.verifyUserName();
     }
+
+    @Override
+    public Admin adminVerify(Admin admin) {
+        return adminDAO.adminVerify(admin);
+    }
+
+    @Override
+    public String verifyUserPassWord() {
+       return adminDAO.verifyUserPassWord();
+    }
+
+
 }

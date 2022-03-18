@@ -50,12 +50,39 @@ public class AdminDAO {
 
     }
 
+    public Admin adminVerify(Admin admin) {
+
+
+        try(Connection connection = con) {
+            String sqlStatement = "SELECT*From dbo.Admin";
+            Statement statement = connection.createStatement();
+            if (statement.execute(sqlStatement)){
+                ResultSet resultSet = statement.getResultSet();
+                while(resultSet.next()){
+                    String userName = resultSet.getString("userName");
+                    String userPassWord = resultSet.getString("userPassWord");
+                    String name = resultSet.getString("name");
+                    int id = resultSet.getInt("id");
+                     admin = new Admin(id,userName,userPassWord,name);
+
+                }
+
+            }
+
+        }
+        catch (SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
+        return admin;
+    }
+
     // inital idea was to use this method to verify the login, to check if the username matched with the admin info input. 
-    /*public String verifyUserName() {
+    public String verifyUserName() {
         String userName = "";
 
         try(Connection connection = con) {
-            String sqlStatement = "Select count(1) From userName";
+            String sqlStatement = "SELCT count(1) FROM dbo.Admin";
 
             Statement statement = connection.createStatement();
             if (statement.execute(sqlStatement)){
@@ -75,6 +102,32 @@ public class AdminDAO {
             return null;
         }
 
-    }*/
+    }
 
+
+    public String verifyUserPassWord() {
+        String password = "";
+        try(Connection connection = con) {
+            String sqlStatement = "SELCT count(1) FROM dbo.Admin";
+
+            Statement statement = connection.createStatement();
+            if (statement.execute(sqlStatement)){
+                ResultSet resultSet = statement.getResultSet();
+
+                while (resultSet.next()){
+                    password = resultSet.getString("userPassWord");
+
+                }
+            }
+            return password;
+
+
+        }
+        catch (SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
+
+
+    }
 }
