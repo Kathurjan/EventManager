@@ -39,7 +39,7 @@ public class PersonDAO {
     }
 
     public void addPerson(String username, String password, String email) {
-        String sqlStatement = "INSERT INTO Movie(username, password, email) VALUES (?,?,?)";
+        String sqlStatement = "INSERT INTO Person(username, password, email) VALUES (?,?,?)";
         try(Connection con = db){
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
             pstm.setString(1, username);
