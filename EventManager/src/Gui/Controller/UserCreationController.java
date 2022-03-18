@@ -48,18 +48,19 @@ public class UserCreationController {
          personModel = new PersonModel();
     }
 
-    public void setEdit(Person person){
+    public void setEdit(Person person){ //Sets the isEditing variable for use in addUser method and gets the info on the selected person
         selectedPerson = person;
         isEditing = true;
         userNameTxt.setText(person.getUsername());
         emailTxt.setText(person.getEmail());
+        // Password is omitted to ensure protection. (Up for discussion)
     }
 
     public void onAddUserBTNPress(ActionEvent event) {
-        if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) {
-            if (verifyEmail() | isEditing) {
+        if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // checks the length of the input to ensure minimum safety
+            if (verifyEmail() | isEditing) { // if controller is in editing mode -> skip email verification step
                 if (verifyPassword()) {
-                    if(!isEditing){
+                    if(!isEditing){ // does the check of the isEditing variable
                         personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText());
                         Stage stage =  (Stage) emailTxt.getScene().getWindow();
                         stage.close();
@@ -68,9 +69,6 @@ public class UserCreationController {
                     Stage stage =  (Stage) emailTxt.getScene().getWindow();
                     stage.close();
                 }
-            }
-            else {
-                errorLabel.setText("You must provide an email");
             }
         }
         else {
@@ -83,22 +81,26 @@ public class UserCreationController {
         stage.close();
     }
 
-    private boolean verifyEmail() {
+    private boolean verifyEmail() { // Checks for null input and gets a list of all Persons in the DB to check it against the input
         List<Person> personList = personModel.getAllPerson();
-        for (Person person: personList) {
-            if(Objects.equals(person.getEmail(), emailTxt.getText())){
-                return true;
+        if (emailTxt.getText() != null) {
+            for (Person person : personList) {
+                if (Objects.equals(person.getEmail(), emailTxt.getText())) {
+                    errorLabel.setText("The email is already in use, check the persons list");
+                    return false;
+                }
             }
+            return true;
         }
-        errorLabel.setText("The email is already in use, check the persons list");
+        errorLabel.setText("You must provide an email");
         return false;
     }
 
     private boolean verifyPassword(){
-        if(Objects.equals(password1stTxt.getText(), password2ndTxt.getText())){
-            if(password1stTxt.getText().length() > 4 && password1stTxt.getText().length() < 21){
-                for (int i = 0; i < password1stTxt.getText().length(); i++) {
-                    if(Character.isDigit(password1stTxt.getText().charAt(i))){
+        if(Objects.equals(password1stTxt.getText(), password2ndTxt.getText())){ // compares the repeated password to ensure input
+            if(password1stTxt.getText().length() > 4 && password1stTxt.getText().length() < 21){ // Checks against minimum and maximum input length.
+                for (int i = 0; i < password1stTxt.getText().length(); i++) { // Loops through the length of the input
+                    if(Character.isDigit(password1stTxt.getText().charAt(i))){ // If a char in the input is a digit it returns true.
                         System.out.println(password1stTxt.getText().charAt(i));
                         return true;
                     }

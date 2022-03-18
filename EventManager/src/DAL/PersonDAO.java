@@ -23,12 +23,13 @@ public class PersonDAO {
                 ResultSet rs = statement.getResultSet();
                 while (rs.next()) {
                     int id = rs.getInt("id");
-                    String username = rs.getString("username");
-                    String password = rs.getString("password");
+                    String username = rs.getString("userName");
+                    String password = rs.getString("userPassWord");
                     String email = rs.getString("email");
 
                     Person person = new Person(id, username,password, email);// Creating a movie object from the retrieved values
                     personList.add(person); // Adding the movie to  list
+                    System.out.println(personList);
                 }
             }
         } catch (SQLException ex) {
