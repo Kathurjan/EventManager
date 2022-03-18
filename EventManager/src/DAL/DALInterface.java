@@ -20,4 +20,10 @@ public interface DALInterface {
 
     void editPerson(Person selectedPerson, String username, String password, String email);
 
+    public String verifyUserName();
+
+
+
+
+    public String verifyUserPassWord();
 }

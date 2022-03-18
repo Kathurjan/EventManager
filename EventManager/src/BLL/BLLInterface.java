@@ -1,5 +1,6 @@
 package BLL;
 
+import BE.Admin;
 import BE.Person;
 
 import java.util.List;
@@ -16,4 +17,10 @@ public interface BLLInterface {
 
     void editPerson(Person selectedPerson, String username, String password, String email);
 
+   public String verifyUserName();
+
+
+
+
+    public String verifyUserPassWord();
 }

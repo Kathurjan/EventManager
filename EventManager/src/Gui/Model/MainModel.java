@@ -18,4 +18,11 @@ public class MainModel {
     public List<Admin> getAdmins(){
        return bllfacade.getAdmins();
     }
+    public String verifyUserName(){
+        return bllfacade.verifyUserName();
+    }
+
+    public String verifyUserPassWord(){
+        return bllfacade.verifyUserPassWord();
+    }
 }

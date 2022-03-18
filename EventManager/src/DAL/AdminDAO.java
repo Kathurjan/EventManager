@@ -50,4 +50,62 @@ public class AdminDAO {
 
     }
 
+
+
+    // inital idea was to use this method to verify the login, to check if the username matched with the admin info input. 
+    public String verifyUserName() {
+        String userName = "";
+
+        try(Connection connection = con) {
+            String sqlStatement = "SELCT count(1) FROM dbo.Admin";
+
+            Statement statement = connection.createStatement();
+            if (statement.execute(sqlStatement)){
+                ResultSet resultSet = statement.getResultSet();
+
+                while (resultSet.next()){
+                    userName = resultSet.getString("userName");
+
+                }
+            }
+            return userName;
+
+
+        }
+        catch (SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
+
+    }
+
+
+    public String verifyUserPassWord() {
+        String password = "";
+        System.out.println(1);
+        try(Connection connection = con) {
+            String sqlStatement = "SELECT count(1) FROM dbo.Admin";
+            System.out.println(sqlStatement);
+            Statement statement = connection.createStatement();
+            if (statement.execute(sqlStatement)){
+                System.out.println(sqlStatement);
+                ResultSet resultSet = statement.getResultSet();
+
+                while (resultSet.next()){
+                    System.out.println(1);
+                    password = resultSet.getString("userPassWord");
+
+                }
+            }
+            return password;
+
+
+        }
+        catch (SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
+
+
+    }
 }
