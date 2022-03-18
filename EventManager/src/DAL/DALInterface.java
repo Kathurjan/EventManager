@@ -8,9 +8,8 @@ import java.util.List;
 public interface DALInterface {
 
 
-    void getallusers();
 
-    List<Admin> getallAdmins();
+
 
     List<Person> getAllPerson();
 
@@ -20,10 +19,5 @@ public interface DALInterface {
 
     void editPerson(Person selectedPerson, String username, String password, String email);
 
-    public String verifyUserName();
-
-
-
-
-    public String verifyUserPassWord();
+    public  Admin verifyadmin(String username,String password);
 }

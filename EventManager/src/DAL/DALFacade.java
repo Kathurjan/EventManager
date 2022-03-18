@@ -17,15 +17,8 @@ public class DALFacade implements DALInterface{
         personDAO = new PersonDAO(db.getConnection());
     }
 
-    @Override
-    public void getallusers() {
-        adminDAO.getAdmins();
-    }
 
-    @Override
-    public List<Admin> getallAdmins() {
-        return adminDAO.getAdmins();
-    }
+
 
     @Override
     public List<Person> getAllPerson() {
@@ -47,15 +40,10 @@ public class DALFacade implements DALInterface{
         personDAO.editPerson(selectedPerson, username, password, email);
     }
 
-    @Override
-    public String verifyUserName() {
-        return adminDAO.verifyUserName();
-    }
-
 
     @Override
-    public String verifyUserPassWord() {
-       return adminDAO.verifyUserPassWord();
+    public Admin verifyadmin(String username,String password) {
+        return adminDAO.verifyAdmin(username, password);
     }
 
 

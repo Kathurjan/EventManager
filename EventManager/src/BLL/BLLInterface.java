@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BLLInterface {
 
-    List getAdmins();
+
 
     List<Person> getAllPerson();
 
@@ -17,10 +17,7 @@ public interface BLLInterface {
 
     void editPerson(Person selectedPerson, String username, String password, String email);
 
-   public String verifyUserName();
 
 
-
-
-    public String verifyUserPassWord();
+    public Admin verifyadmin(String username,String password);
 }

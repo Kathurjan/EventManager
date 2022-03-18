@@ -5,8 +5,6 @@ import BLL.BLLFacade;
 import BLL.BLLInterface;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-import java.util.List;
-
 public class MainModel {
 
     private BLLInterface bllfacade;
@@ -15,14 +13,11 @@ public class MainModel {
         bllfacade = new BLLFacade();
     }
 
-    public List<Admin> getAdmins(){
-       return bllfacade.getAdmins();
-    }
-    public String verifyUserName(){
-        return bllfacade.verifyUserName();
+
+
+
+    public Admin verifyadmin(String username,String password){
+        return bllfacade.verifyadmin( username, password);
     }
 
-    public String verifyUserPassWord(){
-        return bllfacade.verifyUserPassWord();
-    }
 }

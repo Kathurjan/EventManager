@@ -45,4 +45,10 @@ public class AdminPageController {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void editBTNPress(ActionEvent actionEvent) {
+    }
+
+    public void delBTNPress(ActionEvent actionEvent) {
+    }
 }
