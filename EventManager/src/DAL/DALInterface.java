@@ -23,7 +23,7 @@ public interface DALInterface {
     public String verifyUserName();
 
 
-    public Admin adminVerify(Admin admin);
+
 
     public String verifyUserPassWord();
 }

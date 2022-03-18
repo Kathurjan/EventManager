@@ -22,10 +22,6 @@ public class MainModel {
         return bllfacade.verifyUserName();
     }
 
-  public Admin adminVerify(Admin admin){
-        return bllfacade.adminVerify(admin);
-    }
-
     public String verifyUserPassWord(){
         return bllfacade.verifyUserPassWord();
     }

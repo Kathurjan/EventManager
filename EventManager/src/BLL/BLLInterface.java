@@ -20,7 +20,7 @@ public interface BLLInterface {
    public String verifyUserName();
 
 
-    public Admin adminVerify(Admin admin);
+
 
     public String verifyUserPassWord();
 }

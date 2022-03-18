@@ -38,7 +38,10 @@ public LoginController() throws SQLServerException {
 
 
     public void signIn(ActionEvent actionEvent) throws IOException {
-        if (UserName.getText().contains(mainModel.verifyUserName()) && PassWord.getText().contains(mainModel.verifyUserPassWord()))
+        if (!UserName.getText().isBlank())
+            if( UserName.getText().contains(mainModel.verifyUserName()))
+                if (!PassWord.getText().isBlank())
+                    if( PassWord.getText().contains(mainModel.verifyUserPassWord()))
         try{Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
         Stage stage = new Stage();
         Scene scene = new Scene(part);
