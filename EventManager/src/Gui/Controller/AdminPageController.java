@@ -17,6 +17,7 @@ public class AdminPageController {
     private MainModel mainModel;
     private Person testAdminOBJ;
 
+
     public AdminPageController() throws SQLServerException {
         mainModel = new MainModel();
         testAdminOBJ = new Admin(1, "Test", "Test", "Test");
