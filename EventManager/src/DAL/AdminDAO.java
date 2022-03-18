@@ -3,17 +3,15 @@ package DAL;
 import BE.Admin;
 import javafx.collections.FXCollections;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javax.xml.crypto.Data;
+import java.sql.*;
 import java.util.List;
 
 public class AdminDAO {
-    Connection con;
+    DatabaseConnector con;
 
     public AdminDAO(Connection connection) {
-        this.con = connection;
+        con = new DatabaseConnector();
     }
 
 
@@ -21,8 +19,8 @@ public class AdminDAO {
     public List<Admin> getAdmins(){
         List<Admin> adminlist = FXCollections.observableArrayList();
 
-        try(Connection connection = con) {
-            String sqlStatement = "SELECT * From dbo.Admin ";
+        try(Connection connection = con.getConnection()) {
+            String sqlStatement = "SELECT * From dbo.Person ";
 
             Statement statement  = connection.createStatement();
 
@@ -55,20 +53,19 @@ public class AdminDAO {
     // inital idea was to use this method to verify the login, to check if the username matched with the admin info input. 
     public String verifyUserName() {
         String userName = "";
+        try(Connection connection = con.getConnection()) {
+            String sqlStatement = "SELECT userName from dbo.Person ";
 
-        try(Connection connection = con) {
-            String sqlStatement = "SELCT count(1) FROM dbo.Admin";
+            PreparedStatement statement = connection.prepareStatement(sqlStatement);
 
-            Statement statement = connection.createStatement();
-            if (statement.execute(sqlStatement)){
-                ResultSet resultSet = statement.getResultSet();
+            ResultSet resultSet = statement.executeQuery();
 
-                while (resultSet.next()){
-                    userName = resultSet.getString("userName");
+            while (resultSet.next()){
+                userName = resultSet.getString("userName");
 
-                }
             }
-            return userName;
+
+
 
 
         }
@@ -76,28 +73,27 @@ public class AdminDAO {
             System.out.println(ex);
             return null;
         }
-
+        if(userName.equals(""))
+            System.out.println("no such userName");
+        return userName;
     }
 
 
     public String verifyUserPassWord() {
-        String password = "";
-        System.out.println(1);
-        try(Connection connection = con) {
-            String sqlStatement = "SELECT count(1) FROM dbo.Admin";
-            System.out.println(sqlStatement);
-            Statement statement = connection.createStatement();
-            if (statement.execute(sqlStatement)){
-                System.out.println(sqlStatement);
-                ResultSet resultSet = statement.getResultSet();
+        String passWord = "";
+        try(Connection connection = con.getConnection()) {
+            String sqlStatement = "SELECT userPassWord from dbo.Person";
 
-                while (resultSet.next()){
-                    System.out.println(1);
-                    password = resultSet.getString("userPassWord");
+            PreparedStatement statement = connection.prepareStatement(sqlStatement);
 
-                }
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()){
+                passWord = resultSet.getString("userPassWord");
+
             }
-            return password;
+
+
 
 
         }
@@ -105,7 +101,8 @@ public class AdminDAO {
             System.out.println(ex);
             return null;
         }
-
-
+        if(passWord.equals(""))
+            System.out.println("no such PassWord");
+        return passWord;
     }
 }

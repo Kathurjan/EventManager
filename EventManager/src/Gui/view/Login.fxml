@@ -14,5 +14,6 @@
       <Button fx:id="closeButton" layoutX="228.0" layoutY="330.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="149.0" text="Cancel" />
       <Label fx:id="wrongPassOrName" layoutX="226.0" layoutY="251.0" text="Label" />
       <Button layoutX="77.0" layoutY="44.0" mnemonicParsing="false" onAction="#skip" text="Button" />
+      <Button layoutX="61.0" layoutY="274.0" mnemonicParsing="false" onAction="#testButton" text="Button" />
    </children>
 </AnchorPane>

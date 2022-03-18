@@ -38,8 +38,9 @@ public LoginController() throws SQLServerException {
 
 
     public void signIn(ActionEvent actionEvent) throws IOException {
+        //System.out.println("userName: "+mainModel.verifyUserName());
         if (!UserName.getText().isBlank())
-            if( UserName.getText().contains(mainModel.verifyUserName()))
+            if( UserName.getText().equals(mainModel.verifyUserName()))
                 if (!PassWord.getText().isBlank())
                     if( PassWord.getText().contains(mainModel.verifyUserPassWord()))
         try{Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
@@ -70,14 +71,20 @@ public LoginController() throws SQLServerException {
 
 
     public void skip(ActionEvent event) {
-        try{Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
+        try {
+            Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(part);
             stage.setScene(scene);
-            stage.show();}
-        catch (NullPointerException | IOException ex){
+            stage.show();
+        } catch (NullPointerException | IOException ex) {
             System.out.println(ex);
 
         }
+    }
+
+    public void testButton(ActionEvent actionEvent) {
+        System.out.println(mainModel.verifyUserName());
+        System.out.println(mainModel.verifyUserPassWord());
     }
 }
