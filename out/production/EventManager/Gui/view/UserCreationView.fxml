@@ -7,7 +7,6 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.UserCreationController">
    <children>
       <Button layoutX="89.0" layoutY="318.0" mnemonicParsing="false" onAction="#onAddUserBTNPress" text="Create user" />
@@ -16,14 +15,12 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="firstNameTxt" layoutX="118.0" layoutY="110.0" promptText="First name" />
-      <TextField fx:id="lastNameTxt" layoutX="332.0" layoutY="110.0" promptText="Last name" />
-      <TextField fx:id="userNameTxt" layoutX="224.0" layoutY="197.0" promptText="Username" />
-      <TextField fx:id="password1stTxt" layoutX="224.0" layoutY="236.0" promptText="Password" />
-      <CheckComboBox fx:id="typeCheckBox" layoutX="330.0" layoutY="153.0" prefHeight="26.0" prefWidth="150.0" title="Type" />
-      <TextField fx:id="emailTxt" layoutX="118.0" layoutY="154.0" promptText="Email" />
+      <TextField fx:id="userNameTxt" layoutX="223.0" layoutY="145.0" promptText="Username" />
+      <TextField fx:id="password1stTxt" layoutX="223.0" layoutY="184.0" promptText="Password" />
+      <CheckComboBox fx:id="typeCheckBox" layoutX="329.0" layoutY="101.0" prefHeight="26.0" prefWidth="150.0" title="Type" />
+      <TextField fx:id="emailTxt" layoutX="117.0" layoutY="102.0" promptText="Email" />
       <Label fx:id="errorLabel" layoutX="298.0" layoutY="77.0" />
-      <TextField fx:id="password2ndTxt" layoutX="224.0" layoutY="275.0" promptText="Repeat password" />
+      <TextField fx:id="password2ndTxt" layoutX="223.0" layoutY="223.0" promptText="Repeat password" />
       <Button layoutX="456.0" layoutY="318.0" mnemonicParsing="false" onAction="#onCancelBTNPress" text="Cancel" />
    </children>
 </AnchorPane>

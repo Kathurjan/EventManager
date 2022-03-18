@@ -69,6 +69,15 @@ public LoginController() throws SQLServerException {
     }
 
 
+    public void skip(ActionEvent event) {
+        try{Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(part);
+            stage.setScene(scene);
+            stage.show();}
+        catch (NullPointerException | IOException ex){
+            System.out.println(ex);
 
-
+        }
+    }
 }
