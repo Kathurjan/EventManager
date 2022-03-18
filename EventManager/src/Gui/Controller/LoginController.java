@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -53,8 +50,13 @@ public LoginController() throws SQLServerException {
 
         }
         else {
-            wrongPassOrName.setText("Wrong user name or password please try again.");
-
+        // Nothing selected.
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning!");
+        alert.setHeaderText("Wrong username or password.");
+        alert.setContentText("Please try again.");
+        alert.getOwner();
+        alert.showAndWait();
         }
     }
 
