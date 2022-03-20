@@ -3,24 +3,31 @@ package Gui.Controller;
 import BE.Admin;
 import BE.Person;
 import Gui.Model.MainModel;
+import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class AdminPageController {
+    public Button delBTN;
+    @FXML
+    private TableView adminTable;
     private MainModel mainModel;
     private Person testAdminOBJ;
-
+    private final PersonModel model;
 
     public AdminPageController() throws SQLServerException {
         mainModel = new MainModel();
         testAdminOBJ = new Admin(1, "Test", "Test", "Test");
+        this.model = new PersonModel();
     }
 
 
@@ -49,6 +56,14 @@ public class AdminPageController {
         stage.show();
     }
 
+    public void refreshPersonList(){
+
+    }
+
     public void delBTNPress(ActionEvent actionEvent) {
+        if (adminTable.getSelectionModel().getSelectedIndex() != -1);
+        {
+            model.deletePerson((Person) adminTable.getSelectionModel().getSelectedItem());
+        }
     }
 }
