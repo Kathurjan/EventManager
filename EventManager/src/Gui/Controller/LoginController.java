@@ -17,7 +17,8 @@ import java.util.ResourceBundle;
 
 
 public class LoginController implements Initializable {
-
+    @FXML
+    private Button loginBtn;
     @FXML
     private Label wrongPassOrName;
     @FXML
@@ -44,7 +45,8 @@ public class LoginController implements Initializable {
             alert.getOwner();
             alert.showAndWait();
         }
-
+        // checks of the username and password text field is empty and if the username and password matches the admins
+        // it will allow them to log in.
         if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()){
             if (mainModel.verifyadmin(UserName.getText(), PassWord.getText()) != null) {
                 try {
@@ -53,13 +55,18 @@ public class LoginController implements Initializable {
                     Scene scene = new Scene(part);
                     stage.setScene(scene);
                     stage.show();
+
+                    // used to close the window if the pass and username is correct
+                    Stage stagebtnwindow = (Stage) loginBtn.getScene().getWindow();
+                    stagebtnwindow.close();
                     
                 } catch (NullPointerException ex) {
                     System.out.println(ex);
 
                 }
             }else {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
+            // if it doesn't know match it will open up the below alert window alerting the user to incorrect username and apssword.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning!");
             alert.setHeaderText("Wrong username or password.");
             alert.setContentText("Please try again.");
@@ -70,7 +77,7 @@ public class LoginController implements Initializable {
 
     }
 
-
+    // used to close the stage
     public void close(ActionEvent actionEvent) {
         Stage stage =  (Stage) closeButton.getScene().getWindow();
         stage.close();

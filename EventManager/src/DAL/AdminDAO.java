@@ -14,7 +14,12 @@ public class AdminDAO {
         con = new DatabaseConnector();
     }
 
+/*
+Below method is used to verify if the user login is an admin,
+if the username and password matches the any of the username and passwords in the database it will verify them as
+an admin and login them into the admin window.
 
+ */
     public Admin verifyAdmin(String username, String password) {
 
         Admin admin = null;
