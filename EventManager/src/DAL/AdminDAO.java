@@ -7,7 +7,8 @@ import java.sql.*;
 import java.util.List;
 
 public class AdminDAO {
-    DatabaseConnector con;
+
+    private DatabaseConnector con;
 
     public AdminDAO(Connection connection) {
         con = new DatabaseConnector();

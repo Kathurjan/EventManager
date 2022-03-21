@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PersonDAO {
 
-    Connection db;
+    private Connection db;
 
     public PersonDAO(Connection connection) {
         this.db = connection;
