@@ -7,10 +7,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="315.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.LoginController">
+<AnchorPane prefHeight="315.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.LoginController">
    <children>
-      <TextField fx:id="UserName" layoutX="14.0" layoutY="128.0" promptText="Username" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <PasswordField fx:id="PassWord" layoutX="14.0" layoutY="189.0" promptText="Password" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <TextField fx:id="UserName" layoutX="14.0" layoutY="128.0" onKeyPressed="#loginAfterEnter" promptText="Username" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <PasswordField fx:id="PassWord" layoutX="14.0" layoutY="189.0" onKeyPressed="#loginAfterEnter" promptText="Password" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <Button fx:id="loginBtn" layoutX="17.0" layoutY="235.0" mnemonicParsing="false" onAction="#signIn" prefHeight="25.0" prefWidth="149.0" text="Sign In" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="23.0" />
       <Button fx:id="closeButton" layoutX="17.0" layoutY="267.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="149.0" text="Exit" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="23.0" />
       <Text layoutX="51.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login Menu" AnchorPane.topAnchor="35.0">

@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,8 +21,6 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
     @FXML
     private Button loginBtn;
-    @FXML
-    private Label wrongPassOrName;
     @FXML
     private TextField UserName;
     @FXML
@@ -35,9 +35,12 @@ public class LoginController implements Initializable {
 
     }
 
-    public void signIn(ActionEvent actionEvent) throws IOException {
+    public void signIn(ActionEvent actionEvent) {
         System.out.println("sign in");
-        if (UserName.getText().isBlank()) {
+        loginMethod();
+    }
+    public void loginMethod(){
+        if (UserName.getText().isBlank() || PassWord.getText().isBlank()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning!");
             alert.setHeaderText("Wrong username or password.");
@@ -59,24 +62,22 @@ public class LoginController implements Initializable {
                     // used to close the window if the pass and username is correct
                     Stage stagebtnwindow = (Stage) loginBtn.getScene().getWindow();
                     stagebtnwindow.close();
-                    
-                } catch (NullPointerException ex) {
+
+                } catch (NullPointerException | IOException ex) {
                     System.out.println(ex);
 
                 }
             }else {
-            // if it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning!");
-            alert.setHeaderText("Wrong username or password.");
-            alert.setContentText("Please try again.");
-            alert.getOwner();
-            alert.showAndWait();
+                // if it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning!");
+                alert.setHeaderText("Wrong username or password.");
+                alert.setContentText("Please try again.");
+                alert.getOwner();
+                alert.showAndWait();
+            }
         }
-        }
-
     }
-
     // used to close the stage
     public void close(ActionEvent actionEvent) {
         Stage stage =  (Stage) closeButton.getScene().getWindow();
@@ -102,5 +103,10 @@ public class LoginController implements Initializable {
         }
     }
 
-
+    public void loginAfterEnter(KeyEvent keyEvent) {
+        if(keyEvent.getCode() == KeyCode.ENTER)
+        {
+            loginMethod();
+        }
+    }
 }
