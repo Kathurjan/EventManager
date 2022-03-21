@@ -5,6 +5,7 @@ import BE.Person;
 import Gui.Model.MainModel;
 import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,6 +58,7 @@ public class AdminPageController {
     }
 
     public void refreshPersonList(){
+        adminTable.setItems((ObservableList) model.getAllPerson());
 
     }
 
@@ -64,6 +66,7 @@ public class AdminPageController {
         if (adminTable.getSelectionModel().getSelectedIndex() != -1);
         {
             model.deletePerson((Person) adminTable.getSelectionModel().getSelectedItem());
+            refreshPersonList();
         }
     }
 }

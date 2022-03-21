@@ -65,7 +65,7 @@ public class LoginController implements Initializable {
 
                 }
             }else {
-            // if it doesn't know match it will open up the below alert window alerting the user to incorrect username and apssword.
+            // if it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning!");
             alert.setHeaderText("Wrong username or password.");
