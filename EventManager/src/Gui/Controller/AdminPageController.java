@@ -3,31 +3,43 @@ package Gui.Controller;
 import BE.Admin;
 import BE.Person;
 import Gui.Model.MainModel;
+import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class AdminPageController {
+    public Button delBTN;
+    @FXML
+    private TableView adminTable;
     private MainModel mainModel;
     private Person testAdminOBJ;
+    private final PersonModel model;
 
-    public AdminPageController() {
+    public AdminPageController() throws SQLServerException {
         mainModel = new MainModel();
         testAdminOBJ = new Admin(1, "Test", "Test", "Test");
+        this.model = new PersonModel();
     }
 
 
     @FXML
-    public void adduserBTNPress(ActionEvent event) throws IOException, SQLServerException {
+    public void addBTNPress(ActionEvent event) throws IOException, SQLServerException {
         setupPersonWindow(false);
     }
 
+    public void editBTNPress(ActionEvent actionEvent) throws SQLServerException, IOException {
+        setupPersonWindow(true);
+    }
 
     private void setupPersonWindow(boolean edit) throws IOException, SQLServerException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -43,5 +55,18 @@ public class AdminPageController {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void refreshPersonList(){
+        adminTable.setItems((ObservableList) model.getAllPerson());
+
+    }
+
+    public void delBTNPress(ActionEvent actionEvent) {
+        if (adminTable.getSelectionModel().getSelectedIndex() != -1);
+        {
+            model.deletePerson((Person) adminTable.getSelectionModel().getSelectedItem());
+            refreshPersonList();
+        }
     }
 }

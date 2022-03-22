@@ -1,16 +1,24 @@
 package DAL;
 
+import BE.Admin;
 import BE.Person;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.util.List;
 
 public class DALFacade implements DALInterface{
 
+    private AdminDAO adminDAO;
     private PersonDAO personDAO;
+    private DatabaseConnector db = new DatabaseConnector();
 
-    public DALFacade(){
-        personDAO = new PersonDAO();
+    public DALFacade() throws SQLServerException {
+        adminDAO = new AdminDAO(db.getConnection());
+        personDAO = new PersonDAO(db.getConnection());
     }
+
+
+
 
     @Override
     public List<Person> getAllPerson() {
@@ -18,8 +26,8 @@ public class DALFacade implements DALInterface{
     }
 
     @Override
-    public void addPerson(String username, String password, String name) {
-        personDAO.addPerson(username, password, name);
+    public void addPerson(String username, String password, String email) {
+        personDAO.addPerson(username, password, email);
     }
 
     @Override
@@ -28,7 +36,15 @@ public class DALFacade implements DALInterface{
     }
 
     @Override
-    public void editPerson(Person selectedPerson, String username, String password, String name) {
-        personDAO.editPerson(selectedPerson, username, password, name);
+    public void editPerson(Person selectedPerson, String username, String password, String email) {
+        personDAO.editPerson(selectedPerson, username, password, email);
     }
+
+
+    @Override
+    public Admin verifyadmin(String username,String password, int type) {
+        return adminDAO.verifyAdmin(username, password,type);
+    }
+
+
 }

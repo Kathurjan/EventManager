@@ -1,8 +1,10 @@
 package BLL;
 
+import BE.Admin;
 import BE.Person;
 import DAL.DALFacade;
 import DAL.DALInterface;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class BLLFacade implements BLLInterface{
 
     private DALInterface dalInterface;
 
-    public BLLFacade(){
+    public BLLFacade() throws SQLServerException {
         dalInterface = new DALFacade();
     }
 
@@ -20,8 +22,8 @@ public class BLLFacade implements BLLInterface{
     }
 
     @Override
-    public void addPerson(String username, String password, String name) {
-        dalInterface.addPerson(username, password, name);
+    public void addPerson(String username, String password, String email) {
+        dalInterface.addPerson(username, password, email);
     }
 
     @Override
@@ -30,7 +32,18 @@ public class BLLFacade implements BLLInterface{
     }
 
     @Override
-    public void editPerson(Person selectedPerson, String username, String password, String name) {
-        dalInterface.editPerson(selectedPerson, username, password, name);
+    public void editPerson(Person selectedPerson, String username, String password, String email) {
+        dalInterface.editPerson(selectedPerson, username, password, email);
     }
+
+    @Override
+    public Admin verifyadmin(String username,String password, int type) {
+        return dalInterface.verifyadmin( username, password,type);
+    }
+
+
+
+
+
+
 }
