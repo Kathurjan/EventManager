@@ -37,8 +37,8 @@ public class BLLFacade implements BLLInterface{
     }
 
     @Override
-    public Admin verifyadmin(String username,String password) {
-        return dalInterface.verifyadmin( username, password);
+    public Admin verifyadmin(String username,String password,int type) {
+        return dalInterface.verifyadmin( username, password,type);
     }
 
 

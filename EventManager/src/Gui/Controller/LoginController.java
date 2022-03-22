@@ -51,7 +51,7 @@ public class LoginController implements Initializable {
         // checks of the username and password text field is empty and if the username and password matches the admins
         // it will allow them to log in.
         if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()){
-            if (mainModel.verifyadmin(UserName.getText(), PassWord.getText()) != null) {
+            if (mainModel.verifyadmin(UserName.getText(), PassWord.getText(),1) != null) {
                 try {
                     Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
                     Stage stage = new Stage();

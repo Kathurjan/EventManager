@@ -16,8 +16,8 @@ public class MainModel {
 
 
 
-    public Admin verifyadmin(String username,String password){
-        return bllfacade.verifyadmin( username, password);
+    public Admin verifyadmin(String username,String password,int type){
+        return bllfacade.verifyadmin( username, password,type);
     }
 
 }
