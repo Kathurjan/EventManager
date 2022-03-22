@@ -7,12 +7,14 @@ public class Event {
     private String eventName;
     private Date startDate;
     private String eventLocation;
+    private Double price;
 
-    public Event(String eventname, Date startdate, String eventlocation, int eventID){
+    public Event(int eventID, String eventname, Date startdate, String eventlocation, double price){
         this.eventID = eventID;
-        eventName = eventname;
-        startDate = startdate;
-        eventLocation = eventlocation;
+        this.eventName = eventname;
+        this.startDate = startdate;
+        this.eventLocation = eventlocation;
+        this.price = price;
     }
 
     public int getEventID() {
