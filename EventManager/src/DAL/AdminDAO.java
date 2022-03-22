@@ -20,17 +20,18 @@ if the username and password matches the any of the username and passwords in th
 an admin and login them into the admin window.
 
  */
-    public Admin verifyAdmin(String username, String password) {
+    public Admin verifyAdmin(String username, String password, int type) {
 
         Admin admin = null;
 
         try(Connection connection = con.getConnection()){
-            String sqlquery = "SELECT * FROM Person WHERE userName= ? AND userPassWord = ?";
+            String sqlquery = "SELECT * FROM Person WHERE userName= ? AND userPassWord = ? AND Type =?";
             PreparedStatement statement = connection.prepareStatement(sqlquery);
 
 
                 statement.setString(1, username);
                 statement.setString(2, password);
+                statement.setInt(3,type);
                 ResultSet resultSet = statement.executeQuery();
                 while(resultSet.next()){
                     admin = new Admin(resultSet.getInt("id"),resultSet.getString("userName"),

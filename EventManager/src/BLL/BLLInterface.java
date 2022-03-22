@@ -19,5 +19,5 @@ public interface BLLInterface {
 
 
 
-    public Admin verifyadmin(String username,String password);
+    public Admin verifyadmin(String username,String password, int type);
 }

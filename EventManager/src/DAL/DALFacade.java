@@ -42,8 +42,8 @@ public class DALFacade implements DALInterface{
 
 
     @Override
-    public Admin verifyadmin(String username,String password) {
-        return adminDAO.verifyAdmin(username, password);
+    public Admin verifyadmin(String username,String password, int type) {
+        return adminDAO.verifyAdmin(username, password,type);
     }
 
 
