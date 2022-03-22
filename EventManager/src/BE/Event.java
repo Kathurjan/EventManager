@@ -6,14 +6,12 @@ public class Event {
     private final int eventID;
     private String eventName;
     private Date startDate;
-    private Date endDate;
     private String eventLocation;
 
-    public Event(String eventname, Date startdate, Date enddate, String eventlocation, int eventID){
+    public Event(String eventname, Date startdate, String eventlocation, int eventID){
         this.eventID = eventID;
         eventName = eventname;
         startDate = startdate;
-        endDate = enddate;
         eventLocation = eventlocation;
     }
 
@@ -35,14 +33,6 @@ public class Event {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 
     public String getEventLocation() {
