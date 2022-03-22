@@ -3,19 +3,27 @@ package Gui.Controller;
 import BE.Person;
 import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import org.controlsfx.control.CheckComboBox;
 import org.w3c.dom.Text;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 
+import java.net.URL;
 import java.util.List;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class UserCreationController {
-
+public class UserCreationController implements Initializable {
+    ObservableList<String> TypeofUser = FXCollections.observableArrayList("Admin","EventManager","User");
+    @FXML
+    private ChoiceBox userCheckBox;
     Stage stage;
 
     @FXML
@@ -33,8 +41,7 @@ public class UserCreationController {
     @FXML
     private Label errorLabel;
 
-    @FXML
-    private CheckComboBox checkComboBox;
+
 
 
     private AdminPageController controller;
@@ -115,5 +122,10 @@ public class UserCreationController {
         }
         errorLabel.setText("Your password needs atleast one number");
         return false;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        userCheckBox.setItems(TypeofUser);
     }
 }

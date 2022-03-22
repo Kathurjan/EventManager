@@ -5,6 +5,9 @@ public class Person {
     private String Username;
     private String Password;
     private String email;
+    private int type;
+
+
 
 
     public Person(int id,String username, String password, String email) {
@@ -12,6 +15,15 @@ public class Person {
         Username = username;
         Password = password;
         this.email = email;
+
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
     }
 
     public int getID(){
