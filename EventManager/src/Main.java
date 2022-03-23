@@ -4,6 +4,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.time.Instant;
+import java.util.Date;
 
 
 public class Main extends Application {
@@ -16,6 +18,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Event system");
 
+        System.out.println(Date.from(Instant.now()));
         primaryStage.show();
     }
     static void main(String[] args){

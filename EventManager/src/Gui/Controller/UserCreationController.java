@@ -21,7 +21,7 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class UserCreationController implements Initializable {
-    ObservableList<String> TypeofUser = FXCollections.observableArrayList("Admin","EventManager","User");
+
     @FXML
     private ChoiceBox userCheckBox;
     Stage stage;
@@ -43,7 +43,7 @@ public class UserCreationController implements Initializable {
 
 
 
-
+    ObservableList<String> TypeofUser = FXCollections.observableArrayList("Admin","EventManager","User");
     private AdminPageController controller;
     private PersonModel personModel;
     private Person selectedPerson;
