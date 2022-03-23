@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -49,11 +50,16 @@ public class UserCreationController implements Initializable {
     private Person selectedPerson;
     private int type;
     private boolean isEditing = false;
+    private List<Person> personList;
+
+    public UserCreationController() throws SQLServerException {
+        personModel = new PersonModel();
+        personList = new ArrayList<>();
+    }
 
 
-    public void setController(AdminPageController adminPageController) throws SQLServerException {
+    public void setController(AdminPageController adminPageController) {
          this.controller = adminPageController;
-         personModel = new PersonModel();
     }
 
     public void setEdit(Person person){ //Sets the isEditing variable for use in addUser method and gets the info on the selected person
@@ -69,7 +75,7 @@ public class UserCreationController implements Initializable {
         if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // checks the length of the input to ensure minimum safety
             if (verifyEmail() | isEditing) { // if controller is in editing mode -> skip email verification step
                 if (verifyPassword()) {
-                    if(type == -1){
+                    if(type != -1){
                         if(!isEditing){ // does the check of the isEditing variable
                             personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), type);
                             Stage stage =  (Stage) emailTxt.getScene().getWindow();
@@ -96,8 +102,9 @@ public class UserCreationController implements Initializable {
     }
 
     private boolean verifyEmail() { // Checks for null input and gets a list of all Persons in the DB to check it against the input
-        List<Person> personList = personModel.getAllPerson();
-        System.out.println(personList);
+        if(personList.isEmpty()){
+            personList = personModel.getAllPerson();
+        }
         if (emailTxt.getText() != null) {
             for (Person person : personList) {
                 if (Objects.equals(person.getEmail(), emailTxt.getText())) {
