@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,52 +36,92 @@ public class LoginController implements Initializable {
 
     }
 
-    public void signIn(ActionEvent actionEvent) {
+    public void signIn(ActionEvent actionEvent) throws IOException {
         System.out.println("sign in");
         loginMethod();
+
     }
-    public void loginMethod(){
+
+
+    public void loginMethod() {
         if (UserName.getText().isBlank() || PassWord.getText().isBlank()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning!");
-            alert.setHeaderText("Wrong username or password.");
+            alert.setHeaderText("Please enter a login and password");
             alert.setContentText("Please try again.");
             alert.getOwner();
             alert.showAndWait();
+            return;
         }
+
         // checks of the username and password text field is empty and if the username and password matches the admins
         // it will allow them to log in.
-        if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()){
-            if (mainModel.verifyadmin(UserName.getText(), PassWord.getText(),1) != null) {
-                try {
-                    Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
-                    Stage stage = new Stage();
-                    Scene scene = new Scene(part);
-                    stage.setScene(scene);
-                    stage.show();
 
-                    // used to close the window if the pass and username is correct
-                    Stage stagebtnwindow = (Stage) loginBtn.getScene().getWindow();
-                    stagebtnwindow.close();
+        if (mainModel.verifyadmin(UserName.getText(), PassWord.getText(), 1) != null) {
+            try {
+                Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(part);
+                stage.setScene(scene);
+                stage.show();
 
-                } catch (NullPointerException | IOException ex) {
-                    System.out.println(ex);
+                // used to close the window if the pass and username is correct
+                Stage stagebtnwindow = (Stage) loginBtn.getScene().getWindow();
+                stagebtnwindow.close();
+                return;
+            } catch (NullPointerException | IOException ex) {
+                System.out.println(ex);
 
-                }
-            }else {
-                // if it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning!");
-                alert.setHeaderText("Wrong username or password.");
-                alert.setContentText("Please try again.");
-                alert.getOwner();
-                alert.showAndWait();
             }
         }
+        if (mainModel.verifyadmin(UserName.getText(), PassWord.getText(), 2) != null) {
+            try {
+                Parent part = FXMLLoader.load(getClass().getResource("/Gui/view/EventManagerPage.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(part);
+                stage.setScene(scene);
+                stage.show();
+
+                // used to close the window if the pass and username is correct
+                Stage stagebtnwindow = (Stage) loginBtn.getScene().getWindow();
+                stagebtnwindow.close();
+                return;
+            } catch (NullPointerException | IOException ex) {
+                System.out.println(ex);
+
+            }
+        }
+
+        // check if the user is a normal user, unlock method when we need -- remember to remove comments when we do.
+       /* if (mainModel.verifyadmin(UserName.getText(),PassWord.getText(),3)!=null){
+            try{
+                Parent parent = FXMLLoader.load(getClass().getResource(""));
+                Stage stage = new Stage();
+                Scene scene = new Scene(parent);
+                stage.setScene(scene);
+                stage.show();
+
+                //used to close window if the password and username is correct
+                Stage stagebtnwindow = (Stage) loginBtn.getScene().getWindow();
+                stagebtnwindow.close();
+            }
+            catch(NullPointerException ex){
+                System.out.println(ex);
+            }
+        }*/
+        // if it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning!");
+        alert.setHeaderText("Wrong username or password.");
+        alert.setContentText("Please try again.");
+        alert.getOwner();
+        alert.showAndWait();
+
     }
+
     // used to close the stage
     public void close(ActionEvent actionEvent) {
-        Stage stage =  (Stage) closeButton.getScene().getWindow();
+        Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
 
@@ -104,8 +145,7 @@ public class LoginController implements Initializable {
     }
 
     public void loginAfterEnter(KeyEvent keyEvent) {
-        if(keyEvent.getCode() == KeyCode.ENTER)
-        {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
             loginMethod();
         }
     }
