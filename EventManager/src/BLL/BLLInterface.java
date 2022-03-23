@@ -18,9 +18,6 @@ public interface BLLInterface {
 
     void editPerson(Person selectedPerson, String username, String password, String email);
 
-
-
-    public Admin verifyadmin(String username,String password, int type);
-
-    void addEvent(int eventID, String eventname, Date startdate, String eventlocation, double price);
+    Admin verifyadmin(String username,String password, int type);
+    void addEvent(int eventID, String eventname, Date startdate, String eventlocation, double price, String startTime);
 }

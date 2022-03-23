@@ -13,7 +13,7 @@ public class EventModel {
         bllfacade = new BLLFacade();
     }
 
-    public void addEvent(int eventID, String eventname, Date startdate, String eventlocation, double price){
-    bllfacade.addEvent(eventID,eventname,startdate,eventlocation,price);
+    public void addEvent(int eventID, String eventname, Date startdate, String eventlocation, double price, String startTime){
+    bllfacade.addEvent(eventID,eventname,startdate,eventlocation,price,startTime);
     }
 }

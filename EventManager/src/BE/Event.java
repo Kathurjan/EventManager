@@ -8,13 +8,23 @@ public class Event {
     private Date startDate;
     private String eventLocation;
     private Double price;
+    private String stateTime;
 
-    public Event(int eventID, String eventname, Date startdate, String eventlocation, double price){
+    public Event(int eventID, String eventname, Date startdate, String eventlocation, double price, String startTime){
         this.eventID = eventID;
         this.eventName = eventname;
         this.startDate = startdate;
         this.eventLocation = eventlocation;
         this.price = price;
+        this.stateTime = startTime;
+    }
+
+    public String getStateTime() {
+        return stateTime;
+    }
+
+    public void setStateTime(String stateTime) {
+        this.stateTime = stateTime;
     }
 
     public Double getPrice() {

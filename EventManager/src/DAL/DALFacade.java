@@ -17,11 +17,8 @@ public class DALFacade implements DALInterface{
     public DALFacade() throws SQLServerException {
         adminDAO = new AdminDAO(db.getConnection());
         personDAO = new PersonDAO();
-        eventDAO = new EventDAO(db.getConnection());
+        eventDAO = new EventDAO();
     }
-
-
-
 
     @Override
     public List<Person> getAllPerson() {
@@ -50,8 +47,8 @@ public class DALFacade implements DALInterface{
     }
 
     @Override
-    public void addEvent(int eventID, String eventname, Date startdate, String eventlocation, double price) {
-        eventDAO.addEvent(eventID,eventname,startdate,eventlocation,price);
+    public void addEvent(int eventID, String eventname, Date startdate, String eventlocation, double price, String startTime) {
+        eventDAO.addEvent(eventID,eventname,startdate,eventlocation,price,startTime);
     }
 
 

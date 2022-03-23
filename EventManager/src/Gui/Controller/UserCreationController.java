@@ -139,7 +139,7 @@ public class UserCreationController implements Initializable {
         return false;
     }
 
-    private int getTypetoInt(){
+    private int getTypetoInt(){ // Checks for type selected in the UserCheckBox and returns -1 if not selected (will prompt error message)
         if(userCheckBox.getValue() == TypeofUser.get(0)){
             return 0;
         }
