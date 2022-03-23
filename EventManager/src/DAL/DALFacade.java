@@ -4,17 +4,20 @@ import BE.Admin;
 import BE.Person;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+import java.util.Date;
 import java.util.List;
 
 public class DALFacade implements DALInterface{
 
     private AdminDAO adminDAO;
     private PersonDAO personDAO;
+    private EventDAO eventDAO;
     private DatabaseConnector db = new DatabaseConnector();
 
     public DALFacade() throws SQLServerException {
         adminDAO = new AdminDAO(db.getConnection());
         personDAO = new PersonDAO(db.getConnection());
+        eventDAO = new EventDAO(db.getConnection());
     }
 
 
@@ -44,6 +47,11 @@ public class DALFacade implements DALInterface{
     @Override
     public Admin verifyadmin(String username,String password, int type) {
         return adminDAO.verifyAdmin(username, password,type);
+    }
+
+    @Override
+    public void addEvent(int eventID, String eventname, Date startdate, String eventlocation, double price) {
+        eventDAO.addEvent(eventID,eventname,startdate,eventlocation,price);
     }
 
 
