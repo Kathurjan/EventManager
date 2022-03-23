@@ -6,7 +6,6 @@ import DAL.DALFacade;
 import DAL.DALInterface;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-import java.util.Date;
 import java.util.List;
 
 public class BLLFacade implements BLLInterface{
@@ -42,10 +41,9 @@ public class BLLFacade implements BLLInterface{
         return dalInterface.verifyadmin( username, password,type);
     }
 
-    @Override
-    public void addEvent(int eventID, Date startdate, String eventlocation, double price) {
-        dalInterface.addEvent(eventID,startdate,eventlocation,price);
-    }
+
+
+
 
 
 }
