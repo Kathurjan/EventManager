@@ -3,6 +3,7 @@ package BLL;
 import BE.Admin;
 import BE.Person;
 
+import java.util.Date;
 import java.util.List;
 
 public interface BLLInterface {
@@ -20,4 +21,6 @@ public interface BLLInterface {
 
 
     public Admin verifyadmin(String username,String password, int type);
+
+    void addEvent(int eventID, Date startdate, String eventlocation, double price);
 }
