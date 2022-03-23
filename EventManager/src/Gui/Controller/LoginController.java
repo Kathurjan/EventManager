@@ -91,6 +91,24 @@ public class LoginController implements Initializable {
 
             }
         }
+
+        // check if the user is a normal user, unlock method when we need -- remember to remove comments when we do.
+       /* if (mainModel.verifyadmin(UserName.getText(),PassWord.getText(),3)!=null){
+            try{
+                Parent parent = FXMLLoader.load(getClass().getResource(""));
+                Stage stage = new Stage();
+                Scene scene = new Scene(parent);
+                stage.setScene(scene);
+                stage.show();
+
+                //used to close window if the password and username is correct
+                Stage stagebtnwindow = (Stage) loginBtn.getScene().getWindow();
+                stagebtnwindow.close();
+            }
+            catch(NullPointerException ex){
+                System.out.println(ex);
+            }
+        }*/
         // if it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning!");
