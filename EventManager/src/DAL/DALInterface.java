@@ -9,7 +9,7 @@ public interface DALInterface {
 
     List<Person> getAllPerson();
 
-    void addPerson(String username, String password, String email);
+    void addPerson(String username, String password, String email, int type);
 
     void deletePerson(Person selectedPerson);
 

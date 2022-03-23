@@ -26,8 +26,8 @@ public class DALFacade implements DALInterface{
     }
 
     @Override
-    public void addPerson(String username, String password, String email) {
-        personDAO.addPerson(username, password, email);
+    public void addPerson(String username, String password, String email, int type) {
+        personDAO.addPerson(username, password, email, type);
     }
 
     @Override

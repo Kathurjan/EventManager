@@ -22,8 +22,8 @@ public class BLLFacade implements BLLInterface{
     }
 
     @Override
-    public void addPerson(String username, String password, String email) {
-        dalInterface.addPerson(username, password, email);
+    public void addPerson(String username, String password, String email, int type) {
+        dalInterface.addPerson(username, password, email, type);
     }
 
     @Override

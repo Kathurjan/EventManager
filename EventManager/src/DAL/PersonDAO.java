@@ -29,6 +29,7 @@ public class PersonDAO {
 
                     Person person = new Person(id, username,password, email);// Creating a person object from the retrieved values
                     personList.add(person); // Adding the person to  list
+                    System.out.println(personList);
                 }
             }
         } catch (SQLException ex) {
@@ -38,13 +39,14 @@ public class PersonDAO {
         return personList;
     }
 
-    public void addPerson(String username, String password, String email) {
-        String sqlStatement = "INSERT INTO Person(userName, userPassWord, email) VALUES (?,?,?)";
+    public void addPerson(String username, String password, String email, int type) {
+        String sqlStatement = "INSERT INTO Person(userName, userPassWord, email, type) VALUES (?,?,?,?)";
         try(Connection con = db){
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
             pstm.setString(1, username);
             pstm.setString(2, password);
             pstm.setString(3, email);
+            pstm.setInt(4, type);
             pstm.addBatch(); // Adding to the statement
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         } catch(SQLException ex) {
