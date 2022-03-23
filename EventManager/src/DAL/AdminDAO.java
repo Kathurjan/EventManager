@@ -39,7 +39,6 @@ an admin and login them into the admin window.
                 }
         }
         catch(SQLException ex){
-            System.out.println("here1");
             System.out.println(ex);
             return null;
         }
