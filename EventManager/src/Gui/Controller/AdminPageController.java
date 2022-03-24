@@ -85,6 +85,7 @@ public class AdminPageController {
     }
 
     public void populateTableView(){
+        // sut min dut
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
