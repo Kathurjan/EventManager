@@ -1,0 +1,33 @@
+#APane{
+    -fx-background-color: #333;
+}
+
+#userNameLabel{
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+}
+#passWordLabel{
+    -fx-text-fill: #fff;
+    -fx-font-size: 15px;
+}
+#Header{
+    -fx-font-style: italic;
+    -fx-font-size:30px ;
+    -fx-alignment: center;
+    -fx-highlight-text-fill: White;
+
+}
+#loginBtn{
+    -fx-background-color: Coral;
+    -fx-text-fill: white;
+}
+#closeButton{
+    -fx-background-color: Coral;
+    -fx-text-fill: white;
+}
+#UserName{
+    -fx-text-inner-color: #140A15FF;
+}
+#PassWord{
+    -fx-text-inner-color:#140A15FF;
+}
