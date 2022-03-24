@@ -11,7 +11,7 @@
     -fx-font-size: 15px;
 }
 #Header{
-    -fx-font-style: italic;
+    -fx-font-weight: bold;
     -fx-font-size:30px ;
     -fx-alignment: center;
     -fx-highlight-text-fill: White;
