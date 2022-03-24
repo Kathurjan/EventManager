@@ -43,8 +43,8 @@ public class BLLFacade implements BLLInterface{
     }
 
     @Override
-    public void addEvent(int eventID, String eventname, Date startdate, String eventlocation, double price, String startTime) {
-        dalInterface.addEvent(eventID,eventname,startdate,eventlocation,price,startTime);
+    public void addEvent(int eventID, String eventName, Date startDate, String eventLocation, double price, String startTime) {
+        dalInterface.addEvent(eventID,eventName,startDate,eventLocation,price,startTime);
     }
 
 

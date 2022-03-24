@@ -47,8 +47,8 @@ public class DALFacade implements DALInterface{
     }
 
     @Override
-    public void addEvent(int eventID, String eventname, Date startdate, String eventlocation, double price, String startTime) {
-        eventDAO.addEvent(eventID,eventname,startdate,eventlocation,price,startTime);
+    public void addEvent(int eventID, String eventName, Date startDate, String eventLocation, double price, String startTime) {
+        eventDAO.addEvent(eventID,eventName,startDate,eventLocation,price,startTime);
     }
 
 

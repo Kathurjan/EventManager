@@ -8,6 +8,10 @@ import java.util.Date;
 public class EventDAO {
     private final static DatabaseConnector db = new DatabaseConnector();
 
+    public EventDAO(){
+
+    }
+
 
     public void addEvent(int eventID, String eventName, Date startDate, String eventLocation, double price, String startTime) {
         String sqlQuery = "INSERT INTO Event(ID, EventName, Startdate, EventLocation, event price, StartTime) ";
