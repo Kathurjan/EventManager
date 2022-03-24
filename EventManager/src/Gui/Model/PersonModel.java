@@ -19,8 +19,8 @@ public class PersonModel {
         return bllInterface.getAllPerson();
     }
 
-    public void addPerson(String username, String password, String email){
-        bllInterface.addPerson(username, password, email);
+    public void addPerson(String username, String password, String email, int type){
+        bllInterface.addPerson(username, password, email, type);
     }
 
     public void deletePerson(Person selectedPerson){

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventCreatorController">
+   <children>
+      <HBox prefHeight="400.0" prefWidth="606.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="67.0" layoutY="22.0" text="Event name:" />
+                  <TextField fx:id="eventNameTxt" layoutX="25.0" layoutY="40.0" />
+                  <TextField fx:id="hourTxt" layoutX="62.0" layoutY="142.0" prefHeight="26.0" prefWidth="28.0" promptText="18" />
+                  <TextField fx:id="minuteTxt" layoutX="110.0" layoutY="141.0" prefHeight="26.0" prefWidth="28.0" promptText="30" />
+                  <Label layoutX="100.0" layoutY="146.0" text=":" />
+                  <DatePicker fx:id="datePicker" layoutX="24.0" layoutY="108.0" prefHeight="26.0" prefWidth="150.0" />
+                  <Label layoutX="60.0" layoutY="90.0" text="Date and Time" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Label layoutX="77.0" layoutY="22.0" text="Location:" />
+                  <TextField fx:id="locationTxt" layoutX="26.0" layoutY="40.0" />
+                  <TextField fx:id="priceTxt" layoutX="25.0" layoutY="108.0" />
+                  <Label layoutX="47.0" layoutY="90.0" text="Baseline ticket price" />
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

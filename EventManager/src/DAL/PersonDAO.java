@@ -8,15 +8,11 @@ import java.util.List;
 
 public class PersonDAO {
 
-    private Connection db;
-
-    public PersonDAO(Connection connection) {
-        this.db = connection;
-    }
+    private final static DatabaseConnector db = new DatabaseConnector();
 
     public List<Person> getAllPerson() {
         List<Person> personList = FXCollections.observableArrayList();
-        try (Connection con = db) {
+        try (Connection con = db.getConnection()) {
             String sqlStatement = "SELECT * FROM Person";
             Statement statement = con.createStatement();
             if (statement.execute(sqlStatement)) {
@@ -26,7 +22,6 @@ public class PersonDAO {
                     String username = rs.getString("userName");
                     String password = rs.getString("userPassWord");
                     String email = rs.getString("email");
-
                     Person person = new Person(id, username,password, email);// Creating a person object from the retrieved values
                     personList.add(person); // Adding the person to  list
                 }
@@ -38,13 +33,14 @@ public class PersonDAO {
         return personList;
     }
 
-    public void addPerson(String username, String password, String email) {
-        String sqlStatement = "INSERT INTO Person(userName, userPassWord, email) VALUES (?,?,?)";
-        try(Connection con = db){
+    public void addPerson(String username, String password, String email, int type) {
+        String sqlStatement = "INSERT INTO Person(userName, userPassWord, email, Type) VALUES (?,?,?,?)";
+        try(Connection con = db.getConnection()){
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
             pstm.setString(1, username);
             pstm.setString(2, password);
             pstm.setString(3, email);
+            pstm.setInt(4, type);
             pstm.addBatch(); // Adding to the statement
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         } catch(SQLException ex) {
@@ -53,7 +49,7 @@ public class PersonDAO {
     }
 
     public Person editPerson(Person selectedPerson, String username, String password, String email) {
-        try (Connection con = db) {
+        try (Connection con = db.getConnection()) {
             String query = "UPDATE Person set username = ?,password = ?,name = ? WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, username);
@@ -68,7 +64,7 @@ public class PersonDAO {
     }
 
     public void deletePerson(Person selectedPerson){
-        try(Connection con = db){
+        try(Connection con = db.getConnection()){
             String query = "DELETE FROM Person WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1,selectedPerson.getID());

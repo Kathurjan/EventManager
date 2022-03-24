@@ -6,6 +6,7 @@ import DAL.DALFacade;
 import DAL.DALInterface;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+import java.util.Date;
 import java.util.List;
 
 public class BLLFacade implements BLLInterface{
@@ -22,8 +23,8 @@ public class BLLFacade implements BLLInterface{
     }
 
     @Override
-    public void addPerson(String username, String password, String email) {
-        dalInterface.addPerson(username, password, email);
+    public void addPerson(String username, String password, String email, int type) {
+        dalInterface.addPerson(username, password, email, type);
     }
 
     @Override
@@ -37,13 +38,14 @@ public class BLLFacade implements BLLInterface{
     }
 
     @Override
-    public Admin verifyadmin(String username,String password,int type) {
+    public Admin verifyadmin(String username,String password, int type) {
         return dalInterface.verifyadmin( username, password,type);
     }
 
-
-
-
+    @Override
+    public void addEvent(int eventID, String eventname, Date startdate, String eventlocation, double price, String startTime) {
+        dalInterface.addEvent(eventID,eventname,startdate,eventlocation,price,startTime);
+    }
 
 
 }

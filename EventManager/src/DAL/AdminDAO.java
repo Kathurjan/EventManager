@@ -20,7 +20,9 @@ if the username and password matches the any of the username and passwords in th
 an admin and login them into the admin window.
 
  */
+
     public Admin verifyAdmin(String username, String password,int type) {
+
 
         Admin admin = null;
 
@@ -39,7 +41,6 @@ an admin and login them into the admin window.
                 }
         }
         catch(SQLException ex){
-            System.out.println("here1");
             System.out.println(ex);
             return null;
         }

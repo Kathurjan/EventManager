@@ -16,12 +16,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class UserCreationController implements Initializable {
-    ObservableList<String> TypeofUser = FXCollections.observableArrayList("Admin","EventManager","User");
+
     @FXML
     private ChoiceBox userCheckBox;
     Stage stage;
@@ -43,16 +44,22 @@ public class UserCreationController implements Initializable {
 
 
 
-
+    ObservableList<String> TypeofUser = FXCollections.observableArrayList("Admin","EventManager","User");
     private AdminPageController controller;
     private PersonModel personModel;
     private Person selectedPerson;
+    private int type;
     private boolean isEditing = false;
+    private List<Person> personList;
+
+    public UserCreationController() throws SQLServerException {
+        personModel = new PersonModel();
+        personList = new ArrayList<>();
+    }
 
 
-    public void setController(AdminPageController adminPageController) throws SQLServerException {
+    public void setController(AdminPageController adminPageController) {
          this.controller = adminPageController;
-         personModel = new PersonModel();
     }
 
     public void setEdit(Person person){ //Sets the isEditing variable for use in addUser method and gets the info on the selected person
@@ -64,17 +71,23 @@ public class UserCreationController implements Initializable {
     }
 
     public void onAddUserBTNPress(ActionEvent event) {
+        getTypetoInt();
         if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // checks the length of the input to ensure minimum safety
             if (verifyEmail() | isEditing) { // if controller is in editing mode -> skip email verification step
                 if (verifyPassword()) {
-                    if(!isEditing){ // does the check of the isEditing variable
-                        personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText());
+                    if(type != -1){
+                        if(!isEditing){ // does the check of the isEditing variable
+                            personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), type);
+                            Stage stage =  (Stage) emailTxt.getScene().getWindow();
+                            stage.close();
+                        }
+                        else personModel.editPerson(selectedPerson, userNameTxt.getText(), password1stTxt.getText(), emailTxt.getText());
                         Stage stage =  (Stage) emailTxt.getScene().getWindow();
                         stage.close();
                     }
-                    else personModel.editPerson(selectedPerson, userNameTxt.getText(), password1stTxt.getText(), emailTxt.getText());
-                    Stage stage =  (Stage) emailTxt.getScene().getWindow();
-                    stage.close();
+                    else {
+                        errorLabel.setText("Please choose a user type");
+                    }
                 }
             }
         }
@@ -89,7 +102,9 @@ public class UserCreationController implements Initializable {
     }
 
     private boolean verifyEmail() { // Checks for null input and gets a list of all Persons in the DB to check it against the input
-        List<Person> personList = personModel.getAllPerson();
+        if(personList.isEmpty()){
+            personList = personModel.getAllPerson();
+        }
         if (emailTxt.getText() != null) {
             for (Person person : personList) {
                 if (Objects.equals(person.getEmail(), emailTxt.getText())) {
@@ -122,6 +137,19 @@ public class UserCreationController implements Initializable {
         }
         errorLabel.setText("Your password needs atleast one number");
         return false;
+    }
+
+    private int getTypetoInt(){ // Checks for type selected in the UserCheckBox and returns -1 if not selected (will prompt error message)
+        if(userCheckBox.getValue() == TypeofUser.get(0)){
+            return 0;
+        }
+        if (userCheckBox.getValue() == TypeofUser.get(1)){
+            return 1;
+        }
+        if (userCheckBox.getValue() == TypeofUser.get(2)){
+            return 2;
+        }
+        else return -1;
     }
 
     @Override
