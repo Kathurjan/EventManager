@@ -19,7 +19,7 @@
       <TextField fx:id="userNameTxt" layoutX="107.0" layoutY="115.0" promptText="Username" />
       <TextField fx:id="password1stTxt" layoutX="108.0" layoutY="147.0" promptText="Password" />
       <TextField fx:id="password2ndTxt" layoutX="108.0" layoutY="179.0" promptText="Repeat password" />
-      <Label layoutX="135.0" layoutY="214.0" text="Choose user type" />
+      <Label fx:id="userCheckBoxLabel" layoutX="135.0" layoutY="214.0" text="Choose user type" />
       <ChoiceBox fx:id="userCheckBox" layoutX="106.0" layoutY="232.0" prefWidth="150.0" />
       <Button layoutX="68.0" layoutY="276.0" mnemonicParsing="false" onAction="#onAddUserBTNPress" text="Create user" />
       <Button layoutX="230.0" layoutY="276.0" mnemonicParsing="false" onAction="#onCancelBTNPress" text="Cancel" />
