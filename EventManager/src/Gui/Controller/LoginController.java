@@ -37,7 +37,6 @@ public class LoginController implements Initializable {
     }
 
     public void signIn(ActionEvent actionEvent) throws IOException {
-        System.out.println("sign in");
         loginMethod();
 
     }
@@ -57,7 +56,7 @@ public class LoginController implements Initializable {
         // checks of the username and password text field is empty and if the username and password matches the admins
         // it will allow them to log in.
         if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
-            if (mainModel.verifyadmin(UserName.getText(), PassWord.getText(), 1) != null) {
+            if (mainModel.verifyadmin(UserName.getText(), PassWord.getText(), 0) != null) {
                 try {
                     Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
                     Stage stage = new Stage();
@@ -74,7 +73,7 @@ public class LoginController implements Initializable {
 
                 }
             } else if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
-                if (mainModel.verifyadmin(UserName.getText(), PassWord.getText(), 2) != null) {
+                if (mainModel.verifyadmin(UserName.getText(), PassWord.getText(), 1) != null) {
                     try {
                         Parent part = FXMLLoader.load(getClass().getResource("../view/EventManagerPage.fxml"));
                         Stage stage = new Stage();
@@ -103,7 +102,7 @@ public class LoginController implements Initializable {
         }
 
             // check if the user is a normal user, unlock method when we need -- remember to remove comments when we do.
-       /* if (mainModel.verifyadmin(UserName.getText(),PassWord.getText(),3)!=null){
+       /* if (mainModel.verifyadmin(UserName.getText(),PassWord.getText(),2)!=null){
             try{
                 Parent parent = FXMLLoader.load(getClass().getResource(""));
                 Stage stage = new Stage();

@@ -20,7 +20,7 @@ import java.io.IOException;
 public class AdminPageController {
     public Button delBTN;
     @FXML
-    private TableView adminTable;
+    private TableView<Person> adminTable;
     private MainModel mainModel;
     private Person testAdminOBJ;
     private final PersonModel model;
@@ -68,5 +68,11 @@ public class AdminPageController {
             model.deletePerson((Person) adminTable.getSelectionModel().getSelectedItem());
             refreshPersonList();
         }
+    }
+
+    public void populateTableView(){
+
+
+
     }
 }
