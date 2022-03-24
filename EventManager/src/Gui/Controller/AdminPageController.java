@@ -12,25 +12,39 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.assertj.core.internal.Classes;
 
 import java.io.IOException;
 
 public class AdminPageController {
     public Button delBTN;
+
+    @FXML
+    private TableColumn<Classes, String> usernameColumn, emailColumn, typeColumn;
     @FXML
     private TableView<Person> adminTable;
+
     private MainModel mainModel;
     private Person testAdminOBJ;
     private final PersonModel model;
+
+    public void initialize() {
+        try {
+            populateTableView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public AdminPageController() throws SQLServerException {
         mainModel = new MainModel();
         testAdminOBJ = new Admin(1, "Test", "Test", "Test");
         this.model = new PersonModel();
     }
-
 
     @FXML
     public void addBTNPress(ActionEvent event) throws IOException, SQLServerException {
@@ -71,8 +85,9 @@ public class AdminPageController {
     }
 
     public void populateTableView(){
-
-
-
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        adminTable.setItems(mainModel.getAllPerson());
     }
 }
