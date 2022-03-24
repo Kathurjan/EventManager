@@ -23,9 +23,13 @@ import java.util.ResourceBundle;
 
 public class UserCreationController implements Initializable {
 
+    Stage stage;
+
     @FXML
     private ChoiceBox userCheckBox;
-    Stage stage;
+
+    @FXML
+    private Label userCheckBoxLabel;
 
     @FXML
     private TextField userNameTxt;
@@ -67,11 +71,19 @@ public class UserCreationController implements Initializable {
         isEditing = true;
         userNameTxt.setText(person.getUsername());
         emailTxt.setText(person.getEmail());
+        if(selectedPerson.getType() != 0) {
+            userCheckBox.getSelectionModel().select(selectedPerson.getType());
+        }
+        else {
+            userCheckBox.setVisible(false);
+            userCheckBoxLabel.setVisible(false);
+        }
+
         // Password is omitted to ensure protection. (Up for discussion)
     }
 
     public void onAddUserBTNPress(ActionEvent event) {
-        getTypetoInt();
+        type = userCheckBox.getSelectionModel().getSelectedIndex();
         if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // checks the length of the input to ensure minimum safety
             if (verifyEmail() | isEditing) { // if controller is in editing mode -> skip email verification step
                 if (verifyPassword()) {
@@ -137,19 +149,6 @@ public class UserCreationController implements Initializable {
         }
         errorLabel.setText("Your password needs atleast one number");
         return false;
-    }
-
-    private int getTypetoInt(){ // Checks for type selected in the UserCheckBox and returns -1 if not selected (will prompt error message)
-        if(userCheckBox.getValue() == TypeofUser.get(0)){
-            return 0;
-        }
-        if (userCheckBox.getValue() == TypeofUser.get(1)){
-            return 1;
-        }
-        if (userCheckBox.getValue() == TypeofUser.get(2)){
-            return 2;
-        }
-        else return -1;
     }
 
     @Override
