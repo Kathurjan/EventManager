@@ -37,7 +37,6 @@ public class LoginController implements Initializable {
     }
 
     public void signIn(ActionEvent actionEvent) throws IOException {
-        System.out.println("sign in");
         loginMethod();
 
     }
