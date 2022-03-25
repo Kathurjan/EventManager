@@ -43,11 +43,13 @@ public class EventManagerPageController {
 
     public void populateEventTableView(){
 
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("eventName"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory<>("eventLocation"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("eventDate"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("eventPrice"));
-        startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("eventstarttime"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("EventName"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("EventLocation"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("EventDate"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("EventPrice"));
+        startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("StartTime"));
         eventTableview.setItems(eventModel.getAllEvents());
+        System.out.println(eventModel.getAllEvents());
+
     }
 }

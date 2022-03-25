@@ -3,6 +3,7 @@ package DAL;
 import BE.Event;
 import BE.Person;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.Date;
@@ -35,21 +36,21 @@ public class EventDAO {
     }
 
 
-    public List<Event> getAllEvents() {
-        List<Event> eventsList = FXCollections.observableArrayList();
+    public ObservableList<Event> getAllEvents() {
+        ObservableList<Event> eventsList = FXCollections.observableArrayList();
         try (Connection con = db.getConnection()) {
-            String sqlStatement = "SELECT * FROM Person";
+            String sqlStatement = "SELECT * FROM Event";
             Statement statement = con.createStatement();
             if (statement.execute(sqlStatement)) {
                 ResultSet rs = statement.getResultSet();
                 while (rs.next()) {
-                    int id = rs.getInt("id");
-                    String eventname = rs.getString("eventName");
-                    Date startdate = rs.getDate("eventDate");
-                    String eventlocation = rs.getString("eventLocation");
-                    double price = rs.getDouble("eventPrice");
-                    String startTime = rs.getString("eventstarttime");
-                    Event event = new Event(id,eventname, startdate, eventlocation, price, startTime);// Creating a person object from the retrieved values
+                    int id = rs.getInt("ID");
+                    String eventName = rs.getString("EventName");
+                    Date startdate = rs.getDate("EventDate");
+                        String eventlocation = rs.getString("EventLocation");
+                    double price = rs.getDouble("EventPrice");
+                    String startTime = rs.getString("StartTime");
+                    Event event = new Event(id,eventName, startdate, eventlocation, price, startTime);// Creating a person object from the retrieved values
                     eventsList.add(event); // Adding the person to  list
                 }
             }

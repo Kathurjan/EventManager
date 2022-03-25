@@ -6,6 +6,7 @@ import BE.Person;
 import DAL.DALFacade;
 import DAL.DALInterface;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.ObservableList;
 
 import java.util.Date;
 import java.util.List;
@@ -24,7 +25,7 @@ public class BLLInterface implements BLLFacade{
     }
 
     @Override
-    public List<Event> getAllEvents() {
+    public ObservableList<Event> getAllEvents() {
         return dalInterface.getAllEvents();
     }
 

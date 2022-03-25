@@ -4,6 +4,7 @@ import BE.Event;
 import BE.Person;
 import BLL.BLLInterface;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.ObservableList;
 
 import java.util.Date;
 import java.util.List;
@@ -15,7 +16,7 @@ public class EventModel {
         BLLInterface = new BLLInterface();
     }
 
-    public List<Event> getAllEvents(){
+    public ObservableList<Event> getAllEvents(){
         return BLLInterface.getAllEvents();
     }
 

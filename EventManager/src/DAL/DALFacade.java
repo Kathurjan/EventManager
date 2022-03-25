@@ -4,6 +4,7 @@ import BE.Admin;
 import BE.Event;
 import BE.Person;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.ObservableList;
 
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ public class DALFacade implements DALInterface{
     }
 
     @Override
-    public List<Event> getAllEvents() {
+    public ObservableList<Event> getAllEvents() {
         return eventDAO.getAllEvents();
     }
 
