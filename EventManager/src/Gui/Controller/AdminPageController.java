@@ -55,7 +55,10 @@ public class AdminPageController {
     }
 
     public void editBTNPress(ActionEvent actionEvent) throws SQLServerException, IOException {
-        setupPersonWindow(true);
+        if(adminTable.getSelectionModel().getSelectedItem() != null){
+            setupPersonWindow(true);
+        }
+        else System.out.println("Please select a user from the list");
     }
 
     private void setupPersonWindow(boolean edit) throws IOException, SQLServerException {
@@ -65,7 +68,7 @@ public class AdminPageController {
         UserCreationController addPersons = fxmlLoader.getController();
         addPersons.setController(this);
         if (edit){
-            fxmlLoader.<UserCreationController>getController().setEdit(testAdminOBJ);
+            fxmlLoader.<UserCreationController>getController().setEdit(adminTable.getSelectionModel().getSelectedItem());
         }
         fxmlLoader.<UserCreationController>getController();
         Stage stage = new Stage();
