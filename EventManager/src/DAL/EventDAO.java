@@ -47,8 +47,8 @@ public class EventDAO {
                     int id = rs.getInt("ID");
                     String eventName = rs.getString("EventName");
                     Date startdate = rs.getDate("EventDate");
-                        String eventlocation = rs.getString("EventLocation");
-                    double price = rs.getDouble("EventPrice");
+                    String eventlocation = rs.getString("EventLocation");
+                    Float price = rs.getFloat("EventPrice");
                     String startTime = rs.getString("StartTime");
                     Event event = new Event(id,eventName, startdate, eventlocation, price, startTime);// Creating a person object from the retrieved values
                     eventsList.add(event); // Adding the person to  list

@@ -19,11 +19,11 @@ import java.util.Date;
 public class EventManagerPageController {
 
     @FXML
-    private TableColumn<Classes, String> nameColumn, locationColumn, startTimeColumn;
+    private TableColumn<Event, String> nameColumn, locationColumn, startTimeColumn;
     @FXML
-    private TableColumn<Classes,Double> priceColumn;
+    private TableColumn<Event,Double> priceColumn;
     @FXML
-    private TableColumn<Classes, Date> dateColumn;
+    private TableColumn<Event, Date> dateColumn;
     @FXML
     private TableView<Event> eventTableview;
 
@@ -45,9 +45,9 @@ public class EventManagerPageController {
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("EventName"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("EventLocation"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("EventDate"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("EventPrice"));
-        startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("StartTime"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("StartDate"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("StateTime"));
         eventTableview.setItems(eventModel.getAllEvents());
         System.out.println(eventModel.getAllEvents());
 
