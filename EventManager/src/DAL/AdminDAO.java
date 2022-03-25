@@ -37,7 +37,8 @@ an admin and login them into the admin window.
                 ResultSet resultSet = statement.executeQuery();
                 while(resultSet.next()){
                     admin = new Admin(resultSet.getInt("id"),resultSet.getString("userName"),
-                            resultSet.getString("userPassWord"),resultSet.getString("email"));
+                            resultSet.getString("userPassWord"),resultSet.getString("email"),
+                            resultSet.getInt("type"));
                 }
         }
         catch(SQLException ex){

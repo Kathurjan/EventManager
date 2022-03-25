@@ -14,8 +14,8 @@ public class Admin extends Person {
     int type;
 
 
-    public Admin(int id, String username, String password, String email) {
-        super(id, username, password, email);
+    public Admin(int id, String username, String password, String email, int type) {
+        super(id, username, password, email, type);
     }
 
 }

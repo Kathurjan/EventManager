@@ -10,11 +10,12 @@ public class Person {
 
 
 
-    public Person(int id,String username, String password, String email) {
+    public Person(int id,String username, String password, String email, int type) {
         this.ID = id;
         Username = username;
         Password = password;
         this.email = email;
+        this.type = type;
 
     }
 

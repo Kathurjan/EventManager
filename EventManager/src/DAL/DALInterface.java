@@ -17,7 +17,7 @@ public interface DALInterface {
 
     void deletePerson(Person selectedPerson);
 
-    void editPerson(Person selectedPerson, String username, String password, String email);
+    void editPerson(Person selectedPerson, String username, String password, String email, int type);
 
 
     public  Admin verifyadmin(String username,String password,int type);

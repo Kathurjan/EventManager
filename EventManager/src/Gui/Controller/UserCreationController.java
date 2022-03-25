@@ -93,7 +93,7 @@ public class UserCreationController implements Initializable {
                             Stage stage =  (Stage) emailTxt.getScene().getWindow();
                             stage.close();
                         }
-                        else personModel.editPerson(selectedPerson, userNameTxt.getText(), password1stTxt.getText(), emailTxt.getText());
+                        else personModel.editPerson(selectedPerson, userNameTxt.getText(), password1stTxt.getText(), emailTxt.getText(), 0);
                         Stage stage =  (Stage) emailTxt.getScene().getWindow();
                         stage.close();
                     }

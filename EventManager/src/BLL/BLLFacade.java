@@ -17,7 +17,7 @@ public interface BLLFacade {
 
     void deletePerson(Person selectedPerson);
 
-    void editPerson(Person selectedPerson, String username, String password, String email);
+    void editPerson(Person selectedPerson, String username, String password, String email, int type);
 
     Admin verifyadmin(String username,String password, int type);
     void addEvent(int eventID, String eventName, Date startDate, String eventLocation, double price, String startTime);

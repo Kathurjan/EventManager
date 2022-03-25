@@ -43,8 +43,8 @@ public class DALFacade implements DALInterface{
     }
 
     @Override
-    public void editPerson(Person selectedPerson, String username, String password, String email) {
-        personDAO.editPerson(selectedPerson, username, password, email);
+    public void editPerson(Person selectedPerson, String username, String password, String email, int type) {
+        personDAO.editPerson(selectedPerson, username, password, email, type);
     }
 
 

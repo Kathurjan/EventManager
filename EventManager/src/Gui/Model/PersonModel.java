@@ -25,7 +25,7 @@ public class PersonModel {
         BLLInterface.deletePerson(selectedPerson);
     }
 
-    public void editPerson(Person selectedPerson, String username, String password, String email){
-        BLLInterface.editPerson(selectedPerson, username, password, email);
+    public void editPerson(Person selectedPerson, String username, String password, String email, int type){
+        BLLInterface.editPerson(selectedPerson, username, password, email, type);
     }
 }

@@ -45,7 +45,7 @@ public class AdminPageController {
 
     public AdminPageController() throws SQLServerException {
         mainModel = new MainModel();
-        testAdminOBJ = new Admin(1, "Test", "Test", "Test");
+        testAdminOBJ = new Admin(1, "Test", "Test", "Test", 0);
         this.model = new PersonModel();
     }
 

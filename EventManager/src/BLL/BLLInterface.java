@@ -40,8 +40,8 @@ public class BLLInterface implements BLLFacade{
     }
 
     @Override
-    public void editPerson(Person selectedPerson, String username, String password, String email) {
-        dalInterface.editPerson(selectedPerson, username, password, email);
+    public void editPerson(Person selectedPerson, String username, String password, String email, int type) {
+        dalInterface.editPerson(selectedPerson, username, password, email, type);
     }
 
     @Override
