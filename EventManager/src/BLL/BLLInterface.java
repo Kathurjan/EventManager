@@ -1,6 +1,7 @@
 package BLL;
 
 import BE.Admin;
+import BE.Event;
 import BE.Person;
 import DAL.DALFacade;
 import DAL.DALInterface;
@@ -20,6 +21,11 @@ public class BLLInterface implements BLLFacade{
     @Override
     public List<Person> getAllPerson() {
         return dalInterface.getAllPerson();
+    }
+
+    @Override
+    public List<Event> getAllEvents() {
+        return dalInterface.getAllEvents();
     }
 
     @Override

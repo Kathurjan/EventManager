@@ -1,6 +1,7 @@
 package DAL;
 
 import BE.Admin;
+import BE.Event;
 import BE.Person;
 
 import java.util.Date;
@@ -9,6 +10,7 @@ import java.util.List;
 public interface DALInterface {
 
     List<Person> getAllPerson();
+    List<Event> getAllEvents();
 
     void addPerson(String username, String password, String email, int type);
 

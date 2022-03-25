@@ -1,6 +1,7 @@
 package DAL;
 
 import BE.Admin;
+import BE.Event;
 import BE.Person;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
@@ -23,6 +24,11 @@ public class DALFacade implements DALInterface{
     @Override
     public List<Person> getAllPerson() {
         return personDAO.getAllPerson();
+    }
+
+    @Override
+    public List<Event> getAllEvents() {
+        return eventDAO.getAllEvents();
     }
 
     @Override

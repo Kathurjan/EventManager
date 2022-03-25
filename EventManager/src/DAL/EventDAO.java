@@ -1,9 +1,12 @@
 package DAL;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import BE.Event;
+import BE.Person;
+import javafx.collections.FXCollections;
+
+import java.sql.*;
 import java.util.Date;
+import java.util.List;
 
 public class EventDAO {
     private final static DatabaseConnector db = new DatabaseConnector();
@@ -31,6 +34,31 @@ public class EventDAO {
 
     }
 
+
+    public List<Event> getAllEvents() {
+        List<Event> eventsList = FXCollections.observableArrayList();
+        try (Connection con = db.getConnection()) {
+            String sqlStatement = "SELECT * FROM Person";
+            Statement statement = con.createStatement();
+            if (statement.execute(sqlStatement)) {
+                ResultSet rs = statement.getResultSet();
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String eventname = rs.getString("eventName");
+                    Date startdate = rs.getDate("eventDate");
+                    String eventlocation = rs.getString("eventLocation");
+                    double price = rs.getDouble("eventPrice");
+                    String startTime = rs.getString("eventstarttime");
+                    Event event = new Event(id,eventname, startdate, eventlocation, price, startTime);// Creating a person object from the retrieved values
+                    eventsList.add(event); // Adding the person to  list
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            return null;
+        }
+        return eventsList;
+    }
 
 
 }
