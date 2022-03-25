@@ -7,19 +7,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="315.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.LoginController">
+<AnchorPane fx:id="APane" prefHeight="315.0" prefWidth="300.0" stylesheets="@../CSS/LoginStylesheet.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.LoginController">
    <children>
+      <Text fx:id="passWordLabel" fill="WHITE" layoutX="14.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
       <TextField fx:id="UserName" layoutX="14.0" layoutY="128.0" onKeyPressed="#loginAfterEnter" promptText="Username" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
       <PasswordField fx:id="PassWord" layoutX="14.0" layoutY="189.0" onKeyPressed="#loginAfterEnter" promptText="Password" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-      <Button fx:id="loginBtn" layoutX="17.0" layoutY="235.0" mnemonicParsing="false" onAction="#signIn" prefHeight="25.0" prefWidth="149.0" text="Sign In" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="23.0" />
-      <Button fx:id="closeButton" layoutX="17.0" layoutY="267.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="149.0" text="Exit" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="23.0" />
-      <Text layoutX="51.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login Menu" AnchorPane.topAnchor="35.0">
+      <Button fx:id="loginBtn" layoutX="17.0" layoutY="235.0" mnemonicParsing="false" onAction="#signIn" prefHeight="25.0" prefWidth="149.0" text="Sign In" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Button fx:id="closeButton" layoutX="17.0" layoutY="267.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="149.0" text="Exit" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Text fx:id="Header" fill="WHITE" layoutX="62.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGIN MENU" AnchorPane.topAnchor="40.0">
          <font>
             <Font size="40.0" />
          </font>
       </Text>
-      <Text layoutX="14.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
-      <Text layoutX="14.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-      <Button layoutX="126.0" layoutY="82.0" mnemonicParsing="false" onAction="#skip" text="SKIP" />
+      <Text fx:id="userNameLabel" fill="#ffffffe5" layoutX="15.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
    </children>
 </AnchorPane>

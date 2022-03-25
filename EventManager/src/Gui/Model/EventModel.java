@@ -1,19 +1,26 @@
 package Gui.Model;
 
-import BLL.BLLFacade;
+import BE.Event;
+import BE.Person;
 import BLL.BLLInterface;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.ObservableList;
 
 import java.util.Date;
+import java.util.List;
 
 public class EventModel {
-    private BLLInterface bllfacade;
+    private BLLInterface BLLInterface;
 
     public EventModel() throws SQLServerException {
-        bllfacade = new BLLFacade();
+        BLLInterface = new BLLInterface();
+    }
+
+    public ObservableList<Event> getAllEvents(){
+        return BLLInterface.getAllEvents();
     }
 
     public void addEvent(int eventID, String eventName, Date startDate, String eventLocation, double price, String startTime){
-    bllfacade.addEvent(eventID,eventName,startDate,eventLocation,price,startTime);
+        BLLInterface.addEvent(eventID,eventName,startDate,eventLocation,price,startTime);
     }
 }

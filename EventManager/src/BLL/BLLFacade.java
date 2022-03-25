@@ -1,51 +1,24 @@
 package BLL;
 
 import BE.Admin;
+import BE.Event;
 import BE.Person;
-import DAL.DALFacade;
-import DAL.DALInterface;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.ObservableList;
 
 import java.util.Date;
 import java.util.List;
 
-public class BLLFacade implements BLLInterface{
+public interface BLLFacade {
 
-    private DALInterface dalInterface;
+    List<Person> getAllPerson();
+    ObservableList<Event> getAllEvents();
 
-    public BLLFacade() throws SQLServerException {
-        dalInterface = new DALFacade();
-    }
+    void addPerson(String username, String password, String email, int type);
 
-    @Override
-    public List<Person> getAllPerson() {
-        return dalInterface.getAllPerson();
-    }
+    void deletePerson(Person selectedPerson);
 
-    @Override
-    public void addPerson(String username, String password, String email, int type) {
-        dalInterface.addPerson(username, password, email, type);
-    }
+    void editPerson(Person selectedPerson, String username, String password, String email);
 
-    @Override
-    public void deletePerson(Person selectedPerson) {
-        dalInterface.deletePerson(selectedPerson);
-    }
-
-    @Override
-    public void editPerson(Person selectedPerson, String username, String password, String email) {
-        dalInterface.editPerson(selectedPerson, username, password, email);
-    }
-
-    @Override
-    public Admin verifyadmin(String username,String password, int type) {
-        return dalInterface.verifyadmin( username, password,type);
-    }
-
-    @Override
-    public void addEvent(int eventID, String eventName, Date startDate, String eventLocation, double price, String startTime) {
-        dalInterface.addEvent(eventID,eventName,startDate,eventLocation,price,startTime);
-    }
-
-
+    Admin verifyadmin(String username,String password, int type);
+    void addEvent(int eventID, String eventName, Date startDate, String eventLocation, double price, String startTime);
 }

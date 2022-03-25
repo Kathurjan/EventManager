@@ -1,7 +1,9 @@
 package DAL;
 
 import BE.Admin;
+import BE.Event;
 import BE.Person;
+import javafx.collections.ObservableList;
 
 import java.util.Date;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.List;
 public interface DALInterface {
 
     List<Person> getAllPerson();
+    ObservableList<Event> getAllEvents();
 
     void addPerson(String username, String password, String email, int type);
 
