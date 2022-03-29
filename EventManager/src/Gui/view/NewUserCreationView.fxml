@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="344.0" prefWidth="355.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.NewUserCreationController">
+   <children>
+      <Label fx:id="errorLabel" layoutX="155.0" layoutY="14.0" prefHeight="18.0" prefWidth="51.0" />
+      <Label layoutX="75.0" layoutY="23.0" text="Create new user">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <TextField fx:id="emailTxt" layoutX="107.0" layoutY="83.0" promptText="Email" />
+      <TextField fx:id="userNameTxt" layoutX="107.0" layoutY="115.0" promptText="Username" />
+      <TextField fx:id="password1stTxt" layoutX="108.0" layoutY="147.0" promptText="Password" />
+      <TextField fx:id="password2ndTxt" layoutX="108.0" layoutY="179.0" promptText="Repeat password" />
+      <Label fx:id="userCheckBoxLabel" layoutX="135.0" layoutY="214.0" text="Choose user type" />
+      <ChoiceBox fx:id="userCheckBox" layoutX="106.0" layoutY="232.0" prefWidth="150.0" />
+      <Button layoutX="68.0" layoutY="276.0" mnemonicParsing="false" onAction="#onAddUserBTNPress" text="Create user" />
+      <Button layoutX="230.0" layoutY="276.0" mnemonicParsing="false" onAction="#onCancelBTNPress" text="Cancel" />
+   </children>
+</AnchorPane>
