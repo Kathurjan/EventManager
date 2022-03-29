@@ -5,10 +5,14 @@ import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -27,27 +31,41 @@ public class NewUserCreationController {
         personList = new ArrayList<>();
     }
 
-    public void onAddUserBTNPress(ActionEvent actionEvent) {
+    public void onAddUserBTNPress(ActionEvent actionEvent) throws IOException {
         if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // checks the length of the input to ensure minimum safety
             if (verifyEmail()) { // if controller is in editing mode -> skip email verification step
                 if (verifyPassword()) {
                             personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), 2);
                             Stage stage =  (Stage) emailTxt.getScene().getWindow();
                             stage.close();
-                    }
-                    else {
-                        errorLabel.setText("Please choose a user type");
+
+
+                    Parent part = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+                    Stage stage1= new Stage();
+                    Scene scene = new Scene(part);
+                    stage1.setScene(scene);
+                    stage1.show();
                     }
             }
         }
         else {
             errorLabel.setText("You must provide a username with between 4 and 20 characters");
         }
+
+
     }
 
 
 
-    public void onCancelBTNPress(ActionEvent actionEvent) {
+    public void onCancelBTNPress(ActionEvent actionEvent) throws IOException {
+        Stage stage =  (Stage) emailTxt.getScene().getWindow();
+        stage.close();
+
+        Parent part = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+        Stage stage1= new Stage();
+        Scene scene = new Scene(part);
+        stage1.setScene(scene);
+        stage1.show();
     }
     private boolean verifyEmail() { // Checks for null input and gets a list of all Persons in the DB to check it against the input
         if(personList.isEmpty()){
