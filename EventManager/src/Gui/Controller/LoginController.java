@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -28,6 +29,8 @@ public class LoginController implements Initializable {
     private PasswordField PassWord;
     @FXML
     private Button closeButton;
+    @FXML
+    private Label newUserLabel;
 
     private MainModel mainModel;
 
@@ -156,6 +159,22 @@ public class LoginController implements Initializable {
     public void loginAfterEnter(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             loginMethod();
+        }
+    }
+
+    public void newUserBTN(MouseEvent mouseEvent) {
+        try {
+            Parent part = FXMLLoader.load(getClass().getResource("../view/NewUserCreationView.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(part);
+            stage.setScene(scene);
+            stage.show();
+
+            // used to close the window if the pass and username is correct
+            Stage stagewindow = (Stage) newUserLabel.getScene().getWindow();
+            stagewindow.close();
+    } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
