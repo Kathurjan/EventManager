@@ -25,7 +25,7 @@ public class EventManagerPageController {
     @FXML
     private TableColumn<Event, Date> dateColumn;
     @FXML
-    private TableView<Event> eventTableview;
+    private TableView<Event> eventTableView;
 
     private EventModel eventModel;
 
@@ -48,7 +48,7 @@ public class EventManagerPageController {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("StartDate"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("StateTime"));
-        eventTableview.setItems(eventModel.getAllEvents());
+        eventTableView.setItems(eventModel.getAllEvents());
         System.out.println(eventModel.getAllEvents());
 
     }

@@ -9,7 +9,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
    <children>
-      <TableView fx:id="eventTableview" layoutX="21.0" layoutY="21.0" prefHeight="370.0" prefWidth="425.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="eventTableView" layoutX="21.0" layoutY="21.0" prefHeight="370.0" prefWidth="425.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
           <TableColumn fx:id="locationColumn" prefWidth="75.0" text="Location" />
