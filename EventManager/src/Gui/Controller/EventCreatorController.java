@@ -91,7 +91,7 @@ public class EventCreatorController implements Initializable {
     }
 
     @FXML
-    public void buttonAddTicketPress(ActionEvent event){
+    private void buttonAddTicketPress(ActionEvent event){
         TicketType tempticket = new TicketType(ticketNameTxt.getText(), ticketDescInputTxt.getText(), 1);
         ticketTypeObservableList.add(tempticket);
         populateTableview();
@@ -104,7 +104,7 @@ public class EventCreatorController implements Initializable {
         ticketTypeTable.setItems(ticketTypeObservableList);
     }
 
-    private void setEdit(Event event){
+    public void setEdit(Event event){
 
     }
 }

@@ -13,7 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
+import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -91,9 +91,9 @@ public class EventManagerPageController implements Initializable{
         EventCreatorController addEvent = fxmlLoader.getController();
         addEvent.setController(this);
         if (edit){
-            fxmlLoader.<UserCreationController>getController().setEditEventCreator(eventTableView.getSelectionModel().getSelectedItem());
+            fxmlLoader.<EventCreatorController>getController().setEdit(eventTableView.getSelectionModel().getSelectedItem());
         }
-        fxmlLoader.<UserCreationController>getController();
+        fxmlLoader.<EventCreatorController>getController();
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.setScene(scene);
