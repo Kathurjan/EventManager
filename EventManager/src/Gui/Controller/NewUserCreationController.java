@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -20,8 +21,9 @@ import java.util.Objects;
 public class NewUserCreationController {
 
     @FXML
-    private TextField userNameTxt, emailTxt, password1stTxt, password2ndTxt;
-
+    private TextField userNameTxt, emailTxt;
+    @FXML
+    private PasswordField password1stTxt, password2ndTxt;
     @FXML
     private Label errorLabel;
 
@@ -33,7 +35,7 @@ public class NewUserCreationController {
         personModel = new PersonModel();
         personList = new ArrayList<>();
     }
-    
+
     // This button lets you signup or not depending if you do it correctly.
     @FXML
     private void onAddUserBTNPress(ActionEvent actionEvent) throws IOException {
