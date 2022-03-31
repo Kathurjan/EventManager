@@ -33,19 +33,12 @@ public class NewUserCreationController {
         personModel = new PersonModel();
         personList = new ArrayList<>();
     }
-
-<<<<<<< Updated upstream
-    @FXML
-    private void onAddUserBTNPress(ActionEvent actionEvent) throws IOException {
-        if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // checks the length of the input to ensure minimum safety
-            if (verifyEmail()) { // if controller is in editing mode -> skip email verification step
-=======
+    
     // This button lets you signup or not depending if you do it correctly.
     @FXML
     private void onAddUserBTNPress(ActionEvent actionEvent) throws IOException {
         if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // Checks the length of the input to ensure minimum safety
             if (verifyEmail()) { // If controller is in editing mode -> skip email verification step
->>>>>>> Stashed changes
                 if (verifyPassword()) {
                             personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), 2);
                             Stage stage =  (Stage) emailTxt.getScene().getWindow();
@@ -63,10 +56,7 @@ public class NewUserCreationController {
         }
     }
 
-<<<<<<< Updated upstream
-=======
     // This button cancels and leads you back to the login screen.
->>>>>>> Stashed changes
     @FXML
     private void onCancelBTNPress(ActionEvent actionEvent) throws IOException {
         Stage stage =  (Stage) emailTxt.getScene().getWindow();
