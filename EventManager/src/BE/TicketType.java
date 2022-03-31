@@ -4,13 +4,23 @@ public class TicketType {
     private final int ticketTypeID;
     private String ticketDescription;
     private String ticketName;
+    private double extraFee;
 
     // This is the create object for ticket types.
 
-    public TicketType(String name, String desc, int ID){
+    public TicketType(String ticketName, String ticketDescription, double extraFee, int ID){
         this.ticketTypeID = ID;
-        this.ticketDescription = desc;
-        this.ticketName = name;
+        this.ticketDescription = ticketDescription;
+        this.ticketName = ticketName;
+        this.extraFee = extraFee;
+    }
+
+    public double getExtraFee() {
+        return extraFee;
+    }
+
+    public void setExtraFee(double extraFee) {
+        this.extraFee = extraFee;
     }
 
     public int getTicketTypeID(){

@@ -4,6 +4,7 @@ import BE.Event;
 import BE.TicketType;
 import Gui.Model.TicketTypeModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -74,6 +75,7 @@ public class EventCreatorController implements Initializable {
     public EventCreatorController() {
         try {
             ticketTypeModel = new TicketTypeModel();
+            ticketTypeObservableList = FXCollections.observableArrayList();
         }
         catch (SQLServerException ex){
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -97,10 +99,22 @@ public class EventCreatorController implements Initializable {
         populateTableview();
     }
 
+    @FXML
+    private void buttonRemoveTicketPress(ActionEvent event) {
+        if (ticketTypeTable.getSelectionModel().getSelectedItem() != null) {
+            ticketTypeObservableList.remove(ticketTypeTable.getSelectionModel().getSelectedItem());
+            populateTableview();
+        }
+        else System.out.println("Put in error label (Remove button)");
+    }
+
+
+
+
     private void populateTableview(){
         // This dot, method populates the ticket type table view (Space comma here) dot mads (Non dash captilized) this is where you rage & try to fix this exclamantion mark dot
-        ticketTypeColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-        ticketDescColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        ticketTypeColumn.setCellValueFactory(new PropertyValueFactory<>("ticketName"));
+        ticketDescColumn.setCellValueFactory(new PropertyValueFactory<>("ticketDescription"));
         ticketTypeTable.setItems(ticketTypeObservableList);
     }
 

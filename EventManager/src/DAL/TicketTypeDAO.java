@@ -16,12 +16,13 @@ public class TicketTypeDAO {
 
     public void addTicketType(List<TicketType> listToBeAdded, int eventID){
         try(Connection connection = db.getConnection()) {
-            String query = "INSERT INTO TicketType(TicketName, TicketDescription, EventID) VALUES (?,?,?)";
+            String query = "INSERT INTO TicketType(TicketName, TicketDescription, ExtraFee, EventID) VALUES (?,?,?,?)";
             PreparedStatement ptsm = connection.prepareStatement(query);
             for (TicketType ticketType: listToBeAdded) {
                 ptsm.setString(1, ticketType.getTicketName());
                 ptsm.setString(2, ticketType.getTicketDescription());
-                ptsm.setInt(3, eventID);
+                ptsm.setDouble(3, ticketType.getExtraFee());
+                ptsm.setInt(4, eventID);
                 ptsm.addBatch();
             }
             ptsm.executeBatch();
@@ -49,7 +50,7 @@ public class TicketTypeDAO {
             ptsm.setInt(1, eventID);
             ResultSet rs = ptsm.executeQuery();
             while (rs.next()){
-                TicketType ticketType = new TicketType(rs.getString("TicketName"), rs.getString("TicketDescription"), rs.getInt("TypeID"));
+                TicketType ticketType = new TicketType(rs.getString("TicketName"), rs.getString("TicketDescription"), rs.getDouble("ExtraFee"), rs.getInt("TypeID"));
                 ticketTypeList.add(ticketType);
             }
             return ticketTypeList;
