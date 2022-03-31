@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminPageController implements Initializable {
-    
+
     public Button delBTN;
 
     @FXML
@@ -33,12 +33,10 @@ public class AdminPageController implements Initializable {
     @FXML
     private TableView<Person> adminTable;
 
-    private Person testAdminOBJ;
     private PersonModel personModel;
 
 
     public AdminPageController() throws SQLServerException {
-        testAdminOBJ = new Admin(1, "Test", "Test", "Test", 0);
         personModel = new PersonModel();
     }
 

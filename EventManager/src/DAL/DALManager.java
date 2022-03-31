@@ -10,14 +10,14 @@ import javafx.collections.ObservableList;
 import java.util.Date;
 import java.util.List;
 
-public class DALFacade implements DALInterface{
+public class DALManager implements DALInterface{
 
     private PersonDAO personDAO;
     private EventDAO eventDAO;
     private TicketTypeDAO ticketDAO;
     private DatabaseConnector db = new DatabaseConnector();
 
-    public DALFacade() throws SQLServerException {
+    public DALManager() throws SQLServerException {
         personDAO = new PersonDAO();
         eventDAO = new EventDAO();
         ticketDAO = new TicketTypeDAO();

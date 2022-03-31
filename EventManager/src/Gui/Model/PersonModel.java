@@ -2,19 +2,17 @@ package Gui.Model;
 
 import BE.Admin;
 import BE.Person;
-import BLL.BLLInterface;
+import BLL.BLLManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.List;
-
 public class PersonModel {
-    private BLLInterface BLLInterface;
+    private BLLManager BLLInterface;
     private ObservableList<Person> personObservableList;
 
     public PersonModel() throws SQLServerException {
-        BLLInterface = new BLLInterface();
+        BLLInterface = new BLLManager();
     }
 
     public ObservableList<Person> getAllPerson(){
