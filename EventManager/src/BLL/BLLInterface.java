@@ -3,8 +3,10 @@ package BLL;
 import BE.Admin;
 import BE.Event;
 import BE.Person;
+import BE.TicketType;
 import DAL.DALFacade;
 import DAL.DALInterface;
+import DAL.TicketDAO;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
 
@@ -28,6 +30,9 @@ public class BLLInterface implements BLLFacade{
     public ObservableList<Event> getAllEvents() {
         return dalInterface.getAllEvents();
     }
+
+    @Override
+    public List<TicketType> getTicketTypes(int eventID){return dalInterface.getTicketTypes(eventID);}
 
     @Override
     public void addPerson(String username, String password, String email, int type) {

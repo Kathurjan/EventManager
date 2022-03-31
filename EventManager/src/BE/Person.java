@@ -3,7 +3,6 @@ package BE;
 public class Person {
     private final int ID;
     private String Username;
-    private String Password;
     private String email;
     private int type;
 
@@ -13,7 +12,6 @@ public class Person {
     public Person(int id,String username, String password, String email, int type) {
         this.ID = id;
         Username = username;
-        Password = password;
         this.email = email;
         this.type = type;
 
@@ -37,14 +35,6 @@ public class Person {
 
     public void setUsername(String username) {
         Username = username;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
     }
 
     public String getEmail() {

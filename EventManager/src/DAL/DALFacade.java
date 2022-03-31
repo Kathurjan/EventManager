@@ -3,6 +3,7 @@ package DAL;
 import BE.Admin;
 import BE.Event;
 import BE.Person;
+import BE.TicketType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
 
@@ -14,12 +15,14 @@ public class DALFacade implements DALInterface{
     private AdminDAO adminDAO;
     private PersonDAO personDAO;
     private EventDAO eventDAO;
+    private TicketDAO ticketDAO;
     private DatabaseConnector db = new DatabaseConnector();
 
     public DALFacade() throws SQLServerException {
         adminDAO = new AdminDAO(db.getConnection());
         personDAO = new PersonDAO();
         eventDAO = new EventDAO();
+        ticketDAO = new TicketDAO();
     }
 
     @Override
@@ -30,6 +33,11 @@ public class DALFacade implements DALInterface{
     @Override
     public ObservableList<Event> getAllEvents() {
         return eventDAO.getAllEvents();
+    }
+
+    @Override
+    public List<TicketType> getTicketTypes(int eventID) throws SQLServerException {
+        return ticketDAO.getTicketTypes(eventID);
     }
 
     @Override
