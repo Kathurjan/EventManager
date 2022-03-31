@@ -94,7 +94,7 @@ public class EventCreatorController implements Initializable {
 
     @FXML
     private void buttonAddTicketPress(ActionEvent event){
-        TicketType tempticket = new TicketType(ticketNameTxt.getText(), ticketDescInputTxt.getText(), 1);
+        TicketType tempticket = new TicketType(ticketNameTxt.getText(), ticketDescInputTxt.getText(), );
         ticketTypeObservableList.add(tempticket);
         populateTableview();
     }
@@ -108,6 +108,13 @@ public class EventCreatorController implements Initializable {
         else System.out.println("Put in error label (Remove button)");
     }
 
+    @FXML
+    private void createEventButtonPress(ActionEvent event) {
+    }
+
+    @FXML
+    private void cancelButtonPress(ActionEvent event) {
+    }
 
 
 
