@@ -34,7 +34,8 @@ public class NewUserCreationController {
         personList = new ArrayList<>();
     }
 
-    public void onAddUserBTNPress(ActionEvent actionEvent) throws IOException {
+    @FXML
+    private void onAddUserBTNPress(ActionEvent actionEvent) throws IOException {
         if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // checks the length of the input to ensure minimum safety
             if (verifyEmail()) { // if controller is in editing mode -> skip email verification step
                 if (verifyPassword()) {
@@ -56,7 +57,8 @@ public class NewUserCreationController {
 
     }
 
-    public void onCancelBTNPress(ActionEvent actionEvent) throws IOException {
+    @FXML
+    private void onCancelBTNPress(ActionEvent actionEvent) throws IOException {
         Stage stage =  (Stage) emailTxt.getScene().getWindow();
         stage.close();
 

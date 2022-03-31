@@ -5,13 +5,16 @@ import Gui.Model.TicketTypeModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.w3c.dom.Text;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 
-public class EventCreatorController {
+public class EventCreatorController implements Initializable {
 
     @FXML
     private TextField eventNameTxt;
@@ -68,14 +71,17 @@ public class EventCreatorController {
         }
     }
 
-    @FXML
-    public void buttonAddTicketPress(ActionEvent event){
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        populateTableview();
     }
 
+    @FXML
+    public void buttonAddTicketPress(ActionEvent event){
 
+    }
 
+    private void populateTableview(){
 
-
-
-
+    }
 }
