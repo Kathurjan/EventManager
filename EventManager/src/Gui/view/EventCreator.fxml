@@ -53,8 +53,8 @@
                   <AnchorPane prefHeight="182.0" prefWidth="210.0">
                      <children>
                         <AnchorPane layoutX="-1.0" layoutY="1.0" prefHeight="26.0" prefWidth="210.0" />
-                        <Button layoutX="112.0" layoutY="53.0" mnemonicParsing="false" text="Create event" />
-                        <Button layoutX="14.0" layoutY="52.0" mnemonicParsing="false" prefHeight="26.5" prefWidth="83.2" text="Cancel" />
+                        <Button layoutX="112.0" layoutY="53.0" mnemonicParsing="false" onAction="#createEventButtonPress" text="Create event" />
+                        <Button layoutX="14.0" layoutY="52.0" mnemonicParsing="false" onAction="#cancelButtonPress" prefHeight="26.5" prefWidth="83.2" text="Cancel" />
                      </children>
                   </AnchorPane>
                </children>
