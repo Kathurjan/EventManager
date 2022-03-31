@@ -1,19 +1,17 @@
 package Gui.Model;
 
 import BE.Event;
-import BE.Person;
-import BLL.BLLInterface;
+import BLL.BLLManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
 
 import java.util.Date;
-import java.util.List;
 
 public class EventModel {
-    private BLLInterface BLLInterface;
+    private BLLManager BLLInterface;
 
     public EventModel() throws SQLServerException {
-        BLLInterface = new BLLInterface();
+        BLLInterface = new BLLManager();
     }
 
     public ObservableList<Event> getAllEvents(){
