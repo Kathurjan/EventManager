@@ -30,5 +30,5 @@ public interface DALInterface {
     Admin verifyAdmin(String username, String password, int type);
 
 
-    void addEvent(int eventID, String eventname, Date startdate, String eventlocation, double price, String startTime);
+    void addEvent(String eventname, Date startdate, String eventlocation, double price, String startTime);
 }

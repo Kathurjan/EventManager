@@ -2,6 +2,7 @@ package Gui.Controller;
 
 import BE.Event;
 import BE.TicketType;
+import Gui.Model.EventModel;
 import Gui.Model.TicketTypeModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
@@ -17,6 +18,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 
@@ -24,6 +26,9 @@ public class EventCreatorController implements Initializable {
 
     @FXML
     private TextField eventNameTxt;
+
+    @FXML
+    private TextField extraFeeTxt;
 
     @FXML
     private TextField hourTxt;
@@ -65,6 +70,7 @@ public class EventCreatorController implements Initializable {
     private TextArea ticketDescDisplayTxt;
 
     private TicketTypeModel ticketTypeModel;
+    private EventModel eventModel;
     private ObservableList<TicketType> ticketTypeObservableList;
     private EventManagerPageController eventManagerPageController;
 
@@ -74,6 +80,7 @@ public class EventCreatorController implements Initializable {
 ;
     public EventCreatorController() {
         try {
+            eventModel = new EventModel();
             ticketTypeModel = new TicketTypeModel();
             ticketTypeObservableList = FXCollections.observableArrayList();
         }
@@ -94,7 +101,7 @@ public class EventCreatorController implements Initializable {
 
     @FXML
     private void buttonAddTicketPress(ActionEvent event){
-        TicketType tempticket = new TicketType(ticketNameTxt.getText(), ticketDescInputTxt.getText(), );
+        TicketType tempticket = new TicketType(ticketNameTxt.getText(), ticketDescInputTxt.getText(), ticketTypeModel.convertTxtToDouble(extraFeeTxt.getText()), 1);
         ticketTypeObservableList.add(tempticket);
         populateTableview();
     }
@@ -110,6 +117,7 @@ public class EventCreatorController implements Initializable {
 
     @FXML
     private void createEventButtonPress(ActionEvent event) {
+        //eventModel.addEvent(eventNameTxt.getText(), Date.from(Instant.now()), locationTxt.getText(), eventModel.convertStringToDouble(priceTxt.getText()));
     }
 
     @FXML
@@ -121,7 +129,7 @@ public class EventCreatorController implements Initializable {
     private void populateTableview(){
         // This dot, method populates the ticket type table view (Space comma here) dot mads (Non dash captilized) this is where you rage & try to fix this exclamantion mark dot
         ticketTypeColumn.setCellValueFactory(new PropertyValueFactory<>("ticketName"));
-        ticketDescColumn.setCellValueFactory(new PropertyValueFactory<>("ticketDescription"));
+        ticketDescColumn.setCellValueFactory(new PropertyValueFactory<>("extraFee"));
         ticketTypeTable.setItems(ticketTypeObservableList);
     }
 

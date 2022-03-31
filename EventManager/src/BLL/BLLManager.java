@@ -17,9 +17,11 @@ import java.util.List;
 public class BLLManager implements BLLInterface {
 
     private DALInterface dalInterface;
+    private TextConverter textConverter;
 
     public BLLManager() throws SQLServerException {
         dalInterface = new DALManager();
+        textConverter = new TextConverter();
     }
 
     @Override
@@ -56,8 +58,13 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public void addEvent(int eventID, String eventName, Date startDate, String eventLocation, double price, String startTime) {
-        dalInterface.addEvent(eventID,eventName,startDate,eventLocation,price,startTime);
+    public void addEvent(String eventName, Date startDate, String eventLocation, double price, String startTime) {
+        dalInterface.addEvent(eventName,startDate,eventLocation,price,startTime);
+    }
+
+    @Override
+    public double convertTextToDouble(String input){
+        return textConverter.convertStringToDouble(input);
     }
 
 

@@ -61,8 +61,8 @@ public class DALManager implements DALInterface{
     }
 
     @Override
-    public void addEvent(int eventID, String eventName, Date startDate, String eventLocation, double price, String startTime) {
-        eventDAO.addEvent(eventID,eventName,startDate,eventLocation,price,startTime);
+    public void addEvent(String eventName, Date startDate, String eventLocation, double price, String startTime) {
+        eventDAO.addEvent(eventName,startDate,eventLocation,price,startTime);
     }
 
 

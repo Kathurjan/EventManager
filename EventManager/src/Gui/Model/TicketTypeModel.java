@@ -20,4 +20,14 @@ public class TicketTypeModel {
         ticketTypeObservableList.setAll(bllInterface.getTicketTypes(eventID));
         return ticketTypeObservableList;
     }
+
+    public double convertTxtToDouble(String input){
+        try {
+            return bllInterface.convertTextToDouble(input);
+        }
+        catch (NumberFormatException ex){
+            System.out.println("Staph numberformatexception");
+            return 0.00;
+        }
+    }
 }

@@ -18,7 +18,11 @@ public class EventModel {
         return BLLInterface.getAllEvents();
     }
 
-    public void addEvent(int eventID, String eventName, Date startDate, String eventLocation, double price, String startTime){
-        BLLInterface.addEvent(eventID,eventName,startDate,eventLocation,price,startTime);
+    public void addEvent(String eventName, Date startDate, String eventLocation, double price, String startTime){
+        BLLInterface.addEvent(eventName,startDate,eventLocation,price,startTime);
+    }
+
+    public double convertStringToDouble(String input){
+        return BLLInterface.convertTextToDouble(input);
     }
 }
