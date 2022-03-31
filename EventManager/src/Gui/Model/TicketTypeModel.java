@@ -15,8 +15,6 @@ public class TicketTypeModel {
         bllInterface = new BLLManager();
     }
 
-
-
     public ObservableList<TicketType> getTicketTypes(int eventID) throws SQLServerException {
         ticketTypeObservableList = FXCollections.observableArrayList();
         ticketTypeObservableList.setAll(bllInterface.getTicketTypes(eventID));

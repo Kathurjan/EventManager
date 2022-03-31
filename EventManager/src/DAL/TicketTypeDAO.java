@@ -41,7 +41,6 @@ public class TicketTypeDAO {
         }
     }
 
-
     public List<TicketType> getTicketTypes(int eventID) throws SQLServerException {
         List<TicketType> ticketTypeList = new ArrayList<>();
         try (Connection connection = db.getConnection()){

@@ -4,13 +4,16 @@ import BE.Event;
 import Gui.Model.EventModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.net.URL;
 import java.util.Date;
+import java.util.ResourceBundle;
 
-public class EventManagerPageController {
+public class EventManagerPageController implements Initializable{
 
     @FXML
     private TableColumn<Event, String> nameColumn, locationColumn, startTimeColumn;
@@ -23,11 +26,14 @@ public class EventManagerPageController {
 
     private EventModel eventModel;
 
+    // This is our constructor.
     public EventManagerPageController() throws SQLServerException {
         eventModel = new EventModel();
     }
 
-    public void initialize() {
+    // Here we do a initialize for our tableview.
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         try {
             populateEventTableView();
         } catch (Exception e) {
@@ -35,8 +41,9 @@ public class EventManagerPageController {
         }
     }
 
-    public void populateEventTableView(){
-
+    // Here we populate our event table view.
+    @FXML
+    private void populateEventTableView(){
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("EventName"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("EventLocation"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("StartDate"));

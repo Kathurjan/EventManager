@@ -2,6 +2,8 @@ package BE;
 
 import java.util.Date;
 
+// This is the create object for events.
+
 public class Event {
     private final int eventID;
     private String eventName;

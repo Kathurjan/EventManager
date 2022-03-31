@@ -19,7 +19,6 @@ import java.util.Objects;
 
 public class NewUserCreationController {
 
-
     @FXML
     private TextField userNameTxt, emailTxt, password1stTxt, password2ndTxt;
 
@@ -29,15 +28,24 @@ public class NewUserCreationController {
     private PersonModel personModel;
     private List<Person> personList;
 
+    // This is our constructor.
     public NewUserCreationController() throws SQLServerException {
         personModel = new PersonModel();
         personList = new ArrayList<>();
     }
 
+<<<<<<< Updated upstream
     @FXML
     private void onAddUserBTNPress(ActionEvent actionEvent) throws IOException {
         if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // checks the length of the input to ensure minimum safety
             if (verifyEmail()) { // if controller is in editing mode -> skip email verification step
+=======
+    // This button lets you signup or not depending if you do it correctly.
+    @FXML
+    private void onAddUserBTNPress(ActionEvent actionEvent) throws IOException {
+        if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // Checks the length of the input to ensure minimum safety
+            if (verifyEmail()) { // If controller is in editing mode -> skip email verification step
+>>>>>>> Stashed changes
                 if (verifyPassword()) {
                             personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), 2);
                             Stage stage =  (Stage) emailTxt.getScene().getWindow();
@@ -53,15 +61,16 @@ public class NewUserCreationController {
         else {
             errorLabel.setText("You must provide a username with between 4 and 20 characters");
         }
-
-
     }
 
+<<<<<<< Updated upstream
+=======
+    // This button cancels and leads you back to the login screen.
+>>>>>>> Stashed changes
     @FXML
     private void onCancelBTNPress(ActionEvent actionEvent) throws IOException {
         Stage stage =  (Stage) emailTxt.getScene().getWindow();
         stage.close();
-
         Parent part = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
         Stage stage1= new Stage();
         Scene scene = new Scene(part);
@@ -69,6 +78,7 @@ public class NewUserCreationController {
         stage1.show();
     }
 
+    // This method checks if you have verified your mail.
     private boolean verifyEmail() { // Checks for null input and gets a list of all Persons in the DB to check it against the input
         if(personList.isEmpty()){
             personList = personModel.getAllPerson();
@@ -86,8 +96,9 @@ public class NewUserCreationController {
         return false;
     }
 
+    // This method verifies if the two passwords are the same.
     private boolean verifyPassword(){
-        if(Objects.equals(password1stTxt.getText(), password2ndTxt.getText())){ // compares the repeated password to ensure input
+        if(Objects.equals(password1stTxt.getText(), password2ndTxt.getText())){ // Compares the repeated password to ensure input
             if(password1stTxt.getText().length() > 4 && password1stTxt.getText().length() < 21){ // Checks against minimum and maximum input length.
                 for (int i = 0; i < password1stTxt.getText().length(); i++) { // Loops through the length of the input
                     if(Character.isDigit(password1stTxt.getText().charAt(i))){ // If a char in the input is a digit it returns true.
@@ -103,7 +114,7 @@ public class NewUserCreationController {
             errorLabel.setText("Passwords do not match");
             return false;
         }
-        errorLabel.setText("Your password needs atleast one number");
+        errorLabel.setText("Your password needs at least one number");
         return false;
     }
 }

@@ -6,6 +6,8 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.Connection;
 
+// This is where we connect to our database.
+
 public class DatabaseConnector {
     private SQLServerDataSource dataSource;
 

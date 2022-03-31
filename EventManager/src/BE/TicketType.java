@@ -5,6 +5,8 @@ public class TicketType {
     private String ticketDescription;
     private String ticketName;
 
+    // This is the create object for ticket types.
+
     public TicketType(String name, String desc, int ID){
         this.ticketTypeID = ID;
         this.ticketDescription = desc;

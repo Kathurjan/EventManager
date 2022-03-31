@@ -46,8 +46,6 @@ public class UserCreationController implements Initializable {
     @FXML
     private Label errorLabel;
 
-
-
     ObservableList<String> TypeofUser = FXCollections.observableArrayList("Admin","EventManager","User");
     private AdminPageController controller;
     private PersonModel personModel;
@@ -55,6 +53,8 @@ public class UserCreationController implements Initializable {
     private int type;
     private boolean isEditing = false;
     private List<Person> personList;
+
+
 
     public UserCreationController() throws SQLServerException {
         personModel = new PersonModel();
