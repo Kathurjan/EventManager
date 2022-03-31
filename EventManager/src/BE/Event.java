@@ -7,10 +7,10 @@ public class Event {
     private String eventName;
     private Date startDate;
     private String eventLocation;
-    private Float price;
+    private Double price;
     private String stateTime;
 
-    public Event(int eventID, String eventname, Date startdate, String eventlocation, Float price, String startTime){
+    public Event(int eventID, String eventname, Date startdate, String eventlocation, Double price, String startTime){
         this.eventID = eventID;
         this.eventName = eventname;
         this.startDate = startdate;
@@ -27,11 +27,11 @@ public class Event {
         this.stateTime = stateTime;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
