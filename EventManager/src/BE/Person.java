@@ -6,15 +6,13 @@ public class Person {
     private String email;
     private int type;
 
-
-
+// This is the create object for person's.
 
     public Person(int id,String username, String password, String email, int type) {
         this.ID = id;
         Username = username;
         this.email = email;
         this.type = type;
-
     }
 
     public void setType(int type) {

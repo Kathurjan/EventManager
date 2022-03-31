@@ -10,6 +10,8 @@ import javafx.collections.ObservableList;
 import java.util.Date;
 import java.util.List;
 
+// This is where we parse through all our data.
+
 public class DALManager implements DALInterface{
 
     private PersonDAO personDAO;
@@ -53,9 +55,8 @@ public class DALManager implements DALInterface{
         personDAO.editPerson(selectedPerson, username, password, email, type);
     }
 
-
     @Override
-    public Admin verifyadmin(String username,String password,int type) {
+    public Admin verifyAdmin(String username, String password, int type) {
         return personDAO.verifyAdmin(username, password,type);
     }
 

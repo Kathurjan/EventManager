@@ -21,8 +21,8 @@ public class PersonModel {
         return personObservableList;
     }
 
-    public Admin verifyadmin(String username, String password, int type) {
-        return BLLInterface.verifyadmin(username,password,type);
+    public Admin verifyAdmin(String username, String password, int type) {
+        return BLLInterface.verifyAdmin(username,password,type);
     }
 
     public void addPerson(String username, String password, String email, int type){

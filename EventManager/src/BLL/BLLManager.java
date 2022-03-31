@@ -12,6 +12,8 @@ import javafx.collections.ObservableList;
 import java.util.Date;
 import java.util.List;
 
+// This is where we parse through all our data.
+
 public class BLLManager implements BLLInterface {
 
     private DALInterface dalInterface;
@@ -49,8 +51,8 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public Admin verifyadmin(String username,String password, int type) {
-        return dalInterface.verifyadmin( username, password,type);
+    public Admin verifyAdmin(String username, String password, int type) {
+        return dalInterface.verifyAdmin( username, password,type);
     }
 
     @Override

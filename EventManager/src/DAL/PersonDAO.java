@@ -78,22 +78,19 @@ public class PersonDAO {
     }
 
     public Admin verifyAdmin(String username, String password, int type) {
-
-
         Admin admin = null;
-
         try(Connection connection = db.getConnection()){
             String sqlquery = "SELECT * FROM Person WHERE userName= ? AND userPassWord = ? AND Type =?";
             PreparedStatement statement = connection.prepareStatement(sqlquery);
-
-
             statement.setString(1, username);
             statement.setString(2, password);
             statement.setInt(3,type);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
-                admin = new Admin(resultSet.getInt("id"),resultSet.getString("userName"),
-                        resultSet.getString("userPassWord"),resultSet.getString("email"),
+                admin = new Admin(resultSet.getInt("id"),
+                        resultSet.getString("userName"),
+                        resultSet.getString("userPassWord"),
+                        resultSet.getString("email"),
                         resultSet.getInt("type"));
             }
         }
@@ -103,5 +100,4 @@ public class PersonDAO {
         }
         return admin;
     }
-
 }

@@ -23,10 +23,12 @@ public class UserPageController {
 
     private EventModel eventModel;
 
+    // This is our constructor.
     public UserPageController() throws SQLServerException {
         eventModel = new EventModel();
     }
 
+    // Here we do a initialize for our tableview.
     public void initialize() {
         try {
             populateEventTableView();
@@ -35,8 +37,8 @@ public class UserPageController {
         }
     }
 
+    // Here we populate our event table view.
     public void populateEventTableView(){
-
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("EventName"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("EventLocation"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("StartDate"));

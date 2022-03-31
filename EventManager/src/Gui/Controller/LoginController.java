@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 
 
 public class LoginController implements Initializable {
+
     @FXML
     private Button loginBtn;
     @FXML
@@ -33,27 +34,29 @@ public class LoginController implements Initializable {
 
     private PersonModel personModel;
 
+    // This is our constructor.
     public LoginController() throws SQLServerException {
         personModel = new PersonModel();
 
     }
 
-    public void signIn(ActionEvent actionEvent) throws IOException {
+    // This button runs our login method.
+    @FXML
+    private void signIn(ActionEvent actionEvent) throws IOException {
         loginMethod();
-
     }
 
-
-    public void loginMethod() {
+    // This method makes sure that the username and password is correct.
+    private void loginMethod() {
         if (UserName.getText().isBlank() || PassWord.getText().isBlank()) {
             alertWarning();
             return;
         }
 
-        // checks of the username and password text field is empty and if the username and password matches the admins
-        // it will allow them to log in.
+        // Checks of the username and password text field is empty and if the username and password matches the admins
+        // It will allow them to log in.
         if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
-            if (personModel.verifyadmin(UserName.getText(), PassWord.getText(), 0) != null) {
+            if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 0) != null) {
                 try {
                     Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
                     Stage stage = new Stage();
@@ -61,7 +64,7 @@ public class LoginController implements Initializable {
                     stage.setScene(scene);
                     stage.show();
 
-                    // used to close the window if the pass and username is correct
+                    // Used to close the window if the pass and username is correct
                     Stage stagebtnwindow = (Stage) loginBtn.getScene().getWindow();
                     stagebtnwindow.close();
 
@@ -70,7 +73,7 @@ public class LoginController implements Initializable {
 
                 }
             } else if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
-                if (personModel.verifyadmin(UserName.getText(), PassWord.getText(), 1) != null) {
+                if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 1) != null) {
                     try {
                         Parent part = FXMLLoader.load(getClass().getResource("../view/EventManagerPage.fxml"));
                         Stage stage = new Stage();
@@ -78,7 +81,7 @@ public class LoginController implements Initializable {
                         stage.setScene(scene);
                         stage.show();
 
-                        // used to close the window if the pass and username is correct
+                        // Used to close the window if the pass and username is correct
                         Stage stagebtnwindow = (Stage) loginBtn.getScene().getWindow();
                         stagebtnwindow.close();
 
@@ -87,13 +90,13 @@ public class LoginController implements Initializable {
 
                     }
                 } else {
-                    // if it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
+                    // If it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
                     alertWarning();
                 }
             }
         }
 
-            // check if the user is a normal user, unlock method when we need -- remember to remove comments when we do.
+            // Check if the user is a normal user, unlock method when we need -- remember to remove comments when we do.
        /* if (mainModel.verifyadmin(UserName.getText(),PassWord.getText(),2)!=null){
             try{
                 Parent parent = FXMLLoader.load(getClass().getResource(""));
@@ -110,41 +113,34 @@ public class LoginController implements Initializable {
                 System.out.println(ex);
             }
         }*/
-            // if it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
+            // If it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
         //alertWarning();
-        }
-    // used to close the stage
-    public void close(ActionEvent actionEvent) {
+    }
+
+    // Used to close the stage
+    @FXML
+    private void close(ActionEvent actionEvent) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
 
+    // Here we do a initialize.
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
-
-    public void skip(ActionEvent event) {
-        try {
-            Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
-            Stage stage = new Stage();
-            Scene scene = new Scene(part);
-            stage.setScene(scene);
-            stage.show();
-        } catch (NullPointerException | IOException ex) {
-            System.out.println(ex);
-
-        }
-    }
-
-    public void loginAfterEnter(KeyEvent keyEvent) {
+    // If keystroke ENTER is pressed it will run login method.
+    @FXML
+    private void loginAfterEnter(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
             loginMethod();
         }
     }
 
-    public void newUserBTN(MouseEvent mouseEvent) {
+    // If label is pressed you move to user creation.
+    @FXML
+    private void newUserBTN(MouseEvent mouseEvent) {
         try {
             Parent part = FXMLLoader.load(getClass().getResource("../view/NewUserCreationView.fxml"));
             Stage stage = new Stage();
@@ -160,6 +156,7 @@ public class LoginController implements Initializable {
         }
     }
 
+    // This is our template for warnings.
     private void alertWarning(){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning!");
