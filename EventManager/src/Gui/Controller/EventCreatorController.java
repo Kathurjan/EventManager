@@ -4,6 +4,7 @@ import BE.Event;
 import BE.TicketType;
 import Gui.Model.TicketTypeModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -63,7 +64,13 @@ public class EventCreatorController implements Initializable {
     private TextArea ticketDescDisplayTxt;
 
     private TicketTypeModel ticketTypeModel;
+    private ObservableList<TicketType> ticketTypeObservableList;
+    private EventManagerPageController eventManagerPageController;
 
+    public void setController(EventManagerPageController eventManagerPageController) {
+        this.eventManagerPageController = eventManagerPageController;
+    }
+;
     public EventCreatorController() {
         try {
             ticketTypeModel = new TicketTypeModel();
@@ -85,18 +92,19 @@ public class EventCreatorController implements Initializable {
 
     @FXML
     public void buttonAddTicketPress(ActionEvent event){
-        
+        TicketType tempticket = new TicketType(ticketNameTxt.getText(), ticketDescInputTxt.getText(), 1);
+        ticketTypeObservableList.add(tempticket);
+        populateTableview();
     }
 
     private void populateTableview(){
-        try { // This dot, method populates the ticket type table view (Space comma here) dot mads (Non dash captilized) this is where you rage & try to fix this exclamantion mark dot
-            Event tempevent = new Event(1, "Temp", Date.from(Instant.now()), "Temp", 4.40,"23:30");
-            ticketTypeColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-            ticketDescColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-            ticketTypeTable.setItems(ticketTypeModel.getTicketTypes(tempevent.getEventID()));
-        }
-        catch (SQLServerException ex){
-            System.out.println("You smell");
-        }
+        // This dot, method populates the ticket type table view (Space comma here) dot mads (Non dash captilized) this is where you rage & try to fix this exclamantion mark dot
+        ticketTypeColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        ticketDescColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        ticketTypeTable.setItems(ticketTypeObservableList);
+    }
+
+    private void setEdit(Event event){
+
     }
 }

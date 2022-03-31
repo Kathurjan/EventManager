@@ -68,7 +68,7 @@ public class AdminPageController implements Initializable {
         UserCreationController addPersons = fxmlLoader.getController();
         addPersons.setController(this);
         if (edit){
-            fxmlLoader.<UserCreationController>getController().setEdit(adminTable.getSelectionModel().getSelectedItem());
+            fxmlLoader.<UserCreationController>getController().setEditUserCreation(adminTable.getSelectionModel().getSelectedItem());
         }
         fxmlLoader.<UserCreationController>getController();
         Stage stage = new Stage();

@@ -24,8 +24,8 @@
           <TableColumn prefWidth="75.0" text="TicketPrice" />
         </columns>
       </TableView>
-      <Button layoutX="20.0" layoutY="461.0" mnemonicParsing="false" text="Create Event" />
-      <Button layoutX="20.0" layoutY="501.0" mnemonicParsing="false" text="Edit Event" />
+      <Button layoutX="20.0" layoutY="461.0" mnemonicParsing="false" onAction="#addEventPress" text="Create Event" />
+      <Button layoutX="20.0" layoutY="501.0" mnemonicParsing="false" onAction="#editEventPress" text="Edit Event" />
       <Button layoutX="763.0" layoutY="547.0" mnemonicParsing="false" text="Delete Ticket" />
       <Button layoutX="777.0" layoutY="514.0" mnemonicParsing="false" text="Edit Ticket" />
       <Button layoutX="20.0" layoutY="541.0" mnemonicParsing="false" text="Delete Event" />

@@ -66,7 +66,7 @@ public class UserCreationController implements Initializable {
          this.controller = adminPageController;
     }
 
-    public void setEdit(Person person){ //Sets the isEditing variable for use in addUser method and gets the info on the selected person
+    public void setEditUserCreation(Person person){ //Sets the isEditing variable for use in addUser method and gets the info on the selected person
         selectedPerson = person;
         isEditing = true;
         userNameTxt.setText(person.getUsername());
