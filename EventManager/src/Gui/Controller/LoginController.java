@@ -46,12 +46,7 @@ public class LoginController implements Initializable {
 
     public void loginMethod() {
         if (UserName.getText().isBlank() || PassWord.getText().isBlank()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning!");
-            alert.setHeaderText("Please enter a login and password");
-            alert.setContentText("Please try again.");
-            alert.getOwner();
-            alert.showAndWait();
+            alertWarning();
             return;
         }
 
@@ -93,12 +88,7 @@ public class LoginController implements Initializable {
                     }
                 } else {
                     // if it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning!");
-                    alert.setHeaderText("Wrong username or password.");
-                    alert.setContentText("Please try again.");
-                    alert.getOwner();
-                    alert.showAndWait();
+                    alertWarning();
                 }
             }
         }
@@ -121,14 +111,7 @@ public class LoginController implements Initializable {
             }
         }*/
             // if it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
-          /*  Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning!");
-            alert.setHeaderText("Wrong username or password.");
-            alert.setContentText("Please try again.");
-            alert.getOwner();
-            alert.showAndWait();
-            */
-
+        //alertWarning();
         }
     // used to close the stage
     public void close(ActionEvent actionEvent) {
@@ -175,5 +158,14 @@ public class LoginController implements Initializable {
     } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void alertWarning(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning!");
+        alert.setHeaderText("Wrong username or password.");
+        alert.setContentText("Please try again.");
+        alert.getOwner();
+        alert.showAndWait();
     }
 }
