@@ -2,17 +2,16 @@ package Gui.Controller;
 
 import BE.Admin;
 import BE.Person;
-import Gui.Model.MainModel;
 import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -20,8 +19,11 @@ import javafx.stage.Stage;
 import org.assertj.core.internal.Classes;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class AdminPageController {
+public class AdminPageController implements Initializable {
+    
     public Button delBTN;
 
     @FXML
@@ -31,22 +33,13 @@ public class AdminPageController {
     @FXML
     private TableView<Person> adminTable;
 
-    private MainModel mainModel;
     private Person testAdminOBJ;
-    private final PersonModel model;
+    private PersonModel personModel;
 
-    public void initialize() {
-        try {
-            populateTableView();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public AdminPageController() throws SQLServerException {
-        mainModel = new MainModel();
         testAdminOBJ = new Admin(1, "Test", "Test", "Test", 0);
-        this.model = new PersonModel();
+        personModel = new PersonModel();
     }
 
     @FXML
@@ -78,23 +71,31 @@ public class AdminPageController {
     }
 
     public void refreshPersonList(){
-        adminTable.setItems((ObservableList) model.getAllPerson());
+        adminTable.setItems(personModel.getAllPerson());
 
     }
 
     public void delBTNPress(ActionEvent actionEvent) {
         if (adminTable.getSelectionModel().getSelectedIndex() != -1);
         {
-            model.deletePerson((Person) adminTable.getSelectionModel().getSelectedItem());
+            personModel.deletePerson((Person) adminTable.getSelectionModel().getSelectedItem());
             refreshPersonList();
         }
     }
 
     public void populateTableView(){
-        // sut min dut
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        adminTable.setItems(mainModel.getAllPerson());
+        adminTable.setItems(personModel.getAllPerson());
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            populateTableView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

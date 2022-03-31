@@ -1,6 +1,6 @@
 package Gui.Controller;
 
-import Gui.Model.MainModel;
+import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +14,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,10 +31,10 @@ public class LoginController implements Initializable {
     @FXML
     private Label newUserLabel;
 
-    private MainModel mainModel;
+    private PersonModel personModel;
 
     public LoginController() throws SQLServerException {
-        mainModel = new MainModel();
+        personModel = new PersonModel();
 
     }
 
@@ -59,7 +58,7 @@ public class LoginController implements Initializable {
         // checks of the username and password text field is empty and if the username and password matches the admins
         // it will allow them to log in.
         if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
-            if (mainModel.verifyadmin(UserName.getText(), PassWord.getText(), 0) != null) {
+            if (personModel.verifyadmin(UserName.getText(), PassWord.getText(), 0) != null) {
                 try {
                     Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
                     Stage stage = new Stage();
@@ -76,7 +75,7 @@ public class LoginController implements Initializable {
 
                 }
             } else if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
-                if (mainModel.verifyadmin(UserName.getText(), PassWord.getText(), 1) != null) {
+                if (personModel.verifyadmin(UserName.getText(), PassWord.getText(), 1) != null) {
                     try {
                         Parent part = FXMLLoader.load(getClass().getResource("../view/EventManagerPage.fxml"));
                         Stage stage = new Stage();

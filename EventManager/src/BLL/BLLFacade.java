@@ -4,6 +4,7 @@ import BE.Admin;
 import BE.Event;
 import BE.Person;
 import BE.TicketType;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
 
 import java.util.Date;
@@ -13,7 +14,7 @@ public interface BLLFacade {
 
     List<Person> getAllPerson();
     ObservableList<Event> getAllEvents();
-    List<TicketType> getTicketTypes(int eventID);
+    List<TicketType> getTicketTypes(int eventID) throws SQLServerException;
 
     void addPerson(String username, String password, String email, int type);
 

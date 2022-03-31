@@ -1,18 +1,12 @@
 package Gui.Controller;
 
-import BE.Admin;
 import BE.Event;
-import BE.Person;
 import Gui.Model.EventModel;
-import Gui.Model.MainModel;
-import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.assertj.core.internal.Classes;
 
 import java.util.Date;
 

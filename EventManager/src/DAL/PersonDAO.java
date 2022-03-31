@@ -1,5 +1,6 @@
 package DAL;
 
+import BE.Admin;
 import BE.Person;
 import javafx.collections.FXCollections;
 
@@ -74,6 +75,33 @@ public class PersonDAO {
         } catch(SQLException ex){
             System.out.println(ex);
         }
+    }
+
+    public Admin verifyAdmin(String username, String password, int type) {
+
+
+        Admin admin = null;
+
+        try(Connection connection = db.getConnection()){
+            String sqlquery = "SELECT * FROM Person WHERE userName= ? AND userPassWord = ? AND Type =?";
+            PreparedStatement statement = connection.prepareStatement(sqlquery);
+
+
+            statement.setString(1, username);
+            statement.setString(2, password);
+            statement.setInt(3,type);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                admin = new Admin(resultSet.getInt("id"),resultSet.getString("userName"),
+                        resultSet.getString("userPassWord"),resultSet.getString("email"),
+                        resultSet.getInt("type"));
+            }
+        }
+        catch(SQLException ex){
+            System.out.println(ex);
+            return null;
+        }
+        return admin;
     }
 
 }

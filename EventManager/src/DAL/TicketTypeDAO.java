@@ -10,9 +10,37 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketDAO {
+public class TicketTypeDAO {
 
     private final static DatabaseConnector db  = new DatabaseConnector();
+
+    public void addTicketType(List<TicketType> listToBeAdded, int eventID){
+        try(Connection connection = db.getConnection()) {
+            String query = "INSERT INTO TicketType(TicketName, TicketDescription, EventID) VALUES (?,?,?)";
+            PreparedStatement ptsm = connection.prepareStatement(query);
+            for (TicketType ticketType: listToBeAdded) {
+                ptsm.setString(1, ticketType.getTicketName());
+                ptsm.setString(2, ticketType.getTicketDescription());
+                ptsm.setInt(3, eventID);
+                ptsm.addBatch();
+            }
+            ptsm.executeBatch();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void deleteTicketType(TicketType ticketType){
+        try(Connection con = db.getConnection()){
+            String query = "DELETE FROM TicketType WHERE TypeID = ?";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setInt(1,ticketType.getTicketTypeID());
+            pstm.executeUpdate(); // Executing the statement
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+    }
+
 
     public List<TicketType> getTicketTypes(int eventID) throws SQLServerException {
         List<TicketType> ticketTypeList = new ArrayList<>();

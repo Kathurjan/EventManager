@@ -12,17 +12,15 @@ import java.util.List;
 
 public class DALFacade implements DALInterface{
 
-    private AdminDAO adminDAO;
     private PersonDAO personDAO;
     private EventDAO eventDAO;
-    private TicketDAO ticketDAO;
+    private TicketTypeDAO ticketDAO;
     private DatabaseConnector db = new DatabaseConnector();
 
     public DALFacade() throws SQLServerException {
-        adminDAO = new AdminDAO(db.getConnection());
         personDAO = new PersonDAO();
         eventDAO = new EventDAO();
-        ticketDAO = new TicketDAO();
+        ticketDAO = new TicketTypeDAO();
     }
 
     @Override
@@ -58,7 +56,7 @@ public class DALFacade implements DALInterface{
 
     @Override
     public Admin verifyadmin(String username,String password,int type) {
-        return adminDAO.verifyAdmin(username, password,type);
+        return personDAO.verifyAdmin(username, password,type);
     }
 
     @Override

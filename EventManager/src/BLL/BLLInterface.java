@@ -6,7 +6,6 @@ import BE.Person;
 import BE.TicketType;
 import DAL.DALFacade;
 import DAL.DALInterface;
-import DAL.TicketDAO;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
 
@@ -32,7 +31,7 @@ public class BLLInterface implements BLLFacade{
     }
 
     @Override
-    public List<TicketType> getTicketTypes(int eventID){return dalInterface.getTicketTypes(eventID);}
+    public List<TicketType> getTicketTypes(int eventID) throws SQLServerException {return dalInterface.getTicketTypes(eventID);}
 
     @Override
     public void addPerson(String username, String password, String email, int type) {

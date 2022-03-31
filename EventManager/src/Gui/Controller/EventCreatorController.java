@@ -1,9 +1,14 @@
 package Gui.Controller;
 
 import BE.TicketType;
+import Gui.Model.TicketTypeModel;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.w3c.dom.Text;
+
+import java.sql.SQLException;
 
 
 public class EventCreatorController {
@@ -47,11 +52,29 @@ public class EventCreatorController {
     @FXML
     private TextArea ticketDescDisplayTxt;
 
+    private TicketTypeModel ticketTypeModel;
 
-
-    public EventCreatorController(){
-
+    public EventCreatorController() {
+        try {
+            ticketTypeModel = new TicketTypeModel();
+        }
+        catch (SQLServerException ex){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning!");
+            alert.setHeaderText("Exception occured");
+            alert.setContentText("Please try again.");
+            alert.getOwner();
+            alert.showAndWait();
+        }
     }
+
+    @FXML
+    public void buttonAddTicketPress(ActionEvent event){
+    }
+
+
+
+
 
 
 

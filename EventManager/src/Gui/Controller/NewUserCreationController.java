@@ -22,10 +22,13 @@ public class NewUserCreationController {
 
     @FXML
     private TextField userNameTxt, emailTxt, password1stTxt, password2ndTxt;
+
     @FXML
     private Label errorLabel;
+
     private PersonModel personModel;
     private List<Person> personList;
+
     public NewUserCreationController() throws SQLServerException {
         personModel = new PersonModel();
         personList = new ArrayList<>();
@@ -38,8 +41,6 @@ public class NewUserCreationController {
                             personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), 2);
                             Stage stage =  (Stage) emailTxt.getScene().getWindow();
                             stage.close();
-
-
                     Parent part = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
                     Stage stage1= new Stage();
                     Scene scene = new Scene(part);
@@ -55,8 +56,6 @@ public class NewUserCreationController {
 
     }
 
-
-
     public void onCancelBTNPress(ActionEvent actionEvent) throws IOException {
         Stage stage =  (Stage) emailTxt.getScene().getWindow();
         stage.close();
@@ -67,6 +66,7 @@ public class NewUserCreationController {
         stage1.setScene(scene);
         stage1.show();
     }
+
     private boolean verifyEmail() { // Checks for null input and gets a list of all Persons in the DB to check it against the input
         if(personList.isEmpty()){
             personList = personModel.getAllPerson();
