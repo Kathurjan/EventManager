@@ -33,7 +33,7 @@ public class NewUserCreationController {
         personModel = new PersonModel();
         personList = new ArrayList<>();
     }
-    
+
     // This button lets you signup or not depending if you do it correctly.
     @FXML
     private void onAddUserBTNPress(ActionEvent actionEvent) throws IOException {
