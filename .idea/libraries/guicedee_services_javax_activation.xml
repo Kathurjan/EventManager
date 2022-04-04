@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="guicedee.services.javax.activation" type="repository">
+    <properties maven-id="com.guicedee.services:javax.activation:1.0.8.2-jre14" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/guicedee/services/javax.activation/1.0.8.2-jre14/javax.activation-1.0.8.2-jre14.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/guicedee/services/jakarta.activation/1.0.8.2-jre14/jakarta.activation-1.0.8.2-jre14.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
