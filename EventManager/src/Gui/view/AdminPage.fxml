@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.AdminPageController">
+<AnchorPane fx:id="Pane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/Adminpage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.AdminPageController">
    <children>
       <Button fx:id="adduserBTN" layoutX="15.0" layoutY="353.0" mnemonicParsing="false" onAction="#addBTNPress" text="Add User" />
       <Button fx:id="editBTN" layoutX="94.0" layoutY="353.0" mnemonicParsing="false" onAction="#editBTNPress" text="Edit User" />

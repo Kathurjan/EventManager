@@ -1,0 +1,29 @@
+#Pane {
+
+    -fx-background-color: #8698e1;
+
+
+}
+#usernameColumn{
+    -fx-font-smoothing-type: bold;
+
+}
+
+#adminTable{
+    -fx-background-radius: 20;
+}
+
+#adduserBTN{
+
+
+}
+
+#editBTN{
+
+
+}
+
+#delBTN{
+
+
+}
