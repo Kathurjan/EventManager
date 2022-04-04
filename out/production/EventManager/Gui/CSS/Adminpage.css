@@ -1,81 +1,35 @@
 #Pane {
 
-    -fx-background-color: #6d98e8;
-
+    -fx-background-color: white;
 
 }
 #usernameColumn{
     -fx-font-smoothing-type: bold;
-
 }
 
 #adminTable{
-    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(245, 6, 6, 0.27));
-    -fx-background-radius: 0px 7px 7px 0px;
-    -fx-background-insets: 0 0 0 0;
-    -fx-padding: -1px 0px 0px 0px;
-}
-#usernameColumn{
-    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(245, 6, 6, 0.27));
-    -fx-text-background-color: #140a15;
-
-}
-#emailColumn{
-    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(245, 6, 6, 0.27));
-    -fx-text-background-color: #140a15;
-}
-#typeColumn{
-    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(245, 6, 6, 0.27));
-    -fx-text-background-color: #140a15;
 }
 
-#adduserBTN{
-    -fx-background-color:
-            #090a0c,
-            linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-            linear-gradient(#20262b, #191d22),
-            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-background-radius: 5,4,3,5;
-    -fx-background-insets: 0,1,2,0;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+
+.Button{
+    -fx-background-color: #2C6BFA;
+    -fx-background-radius: 0,0,0,0;
+
+    -fx-effect: dropshadow( three-pass-box , #000000 , 0, 1, 4, 5 );
     -fx-font-family: "Arial";
     -fx-text-fill: linear-gradient(white, #d0d0d0);
     -fx-font-size: 12px;
-    -fx-padding: 10 20 10 20;
+    -fx-padding: 10 20;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
 
 }
-
-#editBTN{
-    -fx-background-color:
-            #090a0c,
-            linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-            linear-gradient(#20262b, #191d22),
-            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-background-radius: 5,4,3,5;
-    -fx-background-insets: 0,1,2,0;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-    -fx-font-family: "Arial";
-    -fx-text-fill: linear-gradient(white, #d0d0d0);
-    -fx-font-size: 12px;
-    -fx-padding: 10 20 10 20;
-
+.Button:hover{
+    -fx-background-color: #3d76fa;
+    -fx-effect: dropshadow( three-pass-box , #000000 , 0, 1, 3.5, 4.5 );
 }
 
-#delBTN{
-    -fx-background-color:
-            #090a0c,
-            linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
-            linear-gradient(#20262b, #191d22),
-            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
-    -fx-background-radius: 5,4,3,5;
-    -fx-background-insets: 0,1,2,0;
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-    -fx-font-family: "Arial";
-    -fx-text-fill: linear-gradient(white, #d0d0d0);
-    -fx-font-size: 12px;
-    -fx-padding: 10 20 10 20;
-
-}
+/* Used to change the scroll-bar*/
 .table-view .virtual-flow .scroll-bar:vertical,
 .table-view .virtual-flow .scroll-bar:vertical .track,
 .table-view .virtual-flow .scroll-bar:vertical .track-background,
@@ -98,5 +52,31 @@
 }
 .table-view .column-header-background .filler {
     -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(245, 6, 6, 0.27));
-    -fx-padding: 1em;
+    -fx-padding: 1em;  /*Is used to fix a white square that popped up for some reason in the upper right hand corner of the tableview*/
+}
+
+.tableviewuser {
+    -fx-background-color: rgba(250, 189, 46, 1) !important;
+    -fx-base: transparent;
+    -fx-effect: dropshadow( three-pass-box , #000000 , 0, 1, 4, 5 );
+
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.collumnStyling {
+    -fx-background-color: transparent;
+    -fx-text-background-color:black;
+    -fx-border-width:0.5;
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-color:black;
+    -fx-text-alignment: center;
+}
+
+.leftNoBorder {
+    -fx-border-style: hidden hidden solid hidden;
+}
+
+.rightNoBorder {
+    -fx-border-style: hidden hidden solid hidden;
 }
