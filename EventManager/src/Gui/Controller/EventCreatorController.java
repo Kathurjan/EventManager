@@ -102,7 +102,6 @@ public class EventCreatorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("Init first");
         populateTableview();
     }
 
@@ -204,7 +203,6 @@ public class EventCreatorController implements Initializable {
     }
 
     public void setEdit(Event event) throws SQLServerException { // sets all the textfield to the selected event
-        System.out.println("setEdit first");
         selectedEvent = event;
         String[] arr = eventModel.convertStartTimeToTwoString(selectedEvent.getStateTime()); // Converts startTime to 2 strings.
         isEditing = true;
@@ -216,7 +214,6 @@ public class EventCreatorController implements Initializable {
         priceTxt.setText(selectedEvent.getPrice().toString());
         hourTxt.setText(arr[0]);
         minuteTxt.setText(arr[1]);
-
         warningLabelTxt.setText(selectedEvent.getWarningLabel());
         populateTableview();
     }

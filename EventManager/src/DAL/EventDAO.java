@@ -30,7 +30,6 @@ public class EventDAO {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        System.out.println(id);
         return id;
     }
 
@@ -55,7 +54,6 @@ public class EventDAO {
         try (Connection con = db.getConnection()) {
             String query = "UPDATE Event set EventName = ?, EventDate = ?, EventLocation = ?, EventPrice = ?, StartTime = ?, WarningLabel = ? WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
-            System.out.println(query);
             pstm.setString(1, eventName);
             pstm.setDate(2, eventDate);
             pstm.setString(3, eventLocation);
