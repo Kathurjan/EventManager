@@ -1,6 +1,6 @@
 #Pane {
 
-    -fx-background-color: #6d98e8;
+    -fx-background-color: #454550;
 
 
 }
@@ -10,22 +10,22 @@
 }
 
 #adminTable{
-    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(245, 6, 6, 0.27));
-    -fx-background-radius: 0px 7px 7px 0px;
+    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(12, 72, 225, 0.27));/* Used to make the color go from one to another from top to bottom*/
+    -fx-background-radius: 10px 10px 10px 10px;
     -fx-background-insets: 0 0 0 0;
     -fx-padding: -1px 0px 0px 0px;
 }
 #usernameColumn{
-    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(245, 6, 6, 0.27));
+    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(12, 72, 225, 0.27));
     -fx-text-background-color: #140a15;
 
 }
 #emailColumn{
-    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(245, 6, 6, 0.27));
+    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(12, 72, 225, 0.27));
     -fx-text-background-color: #140a15;
 }
 #typeColumn{
-    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(245, 6, 6, 0.27));
+    -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(12, 72, 225, 0.27));
     -fx-text-background-color: #140a15;
 }
 
@@ -98,5 +98,5 @@
 }
 .table-view .column-header-background .filler {
     -fx-background-color: linear-gradient(to bottom, rgb(236, 212, 38), rgba(245, 6, 6, 0.27));
-    -fx-padding: 1em;
+    -fx-padding: 1em;  /*Is used to fix a white square that popped up for some reason in the upper right hand corner of the tableview*/
 }
