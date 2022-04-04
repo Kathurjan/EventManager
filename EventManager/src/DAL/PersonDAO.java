@@ -58,6 +58,7 @@ public class PersonDAO {
             pstm.setString(2, password);
             pstm.setString(3, email);
             pstm.setInt(4, type);
+            pstm.setInt(5, selectedPerson.getID());
             pstm.executeUpdate(); // Executing the prepared statement with the specified parameters
             return new Person(selectedPerson.getID(),username,password,email,type );
         } catch (SQLException ex) {

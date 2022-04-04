@@ -1,6 +1,8 @@
 package DAL;
 
 import BE.Event;
+import BE.Person;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,21 +12,60 @@ import java.util.Date;
 public class EventDAO {
     private final static DatabaseConnector db = new DatabaseConnector();
 
-    public EventDAO(){
+    public EventDAO() {
 
     }
 
-    public void addEvent(String eventName, Date startDate, String eventLocation, double price, String startTime) {
-        String sqlQuery = "INSERT INTO Event(EventName, Startdate, EventLocation, event price, StartTime) ";
-        try(Connection con = db.getConnection()) {
+    public int selectLastest(){
+        int id = 0;
+        String sqlStatement = "SELECT TOP 1 * FROM Event ORDER BY ID DESC";
+        try (Connection con = db.getConnection()) {
+            Statement statement = con.createStatement();
+            if (statement.execute(sqlStatement)) {
+                ResultSet rs = statement.getResultSet();
+                while (rs.next()) {
+                    id = rs.getInt("ID");
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        System.out.println(id);
+        return id;
+    }
+
+    public void creatEvent() throws SQLServerException {
+        String sqlQuery = "INSERT INTO Event(EventName, EventDate, EventLocation, EventPrice, StartTime, WarningLabel) VALUES (?,?,?,?,?,?) ";
+        try (Connection con = db.getConnection()) {
             PreparedStatement statement = con.prepareStatement(sqlQuery);
-            statement.setString(1,eventName);
-            statement.setDate(2, (java.sql.Date) startDate);
-            statement.setString(3,eventLocation);
-            statement.setDouble(4,price);
-            statement.setString(5, startTime);
+            statement.setString(1, null);
+            statement.setDate(2, null);
+            statement.setString(3, null);
+            statement.setDouble(4, 0.00);
+            statement.setString(5, null);
+            statement.setString(6, null);
+            statement.addBatch(); // Adding to the statement
+            statement.executeBatch(); // Executing the added parameters, and  executing the statement
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void editEvent(String eventName, java.sql.Date eventDate, String eventLocation, double eventPrice, String startTime, String warningLabel, int eventID) {
+        try (Connection con = db.getConnection()) {
+            String query = "UPDATE Event set EventName = ?,EventDate = ?,EventLocation = ?, EventPrice = ?, StartTime = ?, WarningLabel = ? WHERE id = ?";
+            PreparedStatement pstm = con.prepareStatement(query);
+            System.out.println(query);
+            pstm.setString(1, eventName);
+            pstm.setDate(2, eventDate);
+            pstm.setString(3, eventLocation);
+            pstm.setDouble(4, eventPrice);
+            pstm.setString(5, startTime);
+            pstm.setString(6, warningLabel);
+            pstm.setInt(7, eventID);
+            pstm.executeUpdate(); // Executing the prepared statement with the specified parameters
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
     }
 
@@ -43,7 +84,7 @@ public class EventDAO {
                     String eventlocation = rs.getString("EventLocation");
                     Double price = rs.getDouble("EventPrice");
                     String startTime = rs.getString("StartTime");
-                    Event event = new Event(id,eventName, startdate, eventlocation, price, startTime);// Creating a person object from the retrieved values
+                    Event event = new Event(id, eventName, startdate, eventlocation, price, startTime);// Creating a person object from the retrieved values
                     eventsList.add(event); // Adding the person to  list
                 }
             }
@@ -52,5 +93,27 @@ public class EventDAO {
             return null;
         }
         return eventsList;
+    }
+
+    public void deleteEvent(Event selectedEvent){
+        try(Connection con = db.getConnection()){
+            String query = "DELETE FROM Person WHERE id = ?";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setInt(1,selectedEvent.getEventID());
+            pstm.executeUpdate(); // Executing the statement
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+    }
+
+    public void deleteEventWithID(int eventID){
+        try(Connection con = db.getConnection()){
+            String query = "DELETE FROM Person WHERE id = ?";
+            PreparedStatement pstm = con.prepareStatement(query);
+            pstm.setInt(1,eventID);
+            pstm.executeUpdate(); // Executing the statement
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
     }
 }

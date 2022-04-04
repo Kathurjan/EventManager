@@ -1,10 +1,13 @@
 package Gui.Model;
 
 import BE.TicketType;
+import BLL.BLLException;
 import BLL.BLLManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class TicketTypeModel {
     private BLLManager bllInterface;
@@ -21,13 +24,11 @@ public class TicketTypeModel {
         return ticketTypeObservableList;
     }
 
-    public double convertTxtToDouble(String input){
-        try {
+    public void addTicketTypes(ObservableList<TicketType> listToBeAdded, int eventID){
+        bllInterface.addTicketTypes(listToBeAdded, eventID);
+    }
+
+    public double convertTxtToDouble(String input) throws BLLException {
             return bllInterface.convertTextToDouble(input);
-        }
-        catch (NumberFormatException ex){
-            System.out.println("Staph numberformatexception");
-            return 0.00;
-        }
     }
 }

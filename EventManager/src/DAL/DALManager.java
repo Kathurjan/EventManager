@@ -7,7 +7,7 @@ import BE.TicketType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 // This is where we parse through all our data.
@@ -61,9 +61,28 @@ public class DALManager implements DALInterface{
     }
 
     @Override
-    public void addEvent(String eventName, Date startDate, String eventLocation, double price, String startTime) {
-        eventDAO.addEvent(eventName,startDate,eventLocation,price,startTime);
+    public void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id) {
+        eventDAO.editEvent(eventName,startDate,eventLocation,price,startTime,warningLabel,id);
     }
 
+    @Override
+    public void addTicketTypes(List<TicketType> simpleList, int eventID){
+        ticketDAO.addTicketType(simpleList, eventID);
+    }
+
+    @Override
+    public void creatEvent() throws SQLServerException {
+        eventDAO.creatEvent();
+    }
+
+    @Override
+    public int selectLatest(){
+        return eventDAO.selectLastest();
+    }
+
+    @Override
+    public void deleteEventWithID(int EventID){
+        eventDAO.deleteEventWithID(EventID);
+    }
 
 }

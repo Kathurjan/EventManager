@@ -9,7 +9,7 @@ import DAL.DALInterface;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 // This is where we parse through all our data.
@@ -58,14 +58,38 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public void addEvent(String eventName, Date startDate, String eventLocation, double price, String startTime) {
-        dalInterface.addEvent(eventName,startDate,eventLocation,price,startTime);
+    public void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id) {
+        dalInterface.editEvent(eventName,startDate,eventLocation,price,startTime, warningLabel, id);
     }
 
     @Override
-    public double convertTextToDouble(String input){
+    public double convertTextToDouble(String input) throws BLLException {
         return textConverter.convertStringToDouble(input);
     }
 
+    @Override
+    public String convertStartTimeToOneString(String string1, String string2){
+        return textConverter.convertStartTimeToOneString(string1,string2);
+    }
+
+    @Override
+    public void addTicketTypes(List<TicketType> simpleList, int eventID){
+        dalInterface.addTicketTypes(simpleList, eventID);
+    }
+
+    @Override
+    public void creatEvent() throws SQLServerException {
+        dalInterface.creatEvent();
+    }
+
+    @Override
+    public int selectLatest(){
+        return dalInterface.selectLatest();
+    }
+
+    @Override
+    public void deleteEventWithID(int EventID){
+        dalInterface.deleteEventWithID(EventID);
+    }
 
 }

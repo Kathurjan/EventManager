@@ -7,7 +7,7 @@ import BE.TicketType;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 // This is where we parse through all our data.
@@ -26,7 +26,17 @@ public interface BLLInterface {
     void editPerson(Person selectedPerson, String username, String password, String email, int type);
 
     Admin verifyAdmin(String username, String password, int type);
-    void addEvent(String eventName, Date startDate, String eventLocation, double price, String startTime);
+    void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id);
 
-    double convertTextToDouble(String input);
+    double convertTextToDouble(String input) throws BLLException;
+
+    String convertStartTimeToOneString(String string1, String string2);
+
+    void addTicketTypes(List<TicketType> simpleList, int eventID);
+
+    void creatEvent() throws SQLServerException;
+
+    int selectLatest();
+
+    void deleteEventWithID(int EventID);
 }
