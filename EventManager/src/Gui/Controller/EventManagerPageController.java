@@ -99,4 +99,51 @@ public class EventManagerPageController implements Initializable{
         stage.setScene(scene);
         stage.show();
     }
+
+
+
+     /* TODO mail address, username, password, title and body
+
+    sendMail("mail address");  // Mail address you want to send an email
+
+
+    //making connection and then sent the mail
+    public static void sendMail(String recepient) throws Exception{
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+        String username = "your acc mail"; //Your account
+        String password = "xxxxxxxx";      //Your password
+
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+        Message message = prepareMessage(session, username, recepient);
+
+        Transport.send(message);
+        System.out.println("mail sent");
+    }
+    //prepare message to send
+    private static Message prepareMessage(Session session, String username, String recepient) {
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
+            message.setSubject("title");        //title of the message
+            message.setText("body of email");   //body of the message
+            return message;
+        } catch (AddressException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    */
 }
