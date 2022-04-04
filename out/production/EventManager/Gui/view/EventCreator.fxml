@@ -63,7 +63,7 @@
                <children>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="ticketTypeTable" layoutX="5.0" layoutY="5.0" prefHeight="262.0" prefWidth="200.0">
+                        <TableView fx:id="ticketTypeTable" onMousePressed="#selectTickeType" layoutX="5.0" layoutY="5.0" prefHeight="262.0" prefWidth="200.0">
                            <columns>
                               <TableColumn fx:id="ticketTypeColumn" prefWidth="75.0" text="Ticket type" />
                               <TableColumn fx:id="ticketDescColumn" prefWidth="75.0" text="Price" />

@@ -76,6 +76,11 @@ public class DALManager implements DALInterface{
     }
 
     @Override
+    public void deleteTicketType(TicketType ticketType){
+        ticketDAO.deleteTicketType(ticketType);
+    }
+
+    @Override
     public int selectLatest(){
         return eventDAO.selectLastest();
     }

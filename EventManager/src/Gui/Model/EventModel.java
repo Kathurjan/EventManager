@@ -2,6 +2,7 @@ package Gui.Model;
 
 import BE.Event;
 import BLL.BLLException;
+import BLL.BLLInterface;
 import BLL.BLLManager;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
@@ -33,6 +34,10 @@ public class EventModel {
 
     public void creatEvent() throws SQLServerException {
         BLLInterface.creatEvent();
+    }
+
+    public String[] convertStartTimeToTwoString(String string){
+        return BLLInterface.convertStartTimeToTwoString(string);
     }
 
     public int selectLatest(){

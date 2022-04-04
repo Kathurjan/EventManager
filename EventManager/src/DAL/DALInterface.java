@@ -39,4 +39,6 @@ public interface DALInterface {
     int selectLatest();
 
     void deleteEventWithID(int EventID);
+
+    void deleteTicketType(TicketType ticketType);
 }

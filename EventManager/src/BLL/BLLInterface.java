@@ -39,4 +39,8 @@ public interface BLLInterface {
     int selectLatest();
 
     void deleteEventWithID(int EventID);
+
+    String[] convertStartTimeToTwoString(String string);
+
+    void deleteTicketType(TicketType ticketType);
 }

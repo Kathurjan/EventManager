@@ -35,7 +35,8 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public List<TicketType> getTicketTypes(int eventID) throws SQLServerException {return dalInterface.getTicketTypes(eventID);}
+    public List<TicketType> getTicketTypes(int eventID) throws SQLServerException {
+        return dalInterface.getTicketTypes(eventID);}
 
     @Override
     public void addPerson(String username, String password, String email, int type) {
@@ -70,6 +71,16 @@ public class BLLManager implements BLLInterface {
     @Override
     public String convertStartTimeToOneString(String string1, String string2){
         return textConverter.convertStartTimeToOneString(string1,string2);
+    }
+
+    @Override
+    public String[] convertStartTimeToTwoString(String string){
+        return textConverter.convertStartTimeToTwoString(string);
+    }
+
+    @Override
+    public void deleteTicketType(TicketType ticketType){
+        dalInterface.deleteTicketType(ticketType);
     }
 
     @Override

@@ -45,7 +45,7 @@ public class TicketTypeDAO {
     public List<TicketType> getTicketTypes(int eventID) throws SQLServerException {
         List<TicketType> ticketTypeList = new ArrayList<>();
         try (Connection connection = db.getConnection()){
-            String query = "SELECT * FROM TicketType INNER JOIN Event ON TicketType.EventID = Event.ID WHERE TicketType.ID = ? ORDER by TicketName DESC";
+            String query = "SELECT * FROM TicketType WHERE EventID = ? ORDER by TicketName DESC";
             PreparedStatement ptsm = connection.prepareStatement(query);
             ptsm.setInt(1, eventID);
             ResultSet rs = ptsm.executeQuery();

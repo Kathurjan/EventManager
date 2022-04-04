@@ -1,6 +1,6 @@
 package BE;
 
-import java.util.Date;
+import java.sql.Date;
 
 // This is the create object for events.
 
@@ -11,14 +11,16 @@ public class Event {
     private String eventLocation;
     private Double price;
     private String stateTime;
+    private String warningLabel;
 
-    public Event(int eventID, String eventname, Date startdate, String eventlocation, Double price, String startTime){
+    public Event(int eventID, String eventname, Date startdate, String eventlocation, Double price, String startTime, String warningLabel){
         this.eventID = eventID;
         this.eventName = eventname;
         this.startDate = startdate;
         this.eventLocation = eventlocation;
         this.price = price;
         this.stateTime = startTime;
+        this.warningLabel = warningLabel;
     }
 
     public String getStateTime() {
@@ -63,5 +65,13 @@ public class Event {
 
     public void setEventLocation(String eventLocation) {
         this.eventLocation = eventLocation;
+    }
+
+    public String getWarningLabel() {
+        return warningLabel;
+    }
+
+    public void setWarningLabel(String warningLabel) {
+        this.warningLabel = warningLabel;
     }
 }

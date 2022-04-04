@@ -13,4 +13,11 @@ public class TextConverter {
         String output = string1 + ":" + string2;
         return output;
     }
+
+    public String[] convertStartTimeToTwoString(String string){
+        String[] arr = new String[2];
+        arr[0] = string.substring(0,2);
+        arr[1] = string.substring(3,5);
+        return arr;
+    }
 }

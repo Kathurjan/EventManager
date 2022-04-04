@@ -93,6 +93,9 @@ public class EventManagerPageController implements Initializable{
         if (edit){
             fxmlLoader.<EventCreatorController>getController().setEdit(eventTableView.getSelectionModel().getSelectedItem());
         }
+        if(!edit){
+            fxmlLoader.<EventCreatorController>getController().createTempEvent();
+        }
         fxmlLoader.<EventCreatorController>getController();
         Stage stage = new Stage();
         Scene scene = new Scene(root);

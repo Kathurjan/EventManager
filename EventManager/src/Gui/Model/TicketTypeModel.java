@@ -29,6 +29,10 @@ public class TicketTypeModel {
     }
 
     public double convertTxtToDouble(String input) throws BLLException {
-            return bllInterface.convertTextToDouble(input);
+        return bllInterface.convertTextToDouble(input);
+    }
+
+    public void deleteTicketType(TicketType ticketType){
+        bllInterface.deleteTicketType(ticketType);
     }
 }

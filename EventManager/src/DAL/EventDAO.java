@@ -7,7 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.util.Date;
+import java.sql.Date;
 
 public class EventDAO {
     private final static DatabaseConnector db = new DatabaseConnector();
@@ -53,7 +53,7 @@ public class EventDAO {
 
     public void editEvent(String eventName, java.sql.Date eventDate, String eventLocation, double eventPrice, String startTime, String warningLabel, int eventID) {
         try (Connection con = db.getConnection()) {
-            String query = "UPDATE Event set EventName = ?,EventDate = ?,EventLocation = ?, EventPrice = ?, StartTime = ?, WarningLabel = ? WHERE id = ?";
+            String query = "UPDATE Event set EventName = ?, EventDate = ?, EventLocation = ?, EventPrice = ?, StartTime = ?, WarningLabel = ? WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             System.out.println(query);
             pstm.setString(1, eventName);
@@ -84,7 +84,8 @@ public class EventDAO {
                     String eventlocation = rs.getString("EventLocation");
                     Double price = rs.getDouble("EventPrice");
                     String startTime = rs.getString("StartTime");
-                    Event event = new Event(id, eventName, startdate, eventlocation, price, startTime);// Creating a person object from the retrieved values
+                    String warningLabel = rs.getString("WarningLabel");
+                    Event event = new Event(id, eventName, startdate, eventlocation, price, startTime, warningLabel);// Creating a person object from the retrieved values
                     eventsList.add(event); // Adding the person to  list
                 }
             }
