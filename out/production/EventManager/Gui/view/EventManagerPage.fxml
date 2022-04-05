@@ -7,28 +7,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
+<AnchorPane prefHeight="569.0" prefWidth="857.0" stylesheets="@../CSS/EventManagerPage.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
    <children>
-      <TableView fx:id="eventTableView" layoutX="21.0" layoutY="21.0" prefHeight="370.0" prefWidth="425.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="eventTableView" layoutX="21.0" layoutY="21.0" prefHeight="370.0" prefWidth="425.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="locationColumn" prefWidth="75.0" text="Location" />
-            <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Date" />
-            <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
-            <TableColumn fx:id="startTimeColumn" prefWidth="75.0" text="Start time" />
+          <TableColumn fx:id="nameColumn" prefWidth="75.0" styleClass="collumnStyling" text="Name" />
+          <TableColumn fx:id="locationColumn" prefWidth="75.0" styleClass="collumnStyling" text="Location" />
+            <TableColumn fx:id="dateColumn" prefWidth="75.0" styleClass="collumnStyling" text="Date" />
+            <TableColumn fx:id="priceColumn" prefWidth="75.0" styleClass="collumnStyling" text="Price" />
+            <TableColumn fx:id="startTimeColumn" prefWidth="123.0" styleClass="collumnStyling" text="Start time" />
         </columns>
       </TableView>
-      <TableView layoutX="601.0" layoutY="50.0" prefHeight="370.0" prefWidth="245.0" AnchorPane.leftAnchor="601.0" AnchorPane.topAnchor="50.0">
+      <TableView layoutX="601.0" layoutY="50.0" prefHeight="370.0" prefWidth="245.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="601.0" AnchorPane.topAnchor="50.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="TicketName" />
-          <TableColumn prefWidth="75.0" text="TicketPrice" />
+          <TableColumn prefWidth="130.0" styleClass="collumnStyling" text="TicketName" />
+          <TableColumn prefWidth="113.0" styleClass="collumnStyling" text="TicketPrice" />
         </columns>
       </TableView>
-      <Button layoutX="20.0" layoutY="461.0" mnemonicParsing="false" onAction="#addEventPress" text="Create Event" />
-      <Button layoutX="20.0" layoutY="501.0" mnemonicParsing="false" onAction="#editEventPress" text="Edit Event" />
-      <Button layoutX="763.0" layoutY="547.0" mnemonicParsing="false" text="Delete Ticket" />
-      <Button layoutX="777.0" layoutY="514.0" mnemonicParsing="false" text="Edit Ticket" />
-      <Button layoutX="20.0" layoutY="541.0" mnemonicParsing="false" text="Delete Event" />
+      <Button layoutX="16.0" layoutY="444.0" mnemonicParsing="false" onAction="#addEventPress" styleClass="Button" text="Create Event" />
+      <Button layoutX="17.0" layoutY="484.0" mnemonicParsing="false" onAction="#editEventPress" styleClass="Button" text="Edit Event" />
+      <Button layoutX="726.0" layoutY="521.0" mnemonicParsing="false" styleClass="Button" text="Delete Ticket" />
+      <Button layoutX="739.0" layoutY="484.0" mnemonicParsing="false" styleClass="Button" text="Edit Ticket" />
+      <Button layoutX="17.0" layoutY="521.0" mnemonicParsing="false" styleClass="Button" text="Delete Event" />
       <Label layoutX="86.0" layoutY="14.0" text="Events">
          <font>
             <Font size="24.0" />
@@ -39,6 +39,6 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="763.0" layoutY="474.0" mnemonicParsing="false" text="Create Ticket" />
+      <Button layoutX="725.0" layoutY="444.0" mnemonicParsing="false" styleClass="Button" text="Create Ticket" />
    </children>
 </AnchorPane>

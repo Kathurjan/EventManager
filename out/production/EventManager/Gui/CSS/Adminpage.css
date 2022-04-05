@@ -1,15 +1,9 @@
 #Pane {
-
     -fx-background-color: white;
-
 }
 #usernameColumn{
     -fx-font-smoothing-type: bold;
 }
-
-#adminTable{
-}
-
 
 .Button{
     -fx-background-color: #2C6BFA;
@@ -68,15 +62,19 @@
     -fx-background-color: transparent;
     -fx-text-background-color:black;
     -fx-border-width:0.5;
-    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-style: hidden dashed solid hidden;
     -fx-border-color:black;
     -fx-text-alignment: center;
 }
 
 .leftNoBorder {
-    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-style: hidden dashed solid hidden;
 }
 
 .rightNoBorder {
-    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-style: hidden dashed solid hidden;
+}
+
+#adminTable.table-cell{
+    -fx-alignment: CENTER-LEFT;
 }

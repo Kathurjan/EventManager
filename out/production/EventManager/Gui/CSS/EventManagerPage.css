@@ -1,0 +1,51 @@
+.Button{
+    -fx-background-color: #2C6BFA;
+    -fx-background-radius: 0,0,0,0;
+
+    -fx-effect: dropshadow( three-pass-box , #000000 , 0, 1, 4, 5 );
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 10 20;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+
+}
+/* Used to change the scroll-bar*/
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+.table-view{
+    -fx-border-color: black;
+}
+.collumnStyling {
+    -fx-background-color: transparent;
+    -fx-text-background-color:black;
+    -fx-border-width:0.5;
+    -fx-border-style: hidden dashed dashed hidden;
+    -fx-border-color:black;
+    -fx-text-alignment: center;
+
+}
+#eventTableView .table-cell{
+    -fx-alignment: CENTER-LEFT;
+}
+
+.TableviewEvent_ticket {
+    -fx-background-color: rgba(250, 189, 46, 1) !important;
+    -fx-base: transparent;
+    -fx-effect: dropshadow( three-pass-box , #000000 , 0, 1, 4, 5 );
+
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}

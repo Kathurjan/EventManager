@@ -28,3 +28,27 @@
 .table-view{
     -fx-border-color: black;
 }
+
+/* for the individual column within the tableview, the "border-Style" being the quite unique one here where it dicates if there should be lines inside the tableview.
+*/
+.collumnStyling {
+    -fx-background-color: transparent;
+    -fx-text-background-color:black;
+    -fx-border-width:0.5;
+    -fx-border-style: hidden dashed dashed hidden;
+    -fx-border-color:black;
+
+}
+/*Used to align the text to center left, otherwise it would look quite bizarre*/
+#eventTableView .table-cell{
+    -fx-alignment: CENTER-LEFT;
+}
+
+.TableviewEvent_ticket {
+    -fx-background-color: rgba(250, 189, 46, 1) !important;
+    -fx-base: transparent;
+    -fx-effect: dropshadow( three-pass-box , #000000 , 0, 1, 4, 5 );
+
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}

@@ -13,7 +13,6 @@ import java.util.List;
 // This is where we parse through all our data.
 
 public interface BLLInterface {
-
     List<Person> getAllPerson();
     ObservableList<Event> getAllEvents();
     List<TicketType> getTicketTypes(int eventID) throws SQLServerException;
