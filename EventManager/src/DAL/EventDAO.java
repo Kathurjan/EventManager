@@ -16,7 +16,7 @@ public class EventDAO {
 
     }
 
-    public int selectLastest(){
+    public int selectLastest() throws DALException{
         int id = 0;
         String sqlStatement = "SELECT TOP 1 * FROM Event ORDER BY ID DESC";
         try (Connection con = db.getConnection()) {
@@ -27,13 +27,13 @@ public class EventDAO {
                     id = rs.getInt("ID");
                 }
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
         return id;
     }
 
-    public void creatEvent() throws SQLServerException {
+    public void creatEvent() throws DALException {
         String sqlQuery = "INSERT INTO Event(EventName, EventDate, EventLocation, EventPrice, StartTime, WarningLabel) VALUES (?,?,?,?,?,?) ";
         try (Connection con = db.getConnection()) {
             PreparedStatement statement = con.prepareStatement(sqlQuery);
@@ -45,8 +45,8 @@ public class EventDAO {
             statement.setString(6, null);
             statement.addBatch(); // Adding to the statement
             statement.executeBatch(); // Executing the added parameters, and  executing the statement
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
     }
 
@@ -68,7 +68,7 @@ public class EventDAO {
     }
 
 
-    public ObservableList<Event> getAllEvents() {
+    public ObservableList<Event> getAllEvents() throws DALException{
         ObservableList<Event> eventsList = FXCollections.observableArrayList();
         try (Connection con = db.getConnection()) {
             String sqlStatement = "SELECT * FROM Event";
@@ -87,32 +87,31 @@ public class EventDAO {
                     eventsList.add(event); // Adding the person to  list
                 }
             }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            return null;
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
         return eventsList;
     }
 
-    public void deleteEvent(Event selectedEvent){
+    public void deleteEvent(Event selectedEvent) throws DALException{
         try(Connection con = db.getConnection()){
             String query = "DELETE FROM Person WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1,selectedEvent.getEventID());
             pstm.executeUpdate(); // Executing the statement
-        } catch(SQLException ex){
-            System.out.println(ex);
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
     }
 
-    public void deleteEventWithID(int eventID){
+    public void deleteEventWithID(int eventID) throws DALException{
         try(Connection con = db.getConnection()){
             String query = "DELETE FROM Person WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1,eventID);
             pstm.executeUpdate(); // Executing the statement
-        } catch(SQLException ex){
-            System.out.println(ex);
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
     }
 }

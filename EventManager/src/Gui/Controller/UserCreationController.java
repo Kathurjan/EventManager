@@ -1,6 +1,7 @@
 package Gui.Controller;
 
 import BE.Person;
+import DAL.DALException;
 import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
@@ -8,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import org.controlsfx.control.CheckComboBox;
@@ -56,7 +58,7 @@ public class UserCreationController implements Initializable {
 
 
 
-    public UserCreationController() throws SQLServerException {
+    public UserCreationController() {
         personModel = new PersonModel();
         personList = new ArrayList<>();
     }
@@ -88,14 +90,19 @@ public class UserCreationController implements Initializable {
             if (verifyEmail() | isEditing) { // if controller is in editing mode -> skip email verification step
                 if (verifyPassword()) {
                     if(type != -1){
-                        if(!isEditing){ // does the check of the isEditing variable
-                            personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), type);
+                        try {
+                            if(!isEditing){ // does the check of the isEditing variable
+                                personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), type);
+                                Stage stage =  (Stage) emailTxt.getScene().getWindow();
+                                stage.close();
+                            }
+                            else personModel.editPerson(selectedPerson, userNameTxt.getText(), password1stTxt.getText(), emailTxt.getText(), 0);
                             Stage stage =  (Stage) emailTxt.getScene().getWindow();
                             stage.close();
                         }
-                        else personModel.editPerson(selectedPerson, userNameTxt.getText(), password1stTxt.getText(), emailTxt.getText(), 0);
-                        Stage stage =  (Stage) emailTxt.getScene().getWindow();
-                        stage.close();
+                        catch (DALException e){
+                            alertWarning(e.getMessage());
+                        }
                     }
                     else {
                         errorLabel.setText("Please choose a user type");
@@ -115,7 +122,12 @@ public class UserCreationController implements Initializable {
 
     private boolean verifyEmail() { // Checks for null input and gets a list of all Persons in the DB to check it against the input
         if(personList.isEmpty()){
-            personList = personModel.getAllPerson();
+            try {
+                personList = personModel.getAllPerson();
+            }
+            catch (DALException e){
+                alertWarning(e.getMessage());
+            }
         }
         if (emailTxt.getText() != null) {
             for (Person person : personList) {
@@ -154,5 +166,14 @@ public class UserCreationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userCheckBox.setItems(TypeofUser);
+    }
+
+    private void alertWarning(String input){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning!");
+        alert.setHeaderText(input);
+        alert.setContentText("Please try again.");
+        alert.getOwner();
+        alert.showAndWait();
     }
 }

@@ -14,7 +14,7 @@ public class TicketTypeDAO {
 
     private final static DatabaseConnector db  = new DatabaseConnector();
 
-    public void addTicketType(List<TicketType> listToBeAdded, int eventID){
+    public void addTicketType(List<TicketType> listToBeAdded, int eventID) throws DALException{
         try(Connection connection = db.getConnection()) {
             String query = "INSERT INTO TicketType(TicketName, TicketDescription, ExtraFee, EventID) VALUES (?,?,?,?)";
             PreparedStatement ptsm = connection.prepareStatement(query);
@@ -26,23 +26,23 @@ public class TicketTypeDAO {
                 ptsm.addBatch();
             }
             ptsm.executeBatch();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
     }
 
-    public void deleteTicketType(TicketType ticketType){
+    public void deleteTicketType(TicketType ticketType) throws DALException{
         try(Connection con = db.getConnection()){
             String query = "DELETE FROM TicketType WHERE TypeID = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1,ticketType.getTicketTypeID());
             pstm.executeUpdate(); // Executing the statement
-        } catch(SQLException ex){
-            System.out.println(ex);
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
     }
 
-    public List<TicketType> getTicketTypes(int eventID) throws SQLServerException {
+    public List<TicketType> getTicketTypes(int eventID) throws DALException {
         List<TicketType> ticketTypeList = new ArrayList<>();
         try (Connection connection = db.getConnection()){
             String query = "SELECT * FROM TicketType WHERE EventID = ? ORDER by TicketName DESC";
@@ -54,9 +54,8 @@ public class TicketTypeDAO {
                 ticketTypeList.add(ticketType);
             }
             return ticketTypeList;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
-        return null;
     }
 }

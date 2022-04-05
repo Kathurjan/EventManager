@@ -3,6 +3,7 @@ package Gui.Model;
 import BE.TicketType;
 import BLL.BLLException;
 import BLL.BLLManager;
+import DAL.DALException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,17 +15,17 @@ public class TicketTypeModel {
 
     private ObservableList<TicketType> ticketTypeObservableList;
 
-    public TicketTypeModel() throws SQLServerException {
+    public TicketTypeModel()  {
         bllInterface = new BLLManager();
     }
 
-    public ObservableList<TicketType> getTicketTypes(int eventID) throws SQLServerException {
+    public ObservableList<TicketType> getTicketTypes(int eventID) throws DALException {
         ticketTypeObservableList = FXCollections.observableArrayList();
         ticketTypeObservableList.setAll(bllInterface.getTicketTypes(eventID));
         return ticketTypeObservableList;
     }
 
-    public void addTicketTypes(ObservableList<TicketType> listToBeAdded, int eventID){
+    public void addTicketTypes(ObservableList<TicketType> listToBeAdded, int eventID) throws DALException {
         bllInterface.addTicketTypes(listToBeAdded, eventID);
     }
 
@@ -32,7 +33,7 @@ public class TicketTypeModel {
         return bllInterface.convertTextToDouble(input);
     }
 
-    public void deleteTicketType(TicketType ticketType){
+    public void deleteTicketType(TicketType ticketType) throws DALException {
         bllInterface.deleteTicketType(ticketType);
     }
 }

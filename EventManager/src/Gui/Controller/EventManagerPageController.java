@@ -1,6 +1,7 @@
 package Gui.Controller;
 
 import BE.Event;
+import DAL.DALException;
 import Gui.Model.EventModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -33,7 +35,7 @@ public class EventManagerPageController implements Initializable{
     private EventModel eventModel;
 
     // This is our constructor.
-    public EventManagerPageController() throws SQLServerException {
+    public EventManagerPageController() {
         eventModel = new EventModel();
     }
 
@@ -44,19 +46,24 @@ public class EventManagerPageController implements Initializable{
         try {
             populateEventTableView();
         } catch (Exception e) {
-            e.printStackTrace();
+            alertWarning("Failed to initialize Event manager page");
         }
     }
 
     // Here we populate our event table view.
     private void populateEventTableView(){
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("EventName"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory<>("EventLocation"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("StartDate"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("StateTime"));
-        eventTableView.setItems(eventModel.getAllEvents());
-        System.out.println(eventModel.getAllEvents());
+        try {
+            nameColumn.setCellValueFactory(new PropertyValueFactory<>("EventName"));
+            locationColumn.setCellValueFactory(new PropertyValueFactory<>("EventLocation"));
+            dateColumn.setCellValueFactory(new PropertyValueFactory<>("StartDate"));
+            priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+            startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("StateTime"));
+            eventTableView.setItems(eventModel.getAllEvents());
+            System.out.println(eventModel.getAllEvents());
+        }
+        catch (DALException e){
+            alertWarning(e.getMessage());
+        }
 
     }
 
@@ -67,8 +74,8 @@ public class EventManagerPageController implements Initializable{
             try {
                 setupEventCreator(true);
             }
-            catch (SQLServerException | IOException ex){
-                System.out.println("Put this in an error label or something (edit event button)");
+            catch (IOException ex){
+                alertWarning("Failed setting up the edit window");
             }
         }
         else System.out.println("Put this in an error label or something (edit event missing selected item)");
@@ -79,28 +86,33 @@ public class EventManagerPageController implements Initializable{
         try {
             setupEventCreator(false);
         }
-        catch (SQLServerException | IOException ex){
-            System.out.println("Put this in an error label or something (Create event button)");
+        catch (IOException ex){
+            alertWarning("Failed setting up the Event Creator");
         }
     }
 
-    private void setupEventCreator(boolean edit) throws IOException, SQLServerException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("../view/EventCreator.fxml"));
-        Parent root = (Parent) fxmlLoader.load();
-        EventCreatorController addEvent = fxmlLoader.getController();
-        addEvent.setController(this);
-        if (edit){
-            fxmlLoader.<EventCreatorController>getController().setEdit(eventTableView.getSelectionModel().getSelectedItem());
+    private void setupEventCreator(boolean edit) throws IOException {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("../view/EventCreator.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            EventCreatorController addEvent = fxmlLoader.getController();
+            addEvent.setController(this);
+            if (edit){
+                fxmlLoader.<EventCreatorController>getController().setEdit(eventTableView.getSelectionModel().getSelectedItem());
+            }
+            if(!edit){
+                fxmlLoader.<EventCreatorController>getController().createTempEvent();
+            }
+            fxmlLoader.<EventCreatorController>getController();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }
-        if(!edit){
-            fxmlLoader.<EventCreatorController>getController().createTempEvent();
+        catch (IOException e){
+            alertWarning("Failed to load the create/edit event window");
         }
-        fxmlLoader.<EventCreatorController>getController();
-        Stage stage = new Stage();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
     }
 
 
@@ -149,4 +161,13 @@ public class EventManagerPageController implements Initializable{
         return null;
     }
     */
+
+    private void alertWarning(String input){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning!");
+        alert.setHeaderText(input);
+        alert.setContentText("Please try again.");
+        alert.getOwner();
+        alert.showAndWait();
+    }
 }

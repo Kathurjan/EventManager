@@ -19,44 +19,44 @@ public class DALManager implements DALInterface{
     private TicketTypeDAO ticketDAO;
     private DatabaseConnector db = new DatabaseConnector();
 
-    public DALManager() throws SQLServerException {
+    public DALManager() {
         personDAO = new PersonDAO();
         eventDAO = new EventDAO();
         ticketDAO = new TicketTypeDAO();
     }
 
     @Override
-    public List<Person> getAllPerson() {
+    public List<Person> getAllPerson() throws DALException {
         return personDAO.getAllPerson();
     }
 
     @Override
-    public ObservableList<Event> getAllEvents() {
+    public ObservableList<Event> getAllEvents() throws DALException {
         return eventDAO.getAllEvents();
     }
 
     @Override
-    public List<TicketType> getTicketTypes(int eventID) throws SQLServerException {
+    public List<TicketType> getTicketTypes(int eventID) throws DALException {
         return ticketDAO.getTicketTypes(eventID);
     }
 
     @Override
-    public void addPerson(String username, String password, String email, int type) {
+    public void addPerson(String username, String password, String email, int type) throws DALException {
         personDAO.addPerson(username, password, email, type);
     }
 
     @Override
-    public void deletePerson(Person selectedPerson) {
+    public void deletePerson(Person selectedPerson) throws DALException {
         personDAO.deletePerson(selectedPerson);
     }
 
     @Override
-    public void editPerson(Person selectedPerson, String username, String password, String email, int type) {
+    public void editPerson(Person selectedPerson, String username, String password, String email, int type) throws DALException {
         personDAO.editPerson(selectedPerson, username, password, email, type);
     }
 
     @Override
-    public Admin verifyAdmin(String username, String password, int type) {
+    public Admin verifyAdmin(String username, String password, int type) throws DALException {
         return personDAO.verifyAdmin(username, password,type);
     }
 
@@ -66,27 +66,27 @@ public class DALManager implements DALInterface{
     }
 
     @Override
-    public void addTicketTypes(List<TicketType> simpleList, int eventID){
+    public void addTicketTypes(List<TicketType> simpleList, int eventID) throws DALException{
         ticketDAO.addTicketType(simpleList, eventID);
     }
 
     @Override
-    public void creatEvent() throws SQLServerException {
+    public void creatEvent() throws DALException {
         eventDAO.creatEvent();
     }
 
     @Override
-    public void deleteTicketType(TicketType ticketType){
+    public void deleteTicketType(TicketType ticketType) throws DALException {
         ticketDAO.deleteTicketType(ticketType);
     }
 
     @Override
-    public int selectLatest(){
+    public int selectLatest() throws DALException {
         return eventDAO.selectLastest();
     }
 
     @Override
-    public void deleteEventWithID(int EventID){
+    public void deleteEventWithID(int EventID) throws DALException {
         eventDAO.deleteEventWithID(EventID);
     }
 

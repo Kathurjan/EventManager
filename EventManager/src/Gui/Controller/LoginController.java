@@ -1,5 +1,6 @@
 package Gui.Controller;
 
+import DAL.DALException;
 import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.event.ActionEvent;
@@ -35,47 +36,30 @@ public class LoginController implements Initializable {
     private PersonModel personModel;
 
     // This is our constructor.
-    public LoginController() throws SQLServerException {
+    public LoginController() {
         personModel = new PersonModel();
 
     }
 
     // This button runs our login method.
     @FXML
-    private void signIn(ActionEvent actionEvent) throws IOException {
+    private void signIn(ActionEvent actionEvent) {
         loginMethod();
     }
 
     // This method makes sure that the username and password is correct.
     private void loginMethod() {
         if (UserName.getText().isBlank() || PassWord.getText().isBlank()) {
-            alertWarning();
+            alertWarning("Wrong username or password.");
             return;
         }
-
         // Checks of the username and password text field is empty and if the username and password matches the admins
         // It will allow them to log in.
-        if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
-            if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 0) != null) {
-                try {
-                    Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
-                    Stage stage = new Stage();
-                    Scene scene = new Scene(part);
-                    stage.setScene(scene);
-                    stage.show();
-
-                    // Used to close the window if the pass and username is correct
-                    Stage stagebtnwindow = (Stage) loginBtn.getScene().getWindow();
-                    stagebtnwindow.close();
-
-                } catch (NullPointerException | IOException ex) {
-                    System.out.println(ex);
-
-                }
-            } else if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
-                if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 1) != null) {
+        try {
+            if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
+                if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 0) != null) {
                     try {
-                        Parent part = FXMLLoader.load(getClass().getResource("../view/EventManagerPage.fxml"));
+                        Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
                         Stage stage = new Stage();
                         Scene scene = new Scene(part);
                         stage.setScene(scene);
@@ -89,11 +73,32 @@ public class LoginController implements Initializable {
                         System.out.println(ex);
 
                     }
-                } else {
-                    // If it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
-                    alertWarning();
+                } else if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
+                    if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 1) != null) {
+                        try {
+                            Parent part = FXMLLoader.load(getClass().getResource("../view/EventManagerPage.fxml"));
+                            Stage stage = new Stage();
+                            Scene scene = new Scene(part);
+                            stage.setScene(scene);
+                            stage.show();
+
+                            // Used to close the window if the pass and username is correct
+                            Stage stagebtnwindow = (Stage) loginBtn.getScene().getWindow();
+                            stagebtnwindow.close();
+
+                        } catch (NullPointerException | IOException ex) {
+                            System.out.println(ex);
+                        }
+                    }
+                    else {
+                        // If it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
+                        alertWarning("Wrong username or password.");
+                    }
                 }
             }
+        }
+        catch (DALException e){
+            alertWarning(e.getMessage());
         }
 
             // Check if the user is a normal user, unlock method when we need -- remember to remove comments when we do.
@@ -152,15 +157,15 @@ public class LoginController implements Initializable {
             Stage stagewindow = (Stage) newUserLabel.getScene().getWindow();
             stagewindow.close();
     } catch (IOException e) {
-            e.printStackTrace();
+            alertWarning("Failed to set up new User window");
         }
     }
 
     // This is our template for warnings.
-    private void alertWarning(){
+    private void alertWarning(String input){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning!");
-        alert.setHeaderText("Wrong username or password.");
+        alert.setHeaderText(input);
         alert.setContentText("Please try again.");
         alert.getOwner();
         alert.showAndWait();

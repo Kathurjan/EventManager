@@ -1,9 +1,11 @@
 package Gui.Controller;
 
 import BE.Event;
+import DAL.DALException;
 import Gui.Model.EventModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -24,7 +26,7 @@ public class UserPageController {
     private EventModel eventModel;
 
     // This is our constructor.
-    public UserPageController() throws SQLServerException {
+    public UserPageController() {
         eventModel = new EventModel();
     }
 
@@ -33,7 +35,7 @@ public class UserPageController {
         try {
             populateEventTableView();
         } catch (Exception e) {
-            e.printStackTrace();
+            alertWarning("Failed to initialize User page");
         }
     }
 
@@ -44,8 +46,21 @@ public class UserPageController {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("StartDate"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("StateTime"));
-        eventTableView.setItems(eventModel.getAllEvents());
-        System.out.println(eventModel.getAllEvents());
+        try {
+            eventTableView.setItems(eventModel.getAllEvents());
+        }
+        catch (DALException e){
+            alertWarning(e.getMessage());
+        }
 
+    }
+
+    private void alertWarning(String input){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning!");
+        alert.setHeaderText(input);
+        alert.setContentText("Please try again.");
+        alert.getOwner();
+        alert.showAndWait();
     }
 }

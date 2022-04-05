@@ -4,6 +4,7 @@ import BE.Admin;
 import BE.Event;
 import BE.Person;
 import BE.TicketType;
+import DAL.DALException;
 import DAL.DALManager;
 import DAL.DALInterface;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -19,42 +20,42 @@ public class BLLManager implements BLLInterface {
     private DALInterface dalInterface;
     private TextConverter textConverter;
 
-    public BLLManager() throws SQLServerException {
+    public BLLManager() {
         dalInterface = new DALManager();
         textConverter = new TextConverter();
     }
 
     @Override
-    public List<Person> getAllPerson() {
+    public List<Person> getAllPerson() throws DALException {
         return dalInterface.getAllPerson();
     }
 
     @Override
-    public ObservableList<Event> getAllEvents() {
+    public ObservableList<Event> getAllEvents() throws DALException {
         return dalInterface.getAllEvents();
     }
 
     @Override
-    public List<TicketType> getTicketTypes(int eventID) throws SQLServerException {
+    public List<TicketType> getTicketTypes(int eventID) throws DALException {
         return dalInterface.getTicketTypes(eventID);}
 
     @Override
-    public void addPerson(String username, String password, String email, int type) {
+    public void addPerson(String username, String password, String email, int type) throws DALException {
         dalInterface.addPerson(username, password, email, type);
     }
 
     @Override
-    public void deletePerson(Person selectedPerson) {
+    public void deletePerson(Person selectedPerson) throws DALException {
         dalInterface.deletePerson(selectedPerson);
     }
 
     @Override
-    public void editPerson(Person selectedPerson, String username, String password, String email, int type) {
+    public void editPerson(Person selectedPerson, String username, String password, String email, int type) throws DALException {
         dalInterface.editPerson(selectedPerson, username, password, email, type);
     }
 
     @Override
-    public Admin verifyAdmin(String username, String password, int type) {
+    public Admin verifyAdmin(String username, String password, int type) throws DALException {
         return dalInterface.verifyAdmin( username, password,type);
     }
 
@@ -79,27 +80,27 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public void deleteTicketType(TicketType ticketType){
+    public void deleteTicketType(TicketType ticketType) throws DALException {
         dalInterface.deleteTicketType(ticketType);
     }
 
     @Override
-    public void addTicketTypes(List<TicketType> simpleList, int eventID){
+    public void addTicketTypes(List<TicketType> simpleList, int eventID) throws DALException {
         dalInterface.addTicketTypes(simpleList, eventID);
     }
 
     @Override
-    public void creatEvent() throws SQLServerException {
+    public void creatEvent() throws DALException {
         dalInterface.creatEvent();
     }
 
     @Override
-    public int selectLatest(){
+    public int selectLatest() throws DALException {
         return dalInterface.selectLatest();
     }
 
     @Override
-    public void deleteEventWithID(int EventID){
+    public void deleteEventWithID(int EventID) throws DALException {
         dalInterface.deleteEventWithID(EventID);
     }
 

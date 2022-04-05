@@ -11,7 +11,7 @@ public class PersonDAO {
 
     private final static DatabaseConnector db = new DatabaseConnector();
 
-    public List<Person> getAllPerson() {
+    public List<Person> getAllPerson() throws DALException {
         List<Person> personList = FXCollections.observableArrayList();
         try (Connection con = db.getConnection()) {
             String sqlStatement = "SELECT * FROM Person";
@@ -28,14 +28,13 @@ public class PersonDAO {
                     personList.add(person); // Adding the person to  list
                 }
             }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            return null;
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
         return personList;
     }
 
-    public void addPerson(String username, String password, String email, int type) {
+    public void addPerson(String username, String password, String email, int type) throws DALException {
         String sqlStatement = "INSERT INTO Person(userName, userPassWord, email, Type) VALUES (?,?,?,?)";
         try(Connection con = db.getConnection()){
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
@@ -45,12 +44,12 @@ public class PersonDAO {
             pstm.setInt(4, type);
             pstm.addBatch(); // Adding to the statement
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
-        } catch(SQLException ex) {
-            System.out.println(ex);
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
     }
 
-    public Person editPerson(Person selectedPerson, String username, String password, String email, int type) {
+    public Person editPerson(Person selectedPerson, String username, String password, String email, int type) throws DALException {
         try (Connection con = db.getConnection()) {
             String query = "UPDATE Person set username = ?,password = ?,name = ?, type = ?, WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
@@ -61,24 +60,23 @@ public class PersonDAO {
             pstm.setInt(5, selectedPerson.getID());
             pstm.executeUpdate(); // Executing the prepared statement with the specified parameters
             return new Person(selectedPerson.getID(),username,password,email,type );
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            return null;
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
     }
 
-    public void deletePerson(Person selectedPerson){
+    public void deletePerson(Person selectedPerson) throws DALException{
         try(Connection con = db.getConnection()){
             String query = "DELETE FROM Person WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1,selectedPerson.getID());
             pstm.executeUpdate(); // Executing the statement
-        } catch(SQLException ex){
-            System.out.println(ex);
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
     }
 
-    public Admin verifyAdmin(String username, String password, int type) {
+    public Admin verifyAdmin(String username, String password, int type) throws DALException {
         Admin admin = null;
         try(Connection connection = db.getConnection()){
             String sqlquery = "SELECT * FROM Person WHERE userName= ? AND userPassWord = ? AND Type =?";
@@ -95,9 +93,8 @@ public class PersonDAO {
                         resultSet.getInt("type"));
             }
         }
-        catch(SQLException ex){
-            System.out.println(ex);
-            return null;
+        catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
         }
         return admin;
     }

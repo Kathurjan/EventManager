@@ -1,6 +1,7 @@
 package Gui.Controller;
 
 import BE.Person;
+import DAL.DALException;
 import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.event.ActionEvent;
@@ -8,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -42,18 +44,22 @@ public class NewUserCreationController {
         if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // Checks the length of the input to ensure minimum safety
             if (verifyEmail()) { // If controller is in editing mode -> skip email verification step
                 if (verifyPassword()) {
-                            personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), 2);
-                            Stage stage =  (Stage) emailTxt.getScene().getWindow();
-                            stage.close();
+                    try {
+                        personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), 2);
+                    }
+                    catch (DALException e){
+                        alertWarning(e.getMessage());
+                    }
+                    Stage stage = (Stage) emailTxt.getScene().getWindow();
+                    stage.close();
                     Parent part = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
-                    Stage stage1= new Stage();
+                    Stage stage1 = new Stage();
                     Scene scene = new Scene(part);
                     stage1.setScene(scene);
                     stage1.show();
-                    }
+                }
             }
-        }
-        else {
+        } else {
             errorLabel.setText("You must provide a username with between 4 and 20 characters");
         }
     }
@@ -61,10 +67,10 @@ public class NewUserCreationController {
     // This button cancels and leads you back to the login screen.
     @FXML
     private void onCancelBTNPress(ActionEvent actionEvent) throws IOException {
-        Stage stage =  (Stage) emailTxt.getScene().getWindow();
+        Stage stage = (Stage) emailTxt.getScene().getWindow();
         stage.close();
         Parent part = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
-        Stage stage1= new Stage();
+        Stage stage1 = new Stage();
         Scene scene = new Scene(part);
         stage1.setScene(scene);
         stage1.show();
@@ -72,8 +78,13 @@ public class NewUserCreationController {
 
     // This method checks if you have verified your mail.
     private boolean verifyEmail() { // Checks for null input and gets a list of all Persons in the DB to check it against the input
-        if(personList.isEmpty()){
-            personList = personModel.getAllPerson();
+        if (personList.isEmpty()) {
+            try {
+                personList = personModel.getAllPerson();
+            }
+            catch (DALException e){
+                alertWarning(e.getMessage());
+            }
         }
         if (emailTxt.getText() != null) {
             for (Person person : personList) {
@@ -89,24 +100,31 @@ public class NewUserCreationController {
     }
 
     // This method verifies if the two passwords are the same.
-    private boolean verifyPassword(){
-        if(Objects.equals(password1stTxt.getText(), password2ndTxt.getText())){ // Compares the repeated password to ensure input
-            if(password1stTxt.getText().length() > 4 && password1stTxt.getText().length() < 21){ // Checks against minimum and maximum input length.
+    private boolean verifyPassword() {
+        if (Objects.equals(password1stTxt.getText(), password2ndTxt.getText())) { // Compares the repeated password to ensure input
+            if (password1stTxt.getText().length() > 4 && password1stTxt.getText().length() < 21) { // Checks against minimum and maximum input length.
                 for (int i = 0; i < password1stTxt.getText().length(); i++) { // Loops through the length of the input
-                    if(Character.isDigit(password1stTxt.getText().charAt(i))){ // If a char in the input is a digit it returns true.
+                    if (Character.isDigit(password1stTxt.getText().charAt(i))) { // If a char in the input is a digit it returns true.
                         return true;
                     }
                 }
-            }
-            else{
+            } else {
                 errorLabel.setText("Your password needs to be between 5 and 20 characters");
             }
-        }
-        else {
+        } else {
             errorLabel.setText("Passwords do not match");
             return false;
         }
         errorLabel.setText("Your password needs at least one number");
         return false;
+    }
+
+    private void alertWarning(String input){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning!");
+        alert.setHeaderText(input);
+        alert.setContentText("Please try again.");
+        alert.getOwner();
+        alert.showAndWait();
     }
 }
