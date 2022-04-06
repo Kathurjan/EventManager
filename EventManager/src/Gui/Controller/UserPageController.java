@@ -4,6 +4,7 @@ import BE.Event;
 import DAL.DALException;
 import Gui.Model.EventModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -62,5 +63,8 @@ public class UserPageController {
         alert.setContentText("Please try again.");
         alert.getOwner();
         alert.showAndWait();
+    }
+
+    public void ticketsBTN(ActionEvent actionEvent) {
     }
 }
