@@ -1,10 +1,13 @@
 package DAL;
 
 import BE.Admin;
+import BE.Participant;
 import BE.Person;
+import BE.TicketType;
 import javafx.collections.FXCollections;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonDAO {
@@ -24,7 +27,7 @@ public class PersonDAO {
                     String password = rs.getString("userPassWord");
                     String email = rs.getString("email");
                     int type = rs.getInt("type");
-                    Person person = new Person(id, username,password, email, type, null, null);// Creating a person object from the retrieved values
+                    Person person = new Person(id, username, email, type, null, null);// Creating a person object from the retrieved values
                     personList.add(person); // Adding the person to  list
                 }
             }
@@ -59,7 +62,7 @@ public class PersonDAO {
             pstm.setInt(4, type);
             pstm.setInt(5, selectedPerson.getID());
             pstm.executeUpdate(); // Executing the prepared statement with the specified parameters
-            return new Person(selectedPerson.getID(),username,password,email,type, null, null);
+            return new Person(selectedPerson.getID(),username, email,type, null, null);
         } catch(SQLException throwables){
             throw new DALException("The Data access layer met with an error", throwables);
         }
@@ -88,14 +91,40 @@ public class PersonDAO {
             while(resultSet.next()){
                 admin = new Admin(resultSet.getInt("id"),
                         resultSet.getString("userName"),
-                        resultSet.getString("userPassWord"),
                         resultSet.getString("email"),
-                        resultSet.getInt("type"));
+                        resultSet.getInt("type"),
+                        null,
+                        null,
+                        resultSet.getString("userPassWord"));
             }
         }
         catch(SQLException throwables){
             throw new DALException("The Data access layer met with an error", throwables);
         }
         return admin;
+    }
+
+    public List<Participant> getAllParticipants(int eventID) throws DALException {
+        List<Participant> participantList = new ArrayList<>();
+        try (Connection connection = db.getConnection()){
+            String query = "SELECT * FROM EventParticipant INNER JOIN Person ON EventParticipant.PersonID = Person.id WHERE EventParticipant.EventID = ? ORDER BY Person.FirstName DESC";
+            PreparedStatement ptsm = connection.prepareStatement(query);
+            ptsm.setInt(1, eventID);
+            ResultSet rs = ptsm.executeQuery();
+            while (rs.next()){
+                Participant participant = new Participant(rs.getInt("id"),
+                        rs.getString("userName"),
+                        rs.getString("email"),
+                        rs.getInt("Type"),
+                        rs.getString("FirstName"),
+                        rs.getString("LastName"),
+                        rs.getInt("EventID"),
+                        rs.getInt("TicketID"));
+                participantList.add(participant);
+            }
+            return participantList;
+        } catch(SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
+        }
     }
 }

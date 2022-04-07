@@ -10,7 +10,7 @@ public class Person {
 
 // This is the create object for person's.
 
-    public Person(int id, String username, String Password, String email, int type, String firstName, String lastName) {
+    public Person(int id, String username, String email, int type, String firstName, String lastName) {
         this.ID = id;
         Username = username;
         this.email = email;
@@ -19,21 +19,7 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public void setType(int type) {
         this.type = type;

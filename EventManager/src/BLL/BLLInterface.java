@@ -1,9 +1,6 @@
 package BLL;
 
-import BE.Admin;
-import BE.Event;
-import BE.Person;
-import BE.TicketType;
+import BE.*;
 import DAL.DALException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
@@ -43,4 +40,6 @@ public interface BLLInterface {
     String[] convertStartTimeToTwoString(String string);
 
     void deleteTicketType(TicketType ticketType) throws DALException;
+
+    List<Participant> getAllParticipants(int EventID) throws DALException;
 }

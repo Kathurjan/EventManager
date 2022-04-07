@@ -7,8 +7,8 @@ public class Participant extends Person {
     private int eventID;
     private int ticketID;
 
-    public Participant(int id, String username, String password, String email, int type, String firstName, String lastName, int eventID, int ticketID) {
-        super(id, username, email, password, type, firstName, lastName);
+    public Participant(int id, String username, String email, int type, String firstName, String lastName, int eventID, int ticketID) {
+        super(id, username, email, type, firstName, lastName);
         this.eventID = eventID;
         this.ticketID = ticketID;
     }

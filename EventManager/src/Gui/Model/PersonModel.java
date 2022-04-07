@@ -1,12 +1,15 @@
 package Gui.Model;
 
 import BE.Admin;
+import BE.Participant;
 import BE.Person;
 import BLL.BLLManager;
 import DAL.DALException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.List;
 
 public class PersonModel {
     private BLLManager BLLInterface;
@@ -36,5 +39,9 @@ public class PersonModel {
 
     public void editPerson(Person selectedPerson, String username, String password, String email, int type) throws DALException {
         BLLInterface.editPerson(selectedPerson, username, password, email, type);
+    }
+
+    public List<Participant> getAllParticipants(int EventID) throws DALException{
+        return BLLInterface.getAllParticipants(EventID);
     }
 }

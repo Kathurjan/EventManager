@@ -1,9 +1,6 @@
 package DAL;
 
-import BE.Admin;
-import BE.Event;
-import BE.Person;
-import BE.TicketType;
+import BE.*;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.ObservableList;
 
@@ -88,6 +85,11 @@ public class DALManager implements DALInterface{
     @Override
     public void deleteEventWithID(int EventID) throws DALException {
         eventDAO.deleteEventWithID(EventID);
+    }
+
+    @Override
+    public List<Participant> getAllParticipants(int EventID) throws DALException{
+        return personDAO.getAllParticipants(EventID);
     }
 
 }
