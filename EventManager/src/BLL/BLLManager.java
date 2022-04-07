@@ -106,4 +106,14 @@ public class BLLManager implements BLLInterface {
         return dalInterface.getAllParticipants(EventID);
     }
 
+    @Override
+    public List<Person> getPersonsNotInEvent(int EventID) throws DALException{
+        return dalInterface.getPersonsNotInEvent(EventID);
+    }
+
+    @Override
+    public List<Person> getPersonsInEvent(int EventID) throws DALException{
+        return dalInterface.getPersonsInEvent(EventID);
+    }
+
 }

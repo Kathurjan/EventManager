@@ -14,6 +14,7 @@ import java.util.List;
 public class PersonModel {
     private BLLManager BLLInterface;
     private ObservableList<Person> personObservableList;
+    private ObservableList<Participant> participantObservableList;
 
     public PersonModel() {
         BLLInterface = new BLLManager();
@@ -41,7 +42,21 @@ public class PersonModel {
         BLLInterface.editPerson(selectedPerson, username, password, email, type);
     }
 
-    public List<Participant> getAllParticipants(int EventID) throws DALException{
-        return BLLInterface.getAllParticipants(EventID);
+    public ObservableList<Participant> getAllParticipants(int EventID) throws DALException{
+        participantObservableList = FXCollections.observableArrayList();
+        participantObservableList.setAll(BLLInterface.getAllParticipants(EventID));
+        return participantObservableList;
+    }
+
+    public ObservableList<Person> getPersonsNotInEvent(int EventID) throws DALException{
+        personObservableList = FXCollections.observableArrayList();
+        personObservableList.setAll(BLLInterface.getPersonsNotInEvent(EventID));
+        return personObservableList;
+    }
+
+    public ObservableList<Person> getPersonsInEvent(int EventID) throws DALException{
+        personObservableList = FXCollections.observableArrayList();
+        personObservableList.setAll(BLLInterface.getPersonsInEvent(EventID));
+        return personObservableList;
     }
 }

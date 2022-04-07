@@ -38,4 +38,8 @@ public interface DALInterface {
     void deleteTicketType(TicketType ticketType) throws DALException;
 
     List<Participant> getAllParticipants(int EventID) throws DALException;
+
+    List<Person> getPersonsInEvent(int EventID) throws DALException;
+
+    List<Person> getPersonsNotInEvent(int EventID) throws DALException;
 }

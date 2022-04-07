@@ -10,11 +10,8 @@ import java.sql.*;
 import java.sql.Date;
 
 public class EventDAO {
-    private final static DatabaseConnector db = new DatabaseConnector();
 
-    public EventDAO() {
-
-    }
+    private final DatabaseConnector db = new DatabaseConnector();
 
     public int selectLastest() throws DALException{
         int id = 0;

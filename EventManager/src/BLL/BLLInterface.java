@@ -12,7 +12,9 @@ import java.util.List;
 
 public interface BLLInterface {
     List<Person> getAllPerson() throws DALException;
+
     ObservableList<Event> getAllEvents() throws DALException;
+
     List<TicketType> getTicketTypes(int eventID) throws SQLServerException, DALException;
 
     void addPerson(String username, String password, String email, int type) throws DALException;
@@ -23,6 +25,7 @@ public interface BLLInterface {
     void editPerson(Person selectedPerson, String username, String password, String email, int type) throws DALException;
 
     Admin verifyAdmin(String username, String password, int type) throws DALException;
+
     void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id);
 
     double convertTextToDouble(String input) throws BLLException;
@@ -42,4 +45,8 @@ public interface BLLInterface {
     void deleteTicketType(TicketType ticketType) throws DALException;
 
     List<Participant> getAllParticipants(int EventID) throws DALException;
+
+    List<Person> getPersonsInEvent(int EventID) throws DALException;
+
+    List<Person> getPersonsNotInEvent(int EventID) throws DALException;
 }

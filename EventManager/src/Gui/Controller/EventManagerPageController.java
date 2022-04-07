@@ -170,4 +170,23 @@ public class EventManagerPageController implements Initializable{
         alert.getOwner();
         alert.showAndWait();
     }
+
+    public void assignParticipantsBTNPress(ActionEvent event) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("../view/ParticipantAssign.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            ParticipantAssignController participantAssignController = fxmlLoader.getController();
+            fxmlLoader.<ParticipantAssignController>getController().setEdit(eventTableView.getSelectionModel().getSelectedItem());
+            participantAssignController.setController(this);
+            fxmlLoader.<ParticipantAssignController>getController();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (IOException e){
+            alertWarning("Failed to load the create/edit event window");
+        }
+    }
 }

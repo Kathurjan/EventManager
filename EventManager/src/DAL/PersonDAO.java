@@ -5,6 +5,7 @@ import BE.Participant;
 import BE.Person;
 import BE.TicketType;
 import javafx.collections.FXCollections;
+import org.w3c.dom.ls.LSOutput;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class PersonDAO {
 
-    private final static DatabaseConnector db = new DatabaseConnector();
+    private final DatabaseConnector db = new DatabaseConnector();
 
     public List<Person> getAllPerson() throws DALException {
         List<Person> personList = FXCollections.observableArrayList();
@@ -31,7 +32,7 @@ public class PersonDAO {
                     personList.add(person); // Adding the person to  list
                 }
             }
-        } catch(SQLException throwables){
+        } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error", throwables);
         }
         return personList;
@@ -39,7 +40,7 @@ public class PersonDAO {
 
     public void addPerson(String username, String password, String email, int type) throws DALException {
         String sqlStatement = "INSERT INTO Person(userName, userPassWord, email, Type) VALUES (?,?,?,?)";
-        try(Connection con = db.getConnection()){
+        try (Connection con = db.getConnection()) {
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
             pstm.setString(1, username);
             pstm.setString(2, password);
@@ -47,7 +48,7 @@ public class PersonDAO {
             pstm.setInt(4, type);
             pstm.addBatch(); // Adding to the statement
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
-        } catch(SQLException throwables){
+        } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error", throwables);
         }
     }
@@ -62,33 +63,33 @@ public class PersonDAO {
             pstm.setInt(4, type);
             pstm.setInt(5, selectedPerson.getID());
             pstm.executeUpdate(); // Executing the prepared statement with the specified parameters
-            return new Person(selectedPerson.getID(),username, email,type, null, null);
-        } catch(SQLException throwables){
+            return new Person(selectedPerson.getID(), username, email, type, null, null);
+        } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error", throwables);
         }
     }
 
-    public void deletePerson(Person selectedPerson) throws DALException{
-        try(Connection con = db.getConnection()){
+    public void deletePerson(Person selectedPerson) throws DALException {
+        try (Connection con = db.getConnection()) {
             String query = "DELETE FROM Person WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
-            pstm.setInt(1,selectedPerson.getID());
+            pstm.setInt(1, selectedPerson.getID());
             pstm.executeUpdate(); // Executing the statement
-        } catch(SQLException throwables){
+        } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error", throwables);
         }
     }
 
     public Admin verifyAdmin(String username, String password, int type) throws DALException {
         Admin admin = null;
-        try(Connection connection = db.getConnection()){
+        try (Connection connection = db.getConnection()) {
             String sqlquery = "SELECT * FROM Person WHERE userName= ? AND userPassWord = ? AND Type =?";
             PreparedStatement statement = connection.prepareStatement(sqlquery);
             statement.setString(1, username);
             statement.setString(2, password);
-            statement.setInt(3,type);
+            statement.setInt(3, type);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 admin = new Admin(resultSet.getInt("id"),
                         resultSet.getString("userName"),
                         resultSet.getString("email"),
@@ -97,34 +98,75 @@ public class PersonDAO {
                         null,
                         resultSet.getString("userPassWord"));
             }
-        }
-        catch(SQLException throwables){
+        } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error", throwables);
         }
         return admin;
     }
 
-    public List<Participant> getAllParticipants(int eventID) throws DALException {
-        List<Participant> participantList = new ArrayList<>();
-        try (Connection connection = db.getConnection()){
-            String query = "SELECT * FROM EventParticipant INNER JOIN Person ON EventParticipant.PersonID = Person.id WHERE EventParticipant.EventID = ? ORDER BY Person.FirstName DESC";
-            PreparedStatement ptsm = connection.prepareStatement(query);
+    public List<Person> getPersonsNotInEvent(int eventID) throws DALException {
+        List<Person> personList = new ArrayList<>();
+        try (Connection connection = db.getConnection()) {
+            String query = "SELECT DISTINCT Person.id, Person.userName, Person.LastName, Person.email, Person.Type FROM Person INNER JOIN EventParticipant ON Person.id = EventParticipant.PersonID WHERE EventParticipant.EventID != ? AND Person.Type = 2";
+            PreparedStatement ptsm = connection.prepareStatement(query); //The select distinct query insures that we do not get duplicates from having participants in multiple events
             ptsm.setInt(1, eventID);
             ResultSet rs = ptsm.executeQuery();
-            while (rs.next()){
-                Participant participant = new Participant(rs.getInt("id"),
-                        rs.getString("userName"),
+            while (rs.next()) {
+                Person person = new Person(
+                        rs.getInt("id"),
+                        null,
                         rs.getString("email"),
                         rs.getInt("Type"),
                         rs.getString("FirstName"),
-                        rs.getString("LastName"),
-                        rs.getInt("EventID"),
-                        rs.getInt("TicketID"));
-                participantList.add(participant);
+                        rs.getString("LastName"));
+                personList.add(person);
             }
-            return participantList;
-        } catch(SQLException throwables){
+        } catch (SQLException throwables) {
+            throw new DALException("The Data access layer met with an error", throwables);
+        }
+        try (Connection connection2 = db.getConnection()) {
+            String query2 = "SELECT DISTINCT Person.id, Person.userName, Person.FirstName, Person.LastName, Person.email, Person.Type FROM Person WHERE NOT EXISTS (SELECT * FROM EventParticipant WHERE EventParticipant.PersonID = Person.id) AND Person.Type = 2";
+            PreparedStatement ptsm2 = connection2.prepareStatement(query2); // Second query to get people who are not in the participants list yet
+            ResultSet rs2 = ptsm2.executeQuery();
+            while (rs2.next()) {
+                Person person = new Person(
+                        rs2.getInt("id"),
+                        null,
+                        rs2.getString("email"),
+                        rs2.getInt("Type"),
+                        rs2.getString("FirstName"),
+                        rs2.getString("LastName"));
+                System.out.println("Lmao loop");
+                personList.add(person);
+            }
+        }
+        catch (SQLException throwables){
+            throw new DALException("The Data access layer met with an error", throwables);
+        }
+        return personList;
+    }
+
+    public List<Person> getPersonsInEvent(int eventID) throws DALException {
+        List<Person> personList = new ArrayList<>();
+        try (Connection connection = db.getConnection()) {
+            String query = "SELECT DISTINCT Person.id, Person.userName, Person.LastName, Person.email, Person.Type FROM Person INNER JOIN EventParticipant ON Person.id = EventParticipant.PersonID WHERE EventParticipant.EventID = ? AND Person.Type = 2";
+            PreparedStatement ptsm = connection.prepareStatement(query); //The select distinct query insures that we do not get duplicates from having participants in multiple events
+            ptsm.setInt(1, eventID);
+            ResultSet rs = ptsm.executeQuery();
+            while (rs.next()) {
+                Person person = new Person(
+                        rs.getInt("id"),
+                        null,
+                        rs.getString("email"),
+                        rs.getInt("Type"),
+                        rs.getString("FirstName"),
+                        rs.getString("LastName"));
+                personList.add(person);
+            }
+            return personList;
+        } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error", throwables);
         }
     }
+
 }

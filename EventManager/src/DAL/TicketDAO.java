@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TicketDAO {
 
-    DatabaseConnector db = new DatabaseConnector();
+    private final DatabaseConnector db = new DatabaseConnector();
 
     public void addTickets(List<Ticket> listToBeAdded, int TicketTypeID) throws DALException {
         try (Connection connection = db.getConnection()) {

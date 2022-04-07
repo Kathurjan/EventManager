@@ -14,12 +14,13 @@ public class DALManager implements DALInterface{
     private PersonDAO personDAO;
     private EventDAO eventDAO;
     private TicketTypeDAO ticketDAO;
-    private DatabaseConnector db = new DatabaseConnector();
+    private ParticipantDAO participantDAO;
 
     public DALManager() {
         personDAO = new PersonDAO();
         eventDAO = new EventDAO();
         ticketDAO = new TicketTypeDAO();
+        participantDAO = new ParticipantDAO();
     }
 
     @Override
@@ -89,7 +90,16 @@ public class DALManager implements DALInterface{
 
     @Override
     public List<Participant> getAllParticipants(int EventID) throws DALException{
-        return personDAO.getAllParticipants(EventID);
+        return participantDAO.getAllParticipants(EventID);
     }
 
+    @Override
+    public List<Person> getPersonsNotInEvent(int EventID) throws DALException{
+        return personDAO.getPersonsNotInEvent(EventID);
+    }
+
+    @Override
+    public List<Person> getPersonsInEvent(int EventID) throws DALException{
+        return personDAO.getPersonsInEvent(EventID);
+    }
 }
