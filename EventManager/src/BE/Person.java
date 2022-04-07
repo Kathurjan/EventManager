@@ -5,14 +5,34 @@ public class Person {
     private String Username;
     private String email;
     private int type;
+    private String firstName;
+    private String lastName;
 
 // This is the create object for person's.
 
-    public Person(int id,String username, String password, String email, int type) {
+    public Person(int id, String username, String Password, String email, int type, String firstName, String lastName) {
         this.ID = id;
         Username = username;
         this.email = email;
         this.type = type;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public void setType(int type) {

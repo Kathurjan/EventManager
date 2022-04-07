@@ -1,5 +1,6 @@
 package Gui.Controller;
 
+import BE.Participant;
 import BE.Person;
 import DAL.DALException;
 import Gui.Model.PersonModel;
@@ -55,7 +56,6 @@ public class UserCreationController implements Initializable {
     private int type;
     private boolean isEditing = false;
     private List<Person> personList;
-
 
 
     public UserCreationController() {

@@ -24,7 +24,7 @@ public class PersonDAO {
                     String password = rs.getString("userPassWord");
                     String email = rs.getString("email");
                     int type = rs.getInt("type");
-                    Person person = new Person(id, username,password, email, type);// Creating a person object from the retrieved values
+                    Person person = new Person(id, username,password, email, type, null, null);// Creating a person object from the retrieved values
                     personList.add(person); // Adding the person to  list
                 }
             }
@@ -59,7 +59,7 @@ public class PersonDAO {
             pstm.setInt(4, type);
             pstm.setInt(5, selectedPerson.getID());
             pstm.executeUpdate(); // Executing the prepared statement with the specified parameters
-            return new Person(selectedPerson.getID(),username,password,email,type );
+            return new Person(selectedPerson.getID(),username,password,email,type, null, null);
         } catch(SQLException throwables){
             throw new DALException("The Data access layer met with an error", throwables);
         }
