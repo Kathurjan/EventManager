@@ -20,4 +20,8 @@ public class TextConverter {
         arr[1] = string.substring(3,5);
         return arr;
     }
+
+    public String convertDoubleToString(Double doub){
+        return String.valueOf(doub);
+    }
 }

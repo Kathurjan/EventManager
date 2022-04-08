@@ -13,14 +13,16 @@ public class DALManager implements DALInterface{
 
     private PersonDAO personDAO;
     private EventDAO eventDAO;
-    private TicketTypeDAO ticketDAO;
+    private TicketTypeDAO ticketTypeDAO;
     private ParticipantDAO participantDAO;
+    private TicketDAO ticketDAO;
 
     public DALManager() {
         personDAO = new PersonDAO();
         eventDAO = new EventDAO();
-        ticketDAO = new TicketTypeDAO();
+        ticketTypeDAO = new TicketTypeDAO();
         participantDAO = new ParticipantDAO();
+        ticketDAO = new TicketDAO();
     }
 
     @Override
@@ -35,7 +37,7 @@ public class DALManager implements DALInterface{
 
     @Override
     public List<TicketType> getTicketTypes(int eventID) throws DALException {
-        return ticketDAO.getTicketTypes(eventID);
+        return ticketTypeDAO.getTicketTypes(eventID);
     }
 
     @Override
@@ -65,7 +67,7 @@ public class DALManager implements DALInterface{
 
     @Override
     public void addTicketTypes(List<TicketType> simpleList, int eventID) throws DALException{
-        ticketDAO.addTicketType(simpleList, eventID);
+        ticketTypeDAO.addTicketType(simpleList, eventID);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class DALManager implements DALInterface{
 
     @Override
     public void deleteTicketType(TicketType ticketType) throws DALException {
-        ticketDAO.deleteTicketType(ticketType);
+        ticketTypeDAO.deleteTicketType(ticketType);
     }
 
     @Override
@@ -94,12 +96,48 @@ public class DALManager implements DALInterface{
     }
 
     @Override
-    public List<Person> getPersonsNotInEvent(int EventID) throws DALException{
-        return personDAO.getPersonsNotInEvent(EventID);
+    public List<Participant> getPersonsNotInEvent(int EventID) throws DALException{
+        return participantDAO.getPersonsNotInEvent(EventID);
     }
 
     @Override
-    public List<Person> getPersonsInEvent(int EventID) throws DALException{
-        return personDAO.getPersonsInEvent(EventID);
+    public List<Participant> getPersonsInEvent(int EventID) throws DALException{
+        return participantDAO.getPersonsInEvent(EventID);
+    }
+
+    @Override
+    public int addTempTicket(int number, int ticketTypeID) throws DALException {
+        ticketDAO.addTempTicket(number,ticketTypeID);
+        return ticketDAO.selectLastest();
+    }
+
+    @Override
+    public void deleteSingleTicket(int id) throws DALException{
+        ticketDAO.deleteSingleTicket(id);
+    }
+
+    @Override
+    public void deleteTickets(List<Ticket> ticketList) throws DALException{
+        ticketDAO.deleteTickets(ticketList);
+    }
+
+    @Override
+    public void addParticipant(Participant participant) throws DALException{
+        participantDAO.addParticipant(participant);
+    }
+
+    @Override
+    public void deleteParticipant(int personID, int eventID) throws DALException{
+        participantDAO.deleteParticipant(personID,eventID);
+    }
+
+    @Override
+    public void editParticipant(int personID, int eventID, boolean hasPayed) throws DALException{
+        participantDAO.editParticipant(personID,eventID,hasPayed);
+    }
+
+    @Override
+    public List<Ticket> getAllTicketPerType(List<TicketType> ticketTypes) throws DALException{
+        return ticketDAO.getAllTicketPerType(ticketTypes);
     }
 }
