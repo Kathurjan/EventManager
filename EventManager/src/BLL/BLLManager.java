@@ -136,4 +136,19 @@ public class BLLManager implements BLLInterface {
         dalInterface.deleteTickets(ticketList);
     }
 
+    @Override
+    public void addParticipant(Participant participant) throws DALException{
+        dalInterface.addParticipant(participant);
+    }
+
+    @Override
+    public void deleteParticipant(int personID, int eventID) throws DALException{
+        dalInterface.deleteParticipant(personID,eventID);
+    }
+
+    @Override
+    public void editParticipant(int personID, int eventID, boolean hasPayed) throws DALException{
+        dalInterface.editParticipant(personID,eventID,hasPayed);
+    }
+
 }

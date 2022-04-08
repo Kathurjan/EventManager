@@ -14,13 +14,14 @@ public class ParticipantDAO {
 
     private final DatabaseConnector db = new DatabaseConnector();
 
-    public void addParticipant(int personID, int eventID, int ticketID, boolean hasPayed) throws DALException {
+    public void addParticipant(Participant participant) throws DALException {
         String sqlStatement = "INSERT INTO EventParticipant(PersonID, EventID, TicketID, HasPayed) VALUES (?,?,?,?)";
         try (Connection con = db.getConnection()) {
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
-            pstm.setInt(1, personID);
-            pstm.setInt(2, eventID);
-            pstm.setInt(3, ticketID);
+            pstm.setInt(1, participant.getID());
+            pstm.setInt(2, participant.getEventID());
+            pstm.setInt(3, participant.getTicketID());
+            pstm.setBoolean(4, participant.getHasPayed());
             pstm.addBatch(); // Adding to the statement
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         } catch (SQLException throwables) {

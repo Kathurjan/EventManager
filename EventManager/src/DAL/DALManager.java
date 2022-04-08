@@ -120,4 +120,19 @@ public class DALManager implements DALInterface{
     public void deleteTickets(List<Ticket> ticketList) throws DALException{
         ticketDAO.deleteTickets(ticketList);
     }
+
+    @Override
+    public void addParticipant(Participant participant) throws DALException{
+        participantDAO.addParticipant(participant);
+    }
+
+    @Override
+    public void deleteParticipant(int personID, int eventID) throws DALException{
+        participantDAO.deleteParticipant(personID,eventID);
+    }
+
+    @Override
+    public void editParticipant(int personID, int eventID, boolean hasPayed) throws DALException{
+        participantDAO.editParticipant(personID,eventID,hasPayed);
+    }
 }

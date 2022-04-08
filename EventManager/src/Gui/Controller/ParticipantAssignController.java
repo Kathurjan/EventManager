@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import javax.mail.Part;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,16 +75,23 @@ public class ParticipantAssignController implements Initializable {
 
     @FXML
     private void addBTNPress(ActionEvent event) {
-        if (availableParticipatingTable.getSelectionModel().getSelectedItem() != null) {
-            if (hasPayedCheck.isSelected()) {
-                availableParticipatingTable.getSelectionModel().getSelectedItem().setHasPayed(true);
+        if (availableParticipatingTable.getSelectionModel().getSelectedItem() != null) { //Checks for null selection
+            Participant tempParticipant = availableParticipatingTable.getSelectionModel().getSelectedItem(); //Creates a temp participant for editing
+            if (hasPayedCheck.isSelected()) { // Checks if the ticket is already payed for
+                tempParticipant.setHasPayed(true);
             }
-            if(choiceBox.getSelectionModel().getSelectedIndex() < 0){
+            if(choiceBox.getSelectionModel().getSelectedIndex() < 0){ // Check the ticket type selected and default to basic type if nothing is (Up for discussion)
                 choiceBox.getSelectionModel().select(0);
             }
-            tempTicketCreation();
-
-            currentParticipantObservable.add(availableParticipatingTable.getSelectionModel().getSelectedItem());
+            tempParticipant.setEventID(selectedEvent.getEventID()); // Gets the event.id from the event that was selected
+            Participant finishedTempParticipant = ticketCreation(tempParticipant); // creates a finished participant from the out of the ticketCreation method
+            try {
+                personModel.addParticipant(finishedTempParticipant);  // Sends the participant down the rabbithole
+            }
+            catch (DALException e){
+                alertWarning(e.getMessage());
+            }
+            currentParticipantObservable.add(finishedTempParticipant); // Swaps the object of the participant on the list.
             availParticipantObservable.remove(availableParticipatingTable.getSelectionModel().getSelectedItem());
             populateTables();
         } else {
@@ -94,14 +102,19 @@ public class ParticipantAssignController implements Initializable {
     @FXML
     private void removeBTNPress(ActionEvent event) {
         if (currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
-            try{
+            Participant participant = currentlyParticipatingTable.getSelectionModel().getSelectedItem();
+            try{ // Deletes both the ticket and the participant from the db, only the connecting data related to the participant is deleted
                 ticketModel.deleteSingleTicket(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getTicketID());
+                personModel.deleteParticipant(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getID(), selectedEvent.getEventID());
+                participant.setEventID(-1);
+                participant.setHasPayed(false);
+                participant.setTicketID(-1);
+                participant.setEventID(-1);
             }
             catch (DALException e){
                 alertWarning(e.getMessage());
             }
-
-            availParticipantObservable.add(currentlyParticipatingTable.getSelectionModel().getSelectedItem());
+            availParticipantObservable.add(participant);
             currentParticipantObservable.remove(currentlyParticipatingTable.getSelectionModel().getSelectedItem());
             populateTables();
         } else {
@@ -110,7 +123,16 @@ public class ParticipantAssignController implements Initializable {
     }
 
     public void hasPayedCheckPress(ActionEvent event) {
-
+        if(currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null){
+            currentlyParticipatingTable.getSelectionModel().getSelectedItem().setHasPayed(hasPayedCheck.isSelected());
+            try {
+                personModel.editParticipant(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getID(), selectedEvent.getEventID(), hasPayedCheck.isSelected());
+            }
+            catch (DALException e){
+                alertWarning(e.getMessage());
+            }
+            populateTables();
+        }
     }
 
     public void doneBTNPress(ActionEvent event) {
@@ -163,7 +185,7 @@ public class ParticipantAssignController implements Initializable {
         }
     }
 
-    private void tempTicketCreation(){
+    private Participant ticketCreation(Participant tempParticipant){
         int k = 1;
         for (int i = 0; i < listOfTickets.size(); i++) {
             System.out.println(k + " " + i);
@@ -176,10 +198,12 @@ public class ParticipantAssignController implements Initializable {
             int tempid = ticketModel.addTempTicket(k, ticketTypeObservableList.get(choiceBox.getSelectionModel().getSelectedIndex()).getTicketTypeID());
             Ticket ticket = new Ticket(tempid,k, ticketTypeObservableList.get(choiceBox.getSelectionModel().getSelectedIndex()).getTicketTypeID());
             listOfTickets.add(ticket);
-            availableParticipatingTable.getSelectionModel().getSelectedItem().setTicketID(tempid);
+            tempParticipant.setTicketID(tempid);
+            return tempParticipant;
         }
         catch (DALException e){
             alertWarning(e.getMessage());
+            return null;
         }
     }
 

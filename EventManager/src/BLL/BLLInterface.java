@@ -57,4 +57,10 @@ public interface BLLInterface {
     void deleteSingleTicket(int id) throws DALException;
 
     void deleteTickets(List<Ticket> ticketList) throws DALException;
+
+    void addParticipant(Participant participant) throws DALException;
+
+    void deleteParticipant(int personID, int eventID) throws DALException;
+
+    void editParticipant(int personID, int eventID, boolean hasPayed) throws DALException;
 }
