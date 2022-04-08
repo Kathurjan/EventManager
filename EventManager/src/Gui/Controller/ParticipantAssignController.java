@@ -1,9 +1,6 @@
 package Gui.Controller;
 
-import BE.Event;
-import BE.Participant;
-import BE.Person;
-import BE.TicketType;
+import BE.*;
 import DAL.DALException;
 import Gui.Model.EventModel;
 import Gui.Model.PersonModel;
@@ -16,10 +13,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ParticipantAssignController implements Initializable {
@@ -31,11 +31,11 @@ public class ParticipantAssignController implements Initializable {
     @FXML
     private CheckBox hasPayedCheck;
     @FXML
-    private TableView<Person> currentlyParticipatingTable;
+    private TableView<Participant> currentlyParticipatingTable;
     @FXML
     private TableColumn<Person, String> currentFirstNameColumn, currentLastNameColumn, currentHasPayedColumn;
     @FXML
-    private TableView<Person> availableParticipatingTable;
+    private TableView<Participant> availableParticipatingTable;
     @FXML
     private TableColumn<Person, String> availFirstNameColumn, availLastNameColumn;
     @FXML
@@ -45,51 +45,72 @@ public class ParticipantAssignController implements Initializable {
     private PersonModel personModel;
     private TicketTypeModel ticketTypeModel;
     private HashMap<String, Double> choiceToPrice;
+    private List<Ticket> listOfTickets;
     private TicketModel ticketModel;
     private Event selectedEvent;
-    private ObservableList<Person> availParticipantObservable;
-    private ObservableList<Person> currentParticipantObservable;
+    private ObservableList<Participant> availParticipantObservable;
+    private ObservableList<Participant> currentParticipantObservable;
+    private ObservableList<TicketType> ticketTypeObservableList;
     private EventManagerPageController eventManagerPageController;
 
 
     public ParticipantAssignController() {
         ticketTypeModel = new TicketTypeModel();
         personModel = new PersonModel();
+        ticketModel = new TicketModel();
+        listOfTickets = new ArrayList<>();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        choiceToPrice = new HashMap<>();
     }
 
-    public void cancelBTNPress(ActionEvent event) {
-        Stage stage =  (Stage) availableParticipatingSearchfield.getScene().getWindow();
+    @FXML
+    private void cancelBTNPress(ActionEvent event) {
+        Stage stage = (Stage) availableParticipatingSearchfield.getScene().getWindow();
         stage.close();
     }
 
-    public void addBTNPress(ActionEvent event) {
-        if(availableParticipatingTable.getSelectionModel().getSelectedItem() != null) {
+    @FXML
+    private void addBTNPress(ActionEvent event) {
+        if (availableParticipatingTable.getSelectionModel().getSelectedItem() != null) {
+            if (hasPayedCheck.isSelected()) {
+                availableParticipatingTable.getSelectionModel().getSelectedItem().setHasPayed(true);
+            }
+            if(choiceBox.getSelectionModel().getSelectedIndex() < 0){
+                choiceBox.getSelectionModel().select(0);
+            }
+            tempTicketCreation();
+
             currentParticipantObservable.add(availableParticipatingTable.getSelectionModel().getSelectedItem());
             availParticipantObservable.remove(availableParticipatingTable.getSelectionModel().getSelectedItem());
             populateTables();
-        }
-        else {
+        } else {
             alertWarning("You must select an available participant");
         }
     }
 
-    public void removeBTNPress(ActionEvent event) {
-        if(currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
+    @FXML
+    private void removeBTNPress(ActionEvent event) {
+        if (currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
+            try{
+                ticketModel.deleteSingleTicket(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getTicketID());
+            }
+            catch (DALException e){
+                alertWarning(e.getMessage());
+            }
+
             availParticipantObservable.add(currentlyParticipatingTable.getSelectionModel().getSelectedItem());
             currentParticipantObservable.remove(currentlyParticipatingTable.getSelectionModel().getSelectedItem());
             populateTables();
-        }
-        else {
+        } else {
             alertWarning("You need to select a current participant");
         }
     }
 
     public void hasPayedCheckPress(ActionEvent event) {
+
     }
 
     public void doneBTNPress(ActionEvent event) {
@@ -97,6 +118,17 @@ public class ParticipantAssignController implements Initializable {
 
     public void sendBTNPress(ActionEvent event) {
     }
+
+    @FXML
+    private void selectCurrentParticipant(MouseEvent mouseEvent) {
+        availableParticipatingTable.getSelectionModel().select(null);
+    }
+
+    @FXML
+    private void selectAvailableParticipant(MouseEvent mouseEvent) {
+        currentlyParticipatingTable.getSelectionModel().select(null);
+    }
+
 
     private void populateTables() {
         availFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -117,10 +149,11 @@ public class ParticipantAssignController implements Initializable {
         alert.showAndWait();
     }
 
-    private void setUpChoiceBox(){
+    private void setUpChoiceBox() {
         try {
+            ticketTypeObservableList = ticketTypeModel.getTicketTypes(selectedEvent.getEventID());
             ObservableList<String> tempList = FXCollections.observableArrayList();
-            for (TicketType ticketype: ticketTypeModel.getTicketTypes(selectedEvent.getEventID())) {
+            for (TicketType ticketype : ticketTypeObservableList) {
                 tempList.add(ticketype.getTicketName().trim());
                 choiceToPrice.put(ticketype.getTicketName(), ticketype.getExtraFee());
             }
@@ -130,10 +163,28 @@ public class ParticipantAssignController implements Initializable {
         }
     }
 
-    public void setEdit(Event event){
+    private void tempTicketCreation(){
+        int k = 1;
+        for (int i = 0; i < listOfTickets.size(); i++) {
+            System.out.println(k + " " + i);
+            if (k != listOfTickets.get(i).getNumber()) {
+                break;
+            }
+            else k++;
+        }
+        try{
+            int tempid = ticketModel.addTempTicket(k, ticketTypeObservableList.get(choiceBox.getSelectionModel().getSelectedIndex()).getTicketTypeID());
+            Ticket ticket = new Ticket(tempid,k, ticketTypeObservableList.get(choiceBox.getSelectionModel().getSelectedIndex()).getTicketTypeID());
+            listOfTickets.add(ticket);
+            availableParticipatingTable.getSelectionModel().getSelectedItem().setTicketID(tempid);
+        }
+        catch (DALException e){
+            alertWarning(e.getMessage());
+        }
+    }
+
+    public void setEdit(Event event) {
         selectedEvent = event;
-        System.out.println(event);
-        System.out.println(selectedEvent);
         setUpChoiceBox();
         try {
             availParticipantObservable = personModel.getPersonsNotInEvent(selectedEvent.getEventID());
@@ -146,5 +197,10 @@ public class ParticipantAssignController implements Initializable {
 
     public void setController(EventManagerPageController eventManagerPageController) {
         this.eventManagerPageController = eventManagerPageController;
+    }
+
+    public void selectChoiceBox(ActionEvent event) {
+        String str = ticketTypeModel.convertDoubleToString(selectedEvent.getPrice() + choiceToPrice.get(choiceBox.getValue()));
+        priceTxt.setText(str);
     }
 }

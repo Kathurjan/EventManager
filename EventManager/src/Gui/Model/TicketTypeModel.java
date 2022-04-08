@@ -36,4 +36,8 @@ public class TicketTypeModel {
     public void deleteTicketType(TicketType ticketType) throws DALException {
         bllInterface.deleteTicketType(ticketType);
     }
+
+    public String convertDoubleToString(double doub){
+        return bllInterface.convertDoubleToString(doub);
+    }
 }

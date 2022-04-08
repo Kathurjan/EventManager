@@ -107,13 +107,33 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public List<Person> getPersonsNotInEvent(int EventID) throws DALException{
+    public List<Participant> getPersonsNotInEvent(int EventID) throws DALException{
         return dalInterface.getPersonsNotInEvent(EventID);
     }
 
     @Override
-    public List<Person> getPersonsInEvent(int EventID) throws DALException{
+    public List<Participant> getPersonsInEvent(int EventID) throws DALException{
         return dalInterface.getPersonsInEvent(EventID);
+    }
+
+    @Override
+    public String convertDoubleToString(Double doub){
+        return textConverter.convertDoubleToString(doub);
+    }
+
+    @Override
+    public int addTempTicket(int number, int ticketTypeID) throws DALException {
+        return dalInterface.addTempTicket(number, ticketTypeID);
+    }
+
+    @Override
+    public void deleteSingleTicket(int id) throws DALException{
+        dalInterface.deleteSingleTicket(id);
+    }
+
+    @Override
+    public void deleteTickets(List<Ticket> ticketList) throws DALException{
+        dalInterface.deleteTickets(ticketList);
     }
 
 }

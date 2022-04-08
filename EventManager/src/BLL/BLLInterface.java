@@ -46,7 +46,15 @@ public interface BLLInterface {
 
     List<Participant> getAllParticipants(int EventID) throws DALException;
 
-    List<Person> getPersonsInEvent(int EventID) throws DALException;
+    List<Participant> getPersonsInEvent(int EventID) throws DALException;
 
-    List<Person> getPersonsNotInEvent(int EventID) throws DALException;
+    List<Participant> getPersonsNotInEvent(int EventID) throws DALException;
+
+    String convertDoubleToString (Double doub);
+
+    int addTempTicket(int number, int ticketTypeID) throws DALException;
+
+    void deleteSingleTicket(int id) throws DALException;
+
+    void deleteTickets(List<Ticket> ticketList) throws DALException;
 }

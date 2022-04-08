@@ -14,19 +14,34 @@ public class TicketDAO {
 
     private final DatabaseConnector db = new DatabaseConnector();
 
-    public void addTickets(List<Ticket> listToBeAdded, int TicketTypeID) throws DALException {
+    public void addTempTicket(int number, int ticketTypeID) throws DALException {
         try (Connection connection = db.getConnection()) {
             String query = "INSERT INTO Ticket(TicketNumber, TicketTypeID) VALUES (?,?)";
             PreparedStatement ptsm = connection.prepareStatement(query);
-            for (Ticket ticket : listToBeAdded) {
-                ptsm.setInt(1, ticket.getNumber());
-                ptsm.setInt(2, TicketTypeID);
-                ptsm.addBatch();
-            }
+            ptsm.setInt(1, number);
+            ptsm.setInt(2, ticketTypeID);
+            ptsm.addBatch();
             ptsm.executeBatch();
         } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error", throwables);
         }
+    }
+
+    public int selectLastest() throws DALException {
+        int id = 0;
+        String sqlStatement = "SELECT TOP 1 * FROM Ticket ORDER BY ID DESC";
+        try (Connection con = db.getConnection()) {
+            Statement statement = con.createStatement();
+            if (statement.execute(sqlStatement)) {
+                ResultSet rs = statement.getResultSet();
+                while (rs.next()) {
+                    id = rs.getInt("ID");
+                }
+            }
+        } catch (SQLException throwables) {
+            throw new DALException("The Data access layer met with an error", throwables);
+        }
+        return id;
     }
 
     public void deleteTickets(List<Ticket> listToBeDeleted) throws DALException {
@@ -37,6 +52,18 @@ public class TicketDAO {
                 pstm.setInt(1, ticket.getID());
                 pstm.addBatch();
             }
+            pstm.executeBatch();
+        } catch (SQLException throwables) {
+            throw new DALException("The Data access layer met with an error", throwables);
+        }
+    }
+
+    public void deleteSingleTicket(int id) throws DALException {
+        try (Connection connection = db.getConnection()) {
+            String query = "DELETE FROM Ticket WHERE ID = ?";
+            PreparedStatement pstm = connection.prepareStatement(query);
+            pstm.setInt(1, id);
+            pstm.addBatch();
             pstm.executeBatch();
         } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error", throwables);
@@ -57,8 +84,7 @@ public class TicketDAO {
                     ticketList.add(ticket);
                 }
             }
-        }
-        catch(SQLException throwables){
+        } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error", throwables);
         }
         return ticketList;

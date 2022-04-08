@@ -25,7 +25,7 @@
                         <Label layoutX="40.0" layoutY="6.0" text="Available participants" />
                      </children>
                   </AnchorPane>
-                  <TableView fx:id="availableParticipatingTable" prefHeight="250.0" prefWidth="174.0">
+                  <TableView fx:id="availableParticipatingTable" prefHeight="250.0" prefWidth="174.0" onMouseClicked="#selectAvailableParticipant">
                     <columns>
                       <TableColumn fx:id="availFirstNameColumn" prefWidth="75.0" text="First name" />
                       <TableColumn fx:id="availLastNameColumn" prefWidth="75.0" text="Last name" />
@@ -58,7 +58,7 @@
                         <CheckBox fx:id="hasPayedCheck" layoutX="8.0" layoutY="250.0" mnemonicParsing="false" onAction="#hasPayedCheckPress" text="Has payed" />
                         <Label layoutX="17.0" layoutY="185.0" text="Total price" />
                         <TextField fx:id="priceTxt" editable="false" layoutX="12.0" layoutY="209.0" prefHeight="26.0" prefWidth="69.0" />
-                        <ChoiceBox fx:id="choiceBox" layoutX="8.0" layoutY="150.0" prefHeight="26.0" prefWidth="78.0" />
+                        <ChoiceBox fx:id="choiceBox" layoutX="8.0" layoutY="150.0" prefHeight="26.0" prefWidth="78.0" onAction="#selectChoiceBox" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="40.0" prefWidth="174.0" />
@@ -73,7 +73,7 @@
                         <Label layoutX="45.0" layoutY="6.0" text="Current Participants" />
                      </children>
                   </AnchorPane>
-                  <TableView fx:id="currentlyParticipatingTable" prefHeight="250.0" prefWidth="174.0">
+                  <TableView fx:id="currentlyParticipatingTable" prefHeight="250.0" prefWidth="174.0" onMouseClicked="#selectCurrentParticipant">
                      <columns>
                         <TableColumn fx:id="currentFirstNameColumn" prefWidth="75.0" text="First name" />
                         <TableColumn fx:id="currentLastNameColumn" prefWidth="75.0" text="Last name" />

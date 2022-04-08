@@ -2,31 +2,23 @@ package BE;
 
 public class Participant extends Person {
 
-    private String firstName;
-    private String lastName;
     private int eventID;
     private int ticketID;
+    private boolean hasPayed;
 
-    public Participant(int id, String username, String email, int type, String firstName, String lastName, int eventID, int ticketID) {
+    public Participant(int id, String username, String email, int type, String firstName, String lastName, int eventID, int ticketID, Boolean hasPayed) {
         super(id, username, email, type, firstName, lastName);
         this.eventID = eventID;
         this.ticketID = ticketID;
+        this.hasPayed = hasPayed;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public boolean getHasPayed() {
+        return hasPayed;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setHasPayed(boolean hasPayed) {
+        this.hasPayed = hasPayed;
     }
 
     public int getEventID() {

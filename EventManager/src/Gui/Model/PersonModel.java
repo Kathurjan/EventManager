@@ -48,15 +48,15 @@ public class PersonModel {
         return participantObservableList;
     }
 
-    public ObservableList<Person> getPersonsNotInEvent(int EventID) throws DALException{
-        personObservableList = FXCollections.observableArrayList();
-        personObservableList.setAll(BLLInterface.getPersonsNotInEvent(EventID));
-        return personObservableList;
+    public ObservableList<Participant> getPersonsNotInEvent(int EventID) throws DALException{
+        participantObservableList = FXCollections.observableArrayList();
+        participantObservableList.setAll(BLLInterface.getPersonsNotInEvent(EventID));
+        return participantObservableList;
     }
 
-    public ObservableList<Person> getPersonsInEvent(int EventID) throws DALException{
-        personObservableList = FXCollections.observableArrayList();
-        personObservableList.setAll(BLLInterface.getPersonsInEvent(EventID));
-        return personObservableList;
+    public ObservableList<Participant> getPersonsInEvent(int EventID) throws DALException{
+        participantObservableList = FXCollections.observableArrayList();
+        participantObservableList.setAll(BLLInterface.getPersonsInEvent(EventID));
+        return participantObservableList;
     }
 }
