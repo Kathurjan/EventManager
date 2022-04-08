@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="569.0" prefWidth="857.0" stylesheets="@../CSS/EventManagerPage.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
+<AnchorPane prefHeight="569.0" prefWidth="857.0" stylesheets="@../CSS/EventManagerPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
    <children>
       <TableView fx:id="eventTableView" layoutX="21.0" layoutY="21.0" prefHeight="370.0" prefWidth="425.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
         <columns>
@@ -40,7 +40,7 @@
          </font>
       </Label>
       <Button layoutX="725.0" layoutY="444.0" mnemonicParsing="false" onAction="#assignParticipantsBTNPress" styleClass="Button" text="Create Ticket" />
-      <Button layoutX="725.0" layoutY="444.0" mnemonicParsing="false" styleClass="Button" text="Create Ticket" />
-      <Button fx:id="logoutButton" layoutX="544.0" layoutY="526.0" mnemonicParsing="false" onAction="#logoutBTN" text="Log out" />
+      <Button layoutX="725.0" layoutY="444.0" mnemonicParsing="false" onAction="#assignParticipantsBTNPress" styleClass="Button" text="Create Ticket" />
+      <Button fx:id="logoutButton" layoutX="416.0" layoutY="484.0" mnemonicParsing="false" onAction="#logoutBTN" styleClass="Button" text="Log out" />
    </children>
 </AnchorPane>
