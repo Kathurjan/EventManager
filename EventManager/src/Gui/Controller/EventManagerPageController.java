@@ -10,19 +10,23 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
+import org.junit.jupiter.api.TestFactory;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 
 public class EventManagerPageController implements Initializable{
-
+    @FXML
+    private Button logoutButton;
     @FXML
     private TableColumn<Event, String> nameColumn, locationColumn, startTimeColumn;
     @FXML
@@ -171,6 +175,7 @@ public class EventManagerPageController implements Initializable{
         alert.showAndWait();
     }
 
+
     public void assignParticipantsBTNPress(ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -188,5 +193,16 @@ public class EventManagerPageController implements Initializable{
         catch (IOException e){
             alertWarning("Failed to load the create/edit event window");
         }
+    }
+
+    public void logoutBTN(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.show();
+
+        Stage stagebtnwindow = (Stage) logoutButton.getScene().getWindow();
+        stagebtnwindow.close();
     }
 }

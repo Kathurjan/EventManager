@@ -1,34 +1,52 @@
 package Gui.Controller;
 
 import BE.Event;
+import BE.Participant;
 import DAL.DALException;
 import Gui.Model.EventModel;
+import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Date;
 
 public class UserPageController {
 
     @FXML
-    private TableColumn<Event, String> nameColumn, locationColumn, startTimeColumn;
+    private Button logoutButton;
+    @FXML
+    private TableColumn<Event, String> nameColumn, locationColumn, startTimeColumn, userFirstNameColumn, userLastNameColumn;
     @FXML
     private TableColumn<Event,Double> priceColumn;
     @FXML
     private TableColumn<Event, Date> dateColumn;
     @FXML
     private TableView<Event> eventTableView;
+    @FXML
+    private TableView<Participant> participantsTableView;
 
     private EventModel eventModel;
+    private PersonModel personModel;
 
     // This is our constructor.
     public UserPageController() {
         eventModel = new EventModel();
+        personModel = new PersonModel();
     }
 
     // Here we do a initialize for our tableview.
@@ -53,7 +71,15 @@ public class UserPageController {
         catch (DALException e){
             alertWarning(e.getMessage());
         }
-
+    }
+    private void populateParticipantTableView(){
+        userFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        userLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        try{
+            participantsTableView.setItems((ObservableList<Participant>) personModel.getAllParticipants(eventTableView.getSelectionModel().getSelectedItem().getEventID()));
+        } catch (DALException e){
+            alertWarning(e.getMessage());
+        }
     }
 
     private void alertWarning(String input){
@@ -66,5 +92,20 @@ public class UserPageController {
     }
 
     public void ticketsBTN(ActionEvent actionEvent) {
+    }
+
+    public void logoutBTN(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.show();
+
+        Stage stagebtnwindow = (Stage) logoutButton.getScene().getWindow();
+        stagebtnwindow.close();
+    }
+
+    public void handleShopParticipants(MouseEvent mouseEvent) {
+        populateParticipantTableView();
     }
 }

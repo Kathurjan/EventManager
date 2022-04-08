@@ -29,5 +29,6 @@
          </columnResizePolicy>
       </TableView>
       <Button fx:id="delBTN" layoutX="202.0" layoutY="353.0" mnemonicParsing="false" onAction="#delBTNPress" styleClass="Button" text="Delete User" />
+      <Button fx:id="logoutButton" layoutX="528.0" layoutY="358.0" mnemonicParsing="false" onAction="#logoutBTN" text="Log out" />
    </children>
 </AnchorPane>

@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,10 +20,12 @@ import org.assertj.core.internal.Classes;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.Buffer;
 import java.util.ResourceBundle;
 
 public class AdminPageController implements Initializable {
-
+    @FXML
+    private Button logoutButton;
     @FXML
     private TableColumn<Classes, String> usernameColumn, emailColumn;
     @FXML
@@ -131,5 +134,15 @@ public class AdminPageController implements Initializable {
         alert.setContentText("Please try again.");
         alert.getOwner();
         alert.showAndWait();
+    }
+    public void logoutBTN(ActionEvent actionEvent) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+        Stage stage = new Stage();
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        stage.show();
+
+        Stage stagebtnwindow = (Stage) logoutButton.getScene().getWindow();
+        stagebtnwindow.close();
     }
 }
