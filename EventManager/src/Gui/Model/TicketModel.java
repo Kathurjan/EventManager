@@ -1,6 +1,7 @@
 package Gui.Model;
 
 import BE.Ticket;
+import BE.TicketType;
 import BLL.BLLInterface;
 import BLL.BLLManager;
 import DAL.DALException;
@@ -25,5 +26,9 @@ public class TicketModel {
 
     public void deleteTickets(List<Ticket> ticketList) throws DALException{
         BLLInterface.deleteTickets(ticketList);
+    }
+
+    public List<Ticket> getAllTicketPerType(List<TicketType> ticketTypes) throws DALException{
+        return BLLInterface.getAllTicketPerType(ticketTypes);
     }
 }

@@ -35,15 +35,18 @@ public class ParticipantDAO {
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1, personID);
             pstm.setInt(2, eventID);
+            pstm.addBatch(); // Adding to the statement
+            pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         }
         catch (SQLException throwables){
+            System.out.println(throwables);
             throw new DALException("The data access layer met with an error, delete participant operation", throwables);
         }
     }
 
     public void editParticipant(int personID, int eventID, boolean hasPayed) throws DALException {
         try (Connection con = db.getConnection()) {
-            String query = "UPDATE Participant set HasPayed = ? WHERE personID = ? and eventID =?";
+            String query = "UPDATE EventParticipant set HasPayed = ? WHERE personID = ? and eventID =?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setBoolean(1, hasPayed);
             pstm.setInt(2, personID);
@@ -51,8 +54,10 @@ public class ParticipantDAO {
             pstm.addBatch(); // Adding to the statement
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         } catch (SQLException throwables) {
+            System.out.println(throwables);
             throw new DALException("The Data access layer met with an error, edit participant operation", throwables);
         }
+
     }
 
     public List<Participant> getAllParticipants(int eventID) throws DALException {
@@ -81,7 +86,6 @@ public class ParticipantDAO {
 
     public List<Participant> getPersonsInEvent(int eventID) throws DALException {
         List<Participant> participantList = new ArrayList<>();
-        Participant participanttest = new Participant(1, "lol", "Lol", 2, "Me", "Stop", 1, 2, false);
         try (Connection connection = db.getConnection()) {
             String query = "SELECT DISTINCT Person.id, Person.FirstName, Person.LastName, Person.email, Person.Type, EventParticipant.TicketID, EventParticipant.HasPayed FROM Person INNER JOIN EventParticipant ON Person.id = EventParticipant.PersonID WHERE EventParticipant.EventID = ? AND Person.Type = 2";
             PreparedStatement ptsm = connection.prepareStatement(query); //The select distinct query insures that we do not get duplicates from having participants in multiple events

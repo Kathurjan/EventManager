@@ -34,7 +34,8 @@ public class BLLManager implements BLLInterface {
 
     @Override
     public List<TicketType> getTicketTypes(int eventID) throws DALException {
-        return dalInterface.getTicketTypes(eventID);}
+        return dalInterface.getTicketTypes(eventID);
+    }
 
     @Override
     public void addPerson(String username, String password, String email, int type) throws DALException {
@@ -53,12 +54,12 @@ public class BLLManager implements BLLInterface {
 
     @Override
     public Admin verifyAdmin(String username, String password, int type) throws DALException {
-        return dalInterface.verifyAdmin( username, password,type);
+        return dalInterface.verifyAdmin(username, password, type);
     }
 
     @Override
     public void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id) {
-        dalInterface.editEvent(eventName,startDate,eventLocation,price,startTime, warningLabel, id);
+        dalInterface.editEvent(eventName, startDate, eventLocation, price, startTime, warningLabel, id);
     }
 
     @Override
@@ -67,12 +68,12 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public String convertStartTimeToOneString(String string1, String string2){
-        return textConverter.convertStartTimeToOneString(string1,string2);
+    public String convertStartTimeToOneString(String string1, String string2) {
+        return textConverter.convertStartTimeToOneString(string1, string2);
     }
 
     @Override
-    public String[] convertStartTimeToTwoString(String string){
+    public String[] convertStartTimeToTwoString(String string) {
         return textConverter.convertStartTimeToTwoString(string);
     }
 
@@ -102,22 +103,22 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public List<Participant> getAllParticipants(int EventID) throws DALException{
+    public List<Participant> getAllParticipants(int EventID) throws DALException {
         return dalInterface.getAllParticipants(EventID);
     }
 
     @Override
-    public List<Participant> getPersonsNotInEvent(int EventID) throws DALException{
+    public List<Participant> getPersonsNotInEvent(int EventID) throws DALException {
         return dalInterface.getPersonsNotInEvent(EventID);
     }
 
     @Override
-    public List<Participant> getPersonsInEvent(int EventID) throws DALException{
+    public List<Participant> getPersonsInEvent(int EventID) throws DALException {
         return dalInterface.getPersonsInEvent(EventID);
     }
 
     @Override
-    public String convertDoubleToString(Double doub){
+    public String convertDoubleToString(Double doub) {
         return textConverter.convertDoubleToString(doub);
     }
 
@@ -127,28 +128,32 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public void deleteSingleTicket(int id) throws DALException{
+    public void deleteSingleTicket(int id) throws DALException {
         dalInterface.deleteSingleTicket(id);
     }
 
     @Override
-    public void deleteTickets(List<Ticket> ticketList) throws DALException{
+    public void deleteTickets(List<Ticket> ticketList) throws DALException {
         dalInterface.deleteTickets(ticketList);
     }
 
     @Override
-    public void addParticipant(Participant participant) throws DALException{
+    public void addParticipant(Participant participant) throws DALException {
         dalInterface.addParticipant(participant);
     }
 
     @Override
-    public void deleteParticipant(int personID, int eventID) throws DALException{
-        dalInterface.deleteParticipant(personID,eventID);
+    public void deleteParticipant(int personID, int eventID) throws DALException {
+        dalInterface.deleteParticipant(personID, eventID);
     }
 
     @Override
-    public void editParticipant(int personID, int eventID, boolean hasPayed) throws DALException{
-        dalInterface.editParticipant(personID,eventID,hasPayed);
+    public void editParticipant(int personID, int eventID, boolean hasPayed) throws DALException {
+        dalInterface.editParticipant(personID, eventID, hasPayed);
     }
 
+    @Override
+    public List<Ticket> getAllTicketPerType(List<TicketType> ticketTypes) throws DALException {
+        return dalInterface.getAllTicketPerType(ticketTypes);
+    }
 }

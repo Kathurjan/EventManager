@@ -66,6 +66,7 @@ public class TicketDAO {
             pstm.addBatch();
             pstm.executeBatch();
         } catch (SQLException throwables) {
+            System.out.println(throwables);
             throw new DALException("The Data access layer met with an error", throwables);
         }
     }
@@ -90,16 +91,18 @@ public class TicketDAO {
         return ticketList;
     }
 
-    public List<Ticket> getAllTicketPerType(int TicketTypeID) throws DALException {
+    public List<Ticket> getAllTicketPerType(List<TicketType> ticketTypes) throws DALException {
         List<Ticket> ticketList = new ArrayList<>();
         try (Connection connection = db.getConnection()) {
             String query = "SELECT * FROM Ticket WHERE TicketTypeID = ? ORDER by TicketNumber DESC";
             PreparedStatement ptsm = connection.prepareStatement(query);
-            ptsm.setInt(1, TicketTypeID);
-            ResultSet rs = ptsm.executeQuery();
-            while (rs.next()) {
-                Ticket ticket = new Ticket(rs.getInt("ID"), rs.getInt("TicketNumber"), rs.getInt("TicketTypeID"));
-                ticketList.add(ticket);
+            for (TicketType ticketType: ticketTypes) {
+                ptsm.setInt(1, ticketType.getTicketTypeID());
+                ResultSet rs = ptsm.executeQuery();
+                while (rs.next()) {
+                    Ticket ticket = new Ticket(rs.getInt("ID"), rs.getInt("TicketNumber"), rs.getInt("TicketTypeID"));
+                    ticketList.add(ticket);
+                }
             }
             return ticketList;
         } catch (SQLException throwables) {

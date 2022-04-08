@@ -135,4 +135,9 @@ public class DALManager implements DALInterface{
     public void editParticipant(int personID, int eventID, boolean hasPayed) throws DALException{
         participantDAO.editParticipant(personID,eventID,hasPayed);
     }
+
+    @Override
+    public List<Ticket> getAllTicketPerType(List<TicketType> ticketTypes) throws DALException{
+        return ticketDAO.getAllTicketPerType(ticketTypes);
+    }
 }
