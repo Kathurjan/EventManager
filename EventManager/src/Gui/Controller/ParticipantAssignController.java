@@ -185,9 +185,9 @@ public class ParticipantAssignController implements Initializable {
                     return true;
                 }
                 String seachWord = newValue.toLowerCase();
-                if (participant.getFirstName().toLowerCase().contains(seachWord)) {
+                if (participant.getFirstName().toLowerCase().indexOf(seachWord) > -1) {
                     return true; // data will change if song found
-                } else if (participant.getLastName().toLowerCase().contains(seachWord)) {
+                } else if (participant.getLastName().toLowerCase().indexOf(seachWord) > -1) {
                     return true;// data will change if author is found
                 }
                 return false;
@@ -214,9 +214,9 @@ public class ParticipantAssignController implements Initializable {
                     return true;
                 }
                 String seachWord = newValue.toLowerCase();
-                if (participant.getFirstName().toLowerCase().contains(seachWord)) {
+                if (participant.getFirstName().toLowerCase().indexOf(seachWord) > -1) {
                     return true; // data will change if song found
-                } else if (participant.getLastName().toLowerCase().contains(seachWord)) {
+                } else if (participant.getLastName().toLowerCase().indexOf(seachWord) > -1) {
                     return true;// data will change if author is found
                 }
                 return false;
@@ -224,8 +224,8 @@ public class ParticipantAssignController implements Initializable {
         });
         SortedList<Participant> sorteddata = new SortedList<>(seachfilter);
         // binds the sorted result set with the table view;
-        sorteddata.comparatorProperty().bind(availableParticipatingTable.comparatorProperty());
-        availableParticipatingTable.setItems(sorteddata);
+        sorteddata.comparatorProperty().bind(currentlyParticipatingTable.comparatorProperty());
+        currentlyParticipatingTable.setItems(sorteddata);
     }
 
     private void alertWarning(String input) {
