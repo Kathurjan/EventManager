@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="569.0" prefWidth="857.0" stylesheets="@../CSS/EventManagerPage.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
+<AnchorPane prefHeight="569.0" prefWidth="857.0" stylesheets="@../CSS/EventManagerPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
    <children>
       <TableView fx:id="eventTableView" layoutX="21.0" layoutY="21.0" prefHeight="370.0" prefWidth="425.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
         <columns>
@@ -24,11 +24,11 @@
           <TableColumn prefWidth="113.0" styleClass="collumnStyling" text="TicketPrice" />
         </columns>
       </TableView>
-      <Button layoutX="16.0" layoutY="444.0" mnemonicParsing="false" onAction="#addEventPress" styleClass="Button" text="Create Event" />
-      <Button layoutX="17.0" layoutY="484.0" mnemonicParsing="false" onAction="#editEventPress" styleClass="Button" text="Edit Event" />
-      <Button layoutX="726.0" layoutY="521.0" mnemonicParsing="false" styleClass="Button" text="Delete Ticket" />
-      <Button layoutX="739.0" layoutY="484.0" mnemonicParsing="false" styleClass="Button" text="Edit Ticket" />
-      <Button layoutX="17.0" layoutY="521.0" mnemonicParsing="false" styleClass="Button" text="Delete Event" />
+      <Button layoutX="14.0" layoutY="427.0" mnemonicParsing="false" onAction="#addEventPress" styleClass="Button" text="Create Event" />
+      <Button layoutX="125.0" layoutY="427.0" mnemonicParsing="false" onAction="#editEventPress" styleClass="Button" text="Edit Event" />
+      <Button layoutX="733.0" layoutY="427.0" mnemonicParsing="false" styleClass="Button" text="Delete Ticket" />
+      <Button layoutX="636.0" layoutY="427.0" mnemonicParsing="false" styleClass="Button" text="Edit Ticket" />
+      <Button layoutX="220.0" layoutY="427.0" mnemonicParsing="false" styleClass="Button" text="Delete Event" />
       <Label layoutX="86.0" layoutY="14.0" text="Events">
          <font>
             <Font size="24.0" />
