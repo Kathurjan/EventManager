@@ -133,7 +133,8 @@ public class ParticipantAssignController implements Initializable {
         }
     }
 
-    public void hasPayedCheckPress(ActionEvent event) {
+    @FXML
+    private void hasPayedCheckPress(ActionEvent event) {
         if (currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
             currentlyParticipatingTable.getSelectionModel().getSelectedItem().setHasPayed(hasPayedCheck.isSelected());
             try {
@@ -143,10 +144,6 @@ public class ParticipantAssignController implements Initializable {
             }
             refreshTables();
         }
-    }
-
-    @FXML
-    private void doneBTNPress(ActionEvent event) {
     }
 
     @FXML
@@ -202,6 +199,7 @@ public class ParticipantAssignController implements Initializable {
     private void populateCurrentTable() {
         currentFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         currentLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        currentHasPayedColumn.setCellValueFactory(new PropertyValueFactory<>("hasPayed"));
         currentlyParticipatingTable.setItems(currentParticipantObservable);
 
         FilteredList<Participant> seachfilter = new FilteredList<>(currentParticipantObservable, b -> true);
@@ -269,6 +267,8 @@ public class ParticipantAssignController implements Initializable {
     }
 
     private void refreshTables() {
+        availableParticipatingTable.setItems(null);
+        currentlyParticipatingTable.setItems(null);
         availableParticipatingTable.setItems(availParticipantObservable);
         currentlyParticipatingTable.setItems(currentParticipantObservable);
     }

@@ -90,7 +90,6 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="40.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="128.0" layoutY="13.0" mnemonicParsing="false" onAction="#doneBTNPress" prefWidth="52.0" text="Done" />
                         <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#sendBTNPress" text="Send mail" />
                      </children>
                   </AnchorPane>
