@@ -52,7 +52,7 @@ public interface BLLInterface {
 
     String convertDoubleToString (Double doub);
 
-    int addTempTicket(int number, int ticketTypeID) throws DALException;
+    int addTempTicket(int ticketTypeID) throws DALException;
 
     void deleteSingleTicket(int id) throws DALException;
 

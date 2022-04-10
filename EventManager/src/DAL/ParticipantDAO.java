@@ -39,7 +39,6 @@ public class ParticipantDAO {
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         }
         catch (SQLException throwables){
-            System.out.println(throwables);
             throw new DALException("The data access layer met with an error, delete participant operation", throwables);
         }
     }
@@ -54,7 +53,6 @@ public class ParticipantDAO {
             pstm.addBatch(); // Adding to the statement
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         } catch (SQLException throwables) {
-            System.out.println(throwables);
             throw new DALException("The Data access layer met with an error, edit participant operation", throwables);
         }
 
@@ -151,7 +149,6 @@ public class ParticipantDAO {
                         false
                 );
                 participantList.add(participant);
-                System.out.println(participant.getFirstName());
             }
         }
         catch (SQLException throwables){

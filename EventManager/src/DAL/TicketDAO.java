@@ -14,12 +14,11 @@ public class TicketDAO {
 
     private final DatabaseConnector db = new DatabaseConnector();
 
-    public void addTempTicket(int number, int ticketTypeID) throws DALException {
+    public void addTempTicket(int ticketTypeID) throws DALException {
         try (Connection connection = db.getConnection()) {
-            String query = "INSERT INTO Ticket(TicketNumber, TicketTypeID) VALUES (?,?)";
+            String query = "INSERT INTO Ticket(TicketTypeID) VALUES (?)";
             PreparedStatement ptsm = connection.prepareStatement(query);
-            ptsm.setInt(1, number);
-            ptsm.setInt(2, ticketTypeID);
+            ptsm.setInt(1, ticketTypeID);
             ptsm.addBatch();
             ptsm.executeBatch();
         } catch (SQLException throwables) {
@@ -66,7 +65,6 @@ public class TicketDAO {
             pstm.addBatch();
             pstm.executeBatch();
         } catch (SQLException throwables) {
-            System.out.println(throwables);
             throw new DALException("The Data access layer met with an error", throwables);
         }
     }
@@ -81,7 +79,7 @@ public class TicketDAO {
                 ptsm.setInt(1, TicketTypeID);
                 ResultSet rs = ptsm.executeQuery();
                 while (rs.next()) {
-                    Ticket ticket = new Ticket(rs.getInt("ID"), rs.getInt("TicketNumber"), rs.getInt("TicketTypeID"));
+                    Ticket ticket = new Ticket(rs.getInt("ID"), rs.getInt("TicketTypeID"));
                     ticketList.add(ticket);
                 }
             }
@@ -94,13 +92,13 @@ public class TicketDAO {
     public List<Ticket> getAllTicketPerType(List<TicketType> ticketTypes) throws DALException {
         List<Ticket> ticketList = new ArrayList<>();
         try (Connection connection = db.getConnection()) {
-            String query = "SELECT * FROM Ticket WHERE TicketTypeID = ? ORDER by TicketNumber DESC";
+            String query = "SELECT * FROM Ticket WHERE TicketTypeID = ? ORDER BY ID DESC";
             PreparedStatement ptsm = connection.prepareStatement(query);
             for (TicketType ticketType: ticketTypes) {
                 ptsm.setInt(1, ticketType.getTicketTypeID());
                 ResultSet rs = ptsm.executeQuery();
                 while (rs.next()) {
-                    Ticket ticket = new Ticket(rs.getInt("ID"), rs.getInt("TicketNumber"), rs.getInt("TicketTypeID"));
+                    Ticket ticket = new Ticket(rs.getInt("ID"), rs.getInt("TicketTypeID"));
                     ticketList.add(ticket);
                 }
             }

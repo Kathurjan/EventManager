@@ -16,8 +16,8 @@ public class TicketModel {
         BLLInterface = new BLLManager();
     }
 
-    public int addTempTicket(int number, int ticketTypeID) throws DALException {
-        return BLLInterface.addTempTicket(number, ticketTypeID);
+    public int addTempTicket(int ticketTypeID) throws DALException {
+        return BLLInterface.addTempTicket(ticketTypeID);
     }
 
     public void deleteSingleTicket(int id) throws DALException{

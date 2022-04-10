@@ -43,7 +43,7 @@ public interface DALInterface {
 
     List<Participant> getPersonsNotInEvent(int EventID) throws DALException;
 
-    int addTempTicket(int number, int ticketTypeID) throws DALException;
+    int addTempTicket(int ticketTypeID) throws DALException;
 
     void deleteSingleTicket(int id) throws DALException;
 

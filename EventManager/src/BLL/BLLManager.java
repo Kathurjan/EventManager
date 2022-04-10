@@ -123,8 +123,8 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public int addTempTicket(int number, int ticketTypeID) throws DALException {
-        return dalInterface.addTempTicket(number, ticketTypeID);
+    public int addTempTicket(int ticketTypeID) throws DALException {
+        return dalInterface.addTempTicket(ticketTypeID);
     }
 
     @Override

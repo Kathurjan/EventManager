@@ -106,8 +106,8 @@ public class DALManager implements DALInterface{
     }
 
     @Override
-    public int addTempTicket(int number, int ticketTypeID) throws DALException {
-        ticketDAO.addTempTicket(number,ticketTypeID);
+    public int addTempTicket(int ticketTypeID) throws DALException {
+        ticketDAO.addTempTicket(ticketTypeID);
         return ticketDAO.selectLastest();
     }
 

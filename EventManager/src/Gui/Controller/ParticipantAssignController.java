@@ -97,7 +97,7 @@ public class ParticipantAssignController implements Initializable {
                 choiceBox.getSelectionModel().select(0);
             }
             tempParticipant.setEventID(selectedEvent.getEventID());// Gets the event.id from the event that was selected
-            Participant finishedTempParticipant = ticketCreation(tempParticipant); // creates a finished participant from the out of the ticketCreation method
+            Participant finishedTempParticipant = ticketCreation(tempParticipant);// creates a finished participant from the out of the ticketCreation method
             try {
                 personModel.addParticipant(finishedTempParticipant);  // Sends the participant down the rabbithole
             } catch (DALException e) {
@@ -136,12 +136,13 @@ public class ParticipantAssignController implements Initializable {
     @FXML
     private void hasPayedCheckPress(ActionEvent event) {
         if (currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
-            currentlyParticipatingTable.getSelectionModel().getSelectedItem().setHasPayed(hasPayedCheck.isSelected());
+            Participant participant = currentlyParticipatingTable.getSelectionModel().getSelectedItem();
             try {
                 personModel.editParticipant(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getID(), selectedEvent.getEventID(), hasPayedCheck.isSelected());
             } catch (DALException e) {
                 alertWarning(e.getMessage());
             }
+            currentlyParticipatingTable.getSelectionModel().getSelectedItem().setHasPayed(hasPayedCheck.isSelected());
             refreshTables();
         }
     }
@@ -158,12 +159,20 @@ public class ParticipantAssignController implements Initializable {
     @FXML
     private void selectCurrentParticipant(MouseEvent mouseEvent) {
         availableParticipatingTable.getSelectionModel().select(null);
-        choiceBoxUpdate(ticketMap.get(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getTicketID()));
+        if (currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
+            choiceBoxUpdate(ticketMap.get(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getTicketID()));
+            hasPayedCheck.setSelected(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getHasPayed());
+        }
     }
 
     @FXML
     private void selectAvailableParticipant(MouseEvent mouseEvent) {
         currentlyParticipatingTable.getSelectionModel().select(null);
+        if (availableParticipatingTable.getSelectionModel().getSelectedItem() != null) {
+            choiceBox.getSelectionModel().select(1);
+            priceTxt.setText("");
+            hasPayedCheck.setSelected(false);
+        }
     }
 
 
@@ -245,17 +254,10 @@ public class ParticipantAssignController implements Initializable {
     }
 
     private Participant ticketCreation(Participant tempParticipant) {
-        int k = 1;
-        for (int i = 0; i < listOfTickets.size(); i++) {
-            if (listOfTickets.get(i).getNumber() < 0) {
-                System.out.println("Inputted k " + k + " because i.getnumber is: " + listOfTickets.get(i).getNumber());
-                break;
-            } else k++;
-        }
         try {
             int ticketTypeID = ticketTypeObservableList.get(choiceBox.getSelectionModel().getSelectedIndex()).getTicketTypeID();
-            int tempid = ticketModel.addTempTicket(k, ticketTypeID);
-            Ticket ticket = new Ticket(tempid, k, ticketTypeID);
+            int tempid = ticketModel.addTempTicket(ticketTypeID);
+            Ticket ticket = new Ticket(tempid, ticketTypeID);
             listOfTickets.add(ticket);
             tempParticipant.setTicketID(tempid);
             ticketMap.put(tempid, ticketTypeObservableList.get(choiceBox.getSelectionModel().getSelectedIndex()).getTicketName());
@@ -267,10 +269,9 @@ public class ParticipantAssignController implements Initializable {
     }
 
     private void refreshTables() {
-        availableParticipatingTable.setItems(null);
-        currentlyParticipatingTable.setItems(null);
-        availableParticipatingTable.setItems(availParticipantObservable);
-        currentlyParticipatingTable.setItems(currentParticipantObservable);
+            currentlyParticipatingTable.setItems(currentParticipantObservable);
+            availableParticipatingTable.setItems(availParticipantObservable);
+
     }
 
     private void choiceBoxUpdate(String input) {
