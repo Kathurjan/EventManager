@@ -8,9 +8,9 @@
 
 <AnchorPane fx:id="Pane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../CSS/Adminpage.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.AdminPageController">
    <children>
-      <Button fx:id="adduserBTN" layoutX="15.0" layoutY="353.0" mnemonicParsing="false" onAction="#addBTNPress" styleClass="Button" text="Add User" />
-      <Button fx:id="editBTN" layoutX="109.0" layoutY="353.0" mnemonicParsing="false" onAction="#editBTNPress" styleClass="Button" text="Edit User" />
-      <TableView fx:id="adminTable" layoutX="15.0" layoutY="14.0" prefHeight="322.0" prefWidth="558.0" styleClass="tableviewuser" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="14.0">
+      <Button fx:id="adduserBTN" layoutX="29.0" layoutY="353.0" mnemonicParsing="false" onAction="#addBTNPress" styleClass="Button" text="Add User" />
+      <Button fx:id="editBTN" layoutX="144.0" layoutY="353.0" mnemonicParsing="false" onAction="#editBTNPress" styleClass="Button" text="Edit User" />
+      <TableView fx:id="adminTable" layoutX="15.0" layoutY="14.0" prefHeight="322.0" prefWidth="587.0" styleClass="tableviewuser" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="14.0">
         <columns>
           <TableColumn fx:id="usernameColumn" editable="false" prefWidth="156.0" text="Username">
                <styleClass>
@@ -28,7 +28,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="delBTN" layoutX="202.0" layoutY="353.0" mnemonicParsing="false" onAction="#delBTNPress" styleClass="Button" text="Delete User" />
-      <Button fx:id="logoutButton" layoutX="528.0" layoutY="358.0" mnemonicParsing="false" onAction="#logoutBTN" text="Log out" />
+      <Button fx:id="delBTN" layoutX="262.0" layoutY="353.0" mnemonicParsing="false" onAction="#delBTNPress" styleClass="Button" text="Delete User" />
+      <Button fx:id="logoutButton" layoutX="474.0" layoutY="353.0" mnemonicParsing="false" onAction="#logoutBTN" styleClass="Button" text="Log out" />
    </children>
 </AnchorPane>

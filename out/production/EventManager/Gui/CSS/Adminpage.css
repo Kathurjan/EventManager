@@ -1,27 +1,28 @@
 #Pane {
-    -fx-background-color: white;
+    -fx-background-color: #252525;
 }
 #usernameColumn{
     -fx-font-smoothing-type: bold;
 }
 
 .Button{
-    -fx-background-color: #2C6BFA;
+    -fx-background-color:
+            #000000,
+            linear-gradient(#000000, #140a15),
+            linear-gradient(#140a15, #140a15),
+            linear-gradient(#000000, #140a15);
+    -fx-background-insets: 0,1,2,3;
     -fx-background-radius: 0,0,0,0;
-
-    -fx-effect: dropshadow( three-pass-box , #000000 , 0, 1, 2, 3 );
-    -fx-font-family: "Arial";
-    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
     -fx-font-size: 12px;
-    -fx-padding: 10 20;
-    -fx-border-insets: 5px;
-    -fx-background-insets: 5px;
 
 }
 .Button:hover{
-    -fx-background-color: #3d76fa;
-    -fx-effect: dropshadow( three-pass-box , #000000 , 0, 1, 2, 3 );
+    -fx-background-color: #000000;
+    -fx-effect: dropshadow( three-pass-box , #000000, 0, 1, 2, 3 );
 }
+
 
 /* Used to change the scroll-bar*/
 .table-view .virtual-flow .scroll-bar:vertical,
@@ -50,7 +51,7 @@
 }
 
 .tableviewuser {
-    -fx-background-color: rgba(250, 189, 46, 1) !important;
+    -fx-background-color: rgb(0, 0, 0) !important;
     -fx-base: transparent;
     -fx-effect: dropshadow( three-pass-box , #000000 , 0, 1, 2, 3 );
 
@@ -60,10 +61,10 @@
 
 .collumnStyling {
     -fx-background-color: transparent;
-    -fx-text-background-color:black;
+    -fx-text-background-color:white;
     -fx-border-width:0.5;
     -fx-border-style: hidden dashed solid hidden;
-    -fx-border-color:black;
+    -fx-border-color:white;
     -fx-text-alignment: center;
 }
 
