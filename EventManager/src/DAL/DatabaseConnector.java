@@ -8,13 +8,7 @@ import java.sql.Connection;
 
 // This is where we connect to our database.
 
-
-
-
 public class DatabaseConnector {
-
-private static  DatabaseConnector db;
-
 
     private SQLServerDataSource dataSource;
 
@@ -29,13 +23,5 @@ private static  DatabaseConnector db;
 
     public Connection getConnection() throws SQLServerException {
         return dataSource.getConnection();
-    }
-
-    public static DatabaseConnector getInstance(){
-        if (db == null){
-            db = new DatabaseConnector();
-
-        }
-        return db;
     }
 }

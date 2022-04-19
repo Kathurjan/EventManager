@@ -12,12 +12,12 @@ import java.sql.Date;
 public class EventDAO {
 
 
-    private DBConOnCommand dbConOnCommand;
+    private final DatabaseConnector db = new DatabaseConnector();
 
     public int selectLastest() throws DALException{
         int id = 0;
         String sqlStatement = "SELECT TOP 1 * FROM Event ORDER BY ID DESC";
-        try (Connection con = dbConOnCommand.execute()) {
+        try (Connection con = db.getConnection()) {
             Statement statement = con.createStatement();
             if (statement.execute(sqlStatement)) {
                 ResultSet rs = statement.getResultSet();
@@ -33,7 +33,7 @@ public class EventDAO {
 
     public void creatEvent() throws DALException {
         String sqlQuery = "INSERT INTO Event(EventName, EventDate, EventLocation, EventPrice, StartTime, WarningLabel) VALUES (?,?,?,?,?,?) ";
-        try (Connection con = DV) {
+        try (Connection con = db.getConnection()) {
             PreparedStatement statement = con.prepareStatement(sqlQuery);
             statement.setString(1, null);
             statement.setDate(2, null);
