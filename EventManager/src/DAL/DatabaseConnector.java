@@ -12,6 +12,7 @@ import java.sql.Connection;
 
 
 public class DatabaseConnector {
+
 private static  DatabaseConnector db;
 
 
