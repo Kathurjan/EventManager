@@ -37,4 +37,15 @@ private static  DatabaseConnector db;
         }
         return db;
     }
+
+    /* private DatabaseConnector() {
+        dataSource = new SQLServerDataSource();
+        dataSource.setDatabaseName("EventMangager");
+        dataSource.setUser("CSe21B_15");
+        dataSource.setPassword("CSe21B_15");
+        dataSource.setPortNumber(1433);
+        dataSource.setServerName("10.176.111.31");
+    }
+
+    */
 }
