@@ -23,7 +23,7 @@ public interface DALInterface {
 
     void editPerson(Person selectedPerson, String username, String password, String email, int type) throws DALException;
 
-    Admin verifyAdmin(String username, String password, int type) throws DALException;
+    boolean verifyAdmin(String username, String password, int type) throws DALException;
 
     void editEvent(String eventname, Date startdate, String eventlocation, double price, String startTime, String warningLabel, int id);
 

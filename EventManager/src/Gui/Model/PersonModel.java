@@ -1,15 +1,11 @@
 package Gui.Model;
 
-import BE.Admin;
 import BE.Participant;
 import BE.Person;
 import BLL.BLLManager;
 import DAL.DALException;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import java.util.List;
 
 public class PersonModel {
     private BLLManager BLLInterface;
@@ -26,7 +22,7 @@ public class PersonModel {
         return personObservableList;
     }
 
-    public Admin verifyAdmin(String username, String password, int type) throws DALException {
+    public boolean verifyAdmin(String username, String password, int type) throws DALException {
         return BLLInterface.verifyAdmin(username,password,type);
     }
 

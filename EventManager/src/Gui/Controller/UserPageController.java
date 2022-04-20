@@ -43,6 +43,7 @@ public class UserPageController {
     private EventModel eventModel;
     private PersonModel personModel;
 
+
     // This is our constructor.
     public UserPageController() {
         eventModel = new EventModel();
@@ -108,4 +109,28 @@ public class UserPageController {
     public void handleShopParticipants(MouseEvent mouseEvent) {
         populateParticipantTableView();
     }
+
+    @FXML
+    private void setupSignUpPage(ActionEvent actionEvent) throws IOException {
+        if (eventTableView.getSelectionModel().getSelectedItem() != null) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("../view/ParticipantSignUp.fxml"));
+                Parent root = (Parent) fxmlLoader.load();
+                ParticipantSignUpController signUp = fxmlLoader.getController();
+                signUp.setController(this);
+                fxmlLoader.<ParticipantSignUpController>getController().setItems(eventTableView.getSelectionModel().getSelectedItem());
+                fxmlLoader.<ParticipantSignUpController>getController();
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+                alertWarning("Failed to load the create/edit event window");
+            }
+        }
+        else alertWarning("You must select an event to sign up");
+    }
+
+
 }

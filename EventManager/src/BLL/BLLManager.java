@@ -53,7 +53,7 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public Admin verifyAdmin(String username, String password, int type) throws DALException {
+    public boolean verifyAdmin(String username, String password, int type) throws DALException {
         return dalInterface.verifyAdmin(username, password, type);
     }
 

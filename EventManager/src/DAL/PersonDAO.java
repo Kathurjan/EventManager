@@ -1,11 +1,9 @@
 package DAL;
 
-import BE.Admin;
 import BE.Person;
 import javafx.collections.FXCollections;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PersonDAO {
@@ -75,8 +73,7 @@ public class PersonDAO {
         }
     }
 
-    public Admin verifyAdmin(String username, String password, int type) throws DALException {
-        Admin admin = null;
+    public boolean verifyAdmin(String username, String password, int type) throws DALException {
         try (Connection connection = db.getConnection()) {
             String sqlquery = "SELECT * FROM Person WHERE userName= ? AND userPassWord = ? AND Type =?";
             PreparedStatement statement = connection.prepareStatement(sqlquery);
@@ -84,19 +81,13 @@ public class PersonDAO {
             statement.setString(2, password);
             statement.setInt(3, type);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                admin = new Admin(resultSet.getInt("id"),
-                        resultSet.getString("userName"),
-                        resultSet.getString("email"),
-                        resultSet.getInt("type"),
-                        null,
-                        null,
-                        resultSet.getString("userPassWord"));
+            if(resultSet != null){
+                return true;
             }
+            else return false;
         } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error", throwables);
         }
-        return admin;
     }
 
 

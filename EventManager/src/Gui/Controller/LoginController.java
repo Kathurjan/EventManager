@@ -57,7 +57,7 @@ public class LoginController implements Initializable {
         // It will allow them to log in.
         try {
             if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
-                if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 0) != null) {
+                if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 0)) {
                     try {
                         Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
                         Stage stage = new Stage();
@@ -73,7 +73,7 @@ public class LoginController implements Initializable {
                         System.out.println(ex);
 
                     }
-                } else if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 1) != null) {
+                } else if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 1)) {
                     try {
                         Parent part = FXMLLoader.load(getClass().getResource("../view/EventManagerPage.fxml"));
                         Stage stage = new Stage();
@@ -88,7 +88,7 @@ public class LoginController implements Initializable {
                     } catch (NullPointerException | IOException ex) {
                         System.out.println(ex);
                     }
-                } else if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 2) != null) {
+                } else if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 2)) {
                     try {
                         Parent parent = FXMLLoader.load(getClass().getResource("../view/UserPageView.fxml"));
                         Stage stage = new Stage();

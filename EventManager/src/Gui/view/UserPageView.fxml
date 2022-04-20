@@ -17,6 +17,7 @@
             <TableColumn fx:id="dateColumn" prefWidth="99.0" styleClass="collumnStyling" text="Date" />
             <TableColumn fx:id="priceColumn" prefWidth="51.0" styleClass="collumnStyling" text="Price" />
             <TableColumn fx:id="startTimeColumn" prefWidth="79.0" styleClass="collumnStyling" text="Start time" />
+            <TableColumn prefWidth="75.0" text="Column X" />
          </columns>
       </TableView>
       <TableView fx:id="participantsTableView" layoutX="416.0" layoutY="70.0" prefHeight="345.0" prefWidth="220.0" AnchorPane.rightAnchor="14.0">
@@ -39,6 +40,7 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Button fx:id="logoutButton" layoutX="577.0" layoutY="471.0" mnemonicParsing="false" onAction="#logoutBTN" styleClass="Button" text="Log out" />
+      <Button fx:id="logoutButton" layoutX="14.0" layoutY="470.0" mnemonicParsing="false" onAction="#logoutBTN" styleClass="Button" text="Log out" />
+      <Button layoutX="579.0" layoutY="475.0" mnemonicParsing="false" onAction="#setupSignUpPage" text="Sign up" />
    </children>
 </AnchorPane>
