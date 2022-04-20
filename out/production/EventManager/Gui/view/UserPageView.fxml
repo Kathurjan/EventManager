@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -7,22 +8,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="520.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.UserPageController">
+<AnchorPane prefHeight="520.0" prefWidth="650.0" stylesheets="@../CSS/UserPage.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.UserPageController">
    <children>
-      <TableView fx:id="eventTableView" layoutX="14.0" layoutY="70.0" onMouseClicked="#handleShopParticipants" prefHeight="345.0" prefWidth="380.0" AnchorPane.leftAnchor="15.0">
+      <TableView fx:id="eventTableView" layoutX="14.0" layoutY="70.0" onMouseClicked="#handleShopParticipants" prefHeight="345.0" prefWidth="380.0" styleClass="eventTableView_ticket" AnchorPane.leftAnchor="15.0">
          <columns>
-            <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-            <TableColumn fx:id="locationColumn" prefWidth="75.0" text="Location" />
-            <TableColumn fx:id="dateColumn" prefWidth="99.0" text="Date" />
-            <TableColumn fx:id="priceColumn" prefWidth="51.0" text="Price" />
-            <TableColumn fx:id="startTimeColumn" prefWidth="79.0" text="Start time" />
+            <TableColumn fx:id="nameColumn" prefWidth="75.0" styleClass="collumnStyling" text="Name" />
+            <TableColumn fx:id="locationColumn" prefWidth="75.0" styleClass="collumnStyling" text="Location" />
+            <TableColumn fx:id="dateColumn" prefWidth="99.0" styleClass="collumnStyling" text="Date" />
+            <TableColumn fx:id="priceColumn" prefWidth="51.0" styleClass="collumnStyling" text="Price" />
+            <TableColumn fx:id="startTimeColumn" prefWidth="79.0" styleClass="collumnStyling" text="Start time" />
          </columns>
       </TableView>
       <TableView fx:id="participantsTableView" layoutX="416.0" layoutY="70.0" prefHeight="345.0" prefWidth="220.0" AnchorPane.rightAnchor="14.0">
         <columns>
-          <TableColumn fx:id="userFirstNameColumn" prefWidth="110.0" text="First Name" />
-            <TableColumn fx:id="userLastNameColumn" prefWidth="110.0" text="Last Name" />
+          <TableColumn fx:id="userFirstNameColumn" prefWidth="110.0" styleClass="collumnStyling" text="First Name" />
+            <TableColumn fx:id="userLastNameColumn" prefWidth="110.0" styleClass="collumnStyling" text="Last Name" />
         </columns>
+         <styleClass>
+            <String fx:value="table-view" />
+            <String fx:value="eventTableView_ticket" />
+         </styleClass>
       </TableView>
       <Label layoutX="162.0" layoutY="14.0" text="Events">
          <font>
@@ -34,6 +39,6 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Button fx:id="logoutButton" layoutX="577.0" layoutY="471.0" mnemonicParsing="false" onAction="#logoutBTN" text="Log out" />
+      <Button fx:id="logoutButton" layoutX="577.0" layoutY="471.0" mnemonicParsing="false" onAction="#logoutBTN" styleClass="Button" text="Log out" />
    </children>
 </AnchorPane>

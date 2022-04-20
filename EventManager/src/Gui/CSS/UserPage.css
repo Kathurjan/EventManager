@@ -17,5 +17,35 @@
     -fx-effect: dropshadow( three-pass-box , #000000 , 0, 1, 3.5, 4.5 );
 }
 
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+#UserTableView .table-cell{
+    -fx-alignment: CENTER-LEFT;
+}
+.eventTableView_ticket {
+    -fx-background-color: rgba(250, 189, 46, 1) !important;
+    -fx-base: transparent;
+    -fx-effect: dropshadow( three-pass-box , #000000 , 0, 1, 4, 5 );
 
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+.collumnStyling {
+    -fx-background-color: transparent;
+    -fx-text-background-color:black;
+    -fx-border-width:0.5;
+    -fx-border-style: hidden dashed dashed hidden;
+    -fx-border-color:black;
 
+}
