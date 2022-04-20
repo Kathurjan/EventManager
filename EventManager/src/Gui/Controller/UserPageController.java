@@ -2,6 +2,7 @@ package Gui.Controller;
 
 import BE.Event;
 import BE.Participant;
+import BE.Person;
 import DAL.DALException;
 import Gui.Model.EventModel;
 import Gui.Model.PersonModel;
@@ -94,6 +95,7 @@ public class UserPageController {
 
     public void ticketsBTN(ActionEvent actionEvent) {
     }
+
 
     public void logoutBTN(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
