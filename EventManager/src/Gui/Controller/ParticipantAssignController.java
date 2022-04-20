@@ -11,15 +11,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
 import javax.mail.Part;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +53,18 @@ public class ParticipantAssignController implements Initializable {
     private TextField availableParticipatingSearchfield;
     @FXML
     private TextField currentlyParticipatingSearchfield;
+    @FXML
+    private Label firstNameLabel;
+    @FXML
+    private Label lastNameLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label eventNameLabel;
+    @FXML
+    private Label ticketTypeLabel;
+    @FXML
+    private Pane ticketPane;
 
 
     private PersonModel personModel;
@@ -54,6 +73,7 @@ public class ParticipantAssignController implements Initializable {
     private HashMap<Integer, String> ticketMap;
     private List<Ticket> listOfTickets;
     private TicketModel ticketModel;
+    private EventModel eventModel;
     private Event selectedEvent;
     private ObservableList<Participant> availParticipantObservable;
     private ObservableList<Participant> currentParticipantObservable;
@@ -66,6 +86,7 @@ public class ParticipantAssignController implements Initializable {
         personModel = new PersonModel();
         ticketModel = new TicketModel();
         listOfTickets = new ArrayList<>();
+        eventModel = new EventModel();
     }
 
     @Override
@@ -148,16 +169,13 @@ public class ParticipantAssignController implements Initializable {
     }
 
     @FXML
-    private void sendBTNPress(ActionEvent event) {
-    }
-
-    @FXML
     private void selectChoiceBox(ActionEvent event) {
         choiceBoxUpdate(choiceBox.getValue());
     }
 
     @FXML
-    private void selectCurrentParticipant(MouseEvent mouseEvent) {
+    private void selectCurrentParticipant(MouseEvent mouseEvent) throws DALException {
+        setTicket();
         availableParticipatingTable.getSelectionModel().select(null);
         if (currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
             try {
@@ -313,6 +331,25 @@ public class ParticipantAssignController implements Initializable {
 
     public void setController(EventManagerPageController eventManagerPageController) {
         this.eventManagerPageController = eventManagerPageController;
+    }
+
+
+
+    public void setTicket() throws DALException {
+        firstNameLabel.setText(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getFirstName());
+        lastNameLabel.setText(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getLastName());
+        emailLabel.setText(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getEmail());
+        eventNameLabel.setText(eventModel.getAllEvents().get(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getEventID()-1).getEventName());
+    }
+
+    @FXML
+    private void sendBTNPress(ActionEvent event) throws IOException {
+        ticketPane = new Pane();
+        WritableImage writableImage = new WritableImage((int)ticketPane.getWidth() + 20, (int)ticketPane.getHeight() + 20);
+        ticketPane.snapshot(null, writableImage);
+        RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+        ImageIO.write(renderedImage, "png", new File("/ticket.png"));  //Write the snapshot to the chosen file
+        System.out.println("done");
     }
 
 }

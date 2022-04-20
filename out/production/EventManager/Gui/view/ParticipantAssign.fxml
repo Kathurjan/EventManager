@@ -10,9 +10,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.ParticipantAssignController">
+<AnchorPane prefHeight="600.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.ParticipantAssignController">
    <children>
       <HBox layoutX="-2.0" prefHeight="400.0" prefWidth="560.0">
          <children>
@@ -25,7 +26,7 @@
                         <Label layoutX="40.0" layoutY="6.0" text="Available participants" />
                      </children>
                   </AnchorPane>
-                  <TableView fx:id="availableParticipatingTable" prefHeight="250.0" prefWidth="174.0" onMouseClicked="#selectAvailableParticipant">
+                  <TableView fx:id="availableParticipatingTable" onMouseClicked="#selectAvailableParticipant" prefHeight="250.0" prefWidth="174.0">
                     <columns>
                       <TableColumn fx:id="availFirstNameColumn" prefWidth="75.0" text="First name" />
                       <TableColumn fx:id="availLastNameColumn" prefWidth="75.0" text="Last name" />
@@ -58,7 +59,7 @@
                         <CheckBox fx:id="hasPayedCheck" layoutX="8.0" layoutY="250.0" mnemonicParsing="false" onAction="#hasPayedCheckPress" text="Has payed" />
                         <Label layoutX="17.0" layoutY="185.0" text="Total price" />
                         <TextField fx:id="priceTxt" editable="false" layoutX="12.0" layoutY="209.0" prefHeight="26.0" prefWidth="69.0" />
-                        <ChoiceBox fx:id="choiceBox" layoutX="8.0" layoutY="150.0" prefHeight="26.0" prefWidth="78.0" onAction="#selectChoiceBox" />
+                        <ChoiceBox fx:id="choiceBox" layoutX="8.0" layoutY="150.0" onAction="#selectChoiceBox" prefHeight="26.0" prefWidth="78.0" />
                      </children>
                   </AnchorPane>
                   <AnchorPane prefHeight="40.0" prefWidth="174.0" />
@@ -73,7 +74,7 @@
                         <Label layoutX="45.0" layoutY="6.0" text="Current Participants" />
                      </children>
                   </AnchorPane>
-                  <TableView fx:id="currentlyParticipatingTable" prefHeight="250.0" prefWidth="174.0" onMouseClicked="#selectCurrentParticipant">
+                  <TableView fx:id="currentlyParticipatingTable" onMouseClicked="#selectCurrentParticipant" prefHeight="250.0" prefWidth="174.0">
                      <columns>
                         <TableColumn fx:id="currentFirstNameColumn" prefWidth="75.0" text="First name" />
                         <TableColumn fx:id="currentLastNameColumn" prefWidth="75.0" text="Last name" />
@@ -99,5 +100,14 @@
             <AnchorPane prefHeight="200.0" prefWidth="20.0" />
          </children>
       </HBox>
+      <Pane fx:id="ticketPane" layoutX="110.0" layoutY="410.0" prefHeight="160.0" prefWidth="340.0">
+         <children>
+            <Label fx:id="firstNameLabel" layoutX="24.0" layoutY="21.0" text="First Name" />
+            <Label fx:id="lastNameLabel" layoutX="39.0" layoutY="50.0" text="Last Name" />
+            <Label fx:id="eventNameLabel" layoutX="156.0" layoutY="21.0" text="event" />
+            <Label fx:id="ticketTypeLabel" layoutX="146.0" layoutY="73.0" text="tickettype" />
+            <Label fx:id="emailLabel" layoutX="39.0" layoutY="96.0" text="email" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
