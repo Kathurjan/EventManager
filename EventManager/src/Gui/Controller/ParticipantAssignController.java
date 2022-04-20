@@ -160,8 +160,13 @@ public class ParticipantAssignController implements Initializable {
     private void selectCurrentParticipant(MouseEvent mouseEvent) {
         availableParticipatingTable.getSelectionModel().select(null);
         if (currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
-            choiceBoxUpdate(ticketMap.get(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getTicketID()));
-            hasPayedCheck.setSelected(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getHasPayed());
+            try {
+                choiceBoxUpdate(ticketMap.get(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getTicketID()));
+                hasPayedCheck.setSelected(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getHasPayed());
+            }
+            catch (NullPointerException e){
+
+            }
         }
     }
 
@@ -185,16 +190,16 @@ public class ParticipantAssignController implements Initializable {
         availableParticipatingSearchfield.textProperty().addListener((observable, oldValue, newValue) -> {
             seachfilter.setPredicate(participant -> {
 
-                // if search value is empty then it displays the songs as it is.
+                // if search value is empty then it displays the participants as is.
                 if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
                     refreshTables();
                     return true;
                 }
                 String seachWord = newValue.toLowerCase();
                 if (participant.getFirstName().toLowerCase().indexOf(seachWord) > -1) {
-                    return true; // data will change if song found
+                    return true; // data will change if participant found
                 } else if (participant.getLastName().toLowerCase().indexOf(seachWord) > -1) {
-                    return true;// data will change if author is found
+                    return true;// data will change if participant is found
                 }
                 return false;
             });
@@ -215,16 +220,16 @@ public class ParticipantAssignController implements Initializable {
         currentlyParticipatingSearchfield.textProperty().addListener((observable, oldValue, newValue) -> {
             seachfilter.setPredicate(participant -> {
 
-                // if search value is empty then it displays the songs as it is.
+                // if search value is empty then it displays the participant as is.
                 if (newValue.isEmpty() || newValue.isBlank() || newValue == null) {
                     refreshTables();
                     return true;
                 }
                 String seachWord = newValue.toLowerCase();
                 if (participant.getFirstName().toLowerCase().indexOf(seachWord) > -1) {
-                    return true; // data will change if song found
+                    return true; // data will change if participant found
                 } else if (participant.getLastName().toLowerCase().indexOf(seachWord) > -1) {
-                    return true;// data will change if author is found
+                    return true;// data will change if participant is found
                 }
                 return false;
             });

@@ -3,7 +3,6 @@ package DAL;
 import BE.Participant;
 import BE.Person;
 
-import java.security.spec.RSAOtherPrimeInfo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,16 +15,16 @@ public class ParticipantDAO {
     private final DatabaseConnector db = new DatabaseConnector();
 
     public void addParticipant(Participant participant) throws DALException {
-        String sqlStatement = "INSERT INTO EventParticipant(PersonID, EventID, HasPayed) VALUES (?,?,?)";
+        String sqlStatement = "INSERT INTO EventParticipant(PersonID, EventID, TicketID, HasPayed) VALUES (?,?,?,?)";
         try (Connection con = db.getConnection()) {
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
             pstm.setInt(1, participant.getID());
             pstm.setInt(2, participant.getEventID());
-            pstm.setBoolean(3, participant.getHasPayed());
+            pstm.setInt(3, participant.getTicketID());
+            pstm.setBoolean(4, participant.getHasPayed());
             pstm.addBatch(); // Adding to the statement
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         } catch (SQLException throwables) {
-            System.out.println(throwables);
             throw new DALException("The Data access layer met with an error, add participant operation", throwables);
         }
     }
@@ -74,7 +73,7 @@ public class ParticipantDAO {
                         rs.getString("FirstName"),
                         rs.getString("LastName"),
                         rs.getInt("EventID"),
-                        0, false);
+                        rs.getInt("TicketID"), false);
                 participantList.add(participant);
             }
             return participantList;

@@ -1,12 +1,10 @@
 package Gui.Controller;
 
-import BE.Event;
-import BE.Participant;
-import BE.Person;
-import BE.TicketType;
+import BE.*;
 import DAL.DALException;
 import Gui.Model.EventModel;
 import Gui.Model.PersonModel;
+import Gui.Model.TicketModel;
 import Gui.Model.TicketTypeModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,6 +52,7 @@ public class ParticipantSignUpController {
     private PersonModel personModel;
     private Event selectedEvent;
     private Person currentPerson;
+    private TicketModel ticketModel;
     private ObservableList<TicketType> ticketTypeObservableList;
     private ObservableList<Participant> checkList;
 
@@ -61,6 +60,7 @@ public class ParticipantSignUpController {
         eventModel = new EventModel();
         ticketTypeModel = new TicketTypeModel();
         personModel = new PersonModel();
+        ticketModel = new TicketModel();
         ticketTypeObservableList = FXCollections.observableArrayList();
         checkList = FXCollections.observableArrayList();
         currentPerson = CurrentUserStorage.getInstance().getCurrentPerson();
@@ -96,16 +96,15 @@ public class ParticipantSignUpController {
         ticketTable.setItems(ticketTypeObservableList);
     }
 
-    private void checkIfInEvent(){
+    private void checkIfInEvent() {
         try {
             checkList = personModel.getPersonsInEvent(selectedEvent.getEventID());
-            for (Participant part: checkList) {
-                if(part.getID() == currentPerson.getID()){
+            for (Participant part : checkList) {
+                if (part.getID() == currentPerson.getID()) {
                     signedUpCheck.setSelected(true);
                 }
             }
-        }
-        catch (DALException e){
+        } catch (DALException e) {
             alertWarning(e.getMessage());
         }
 
@@ -122,25 +121,22 @@ public class ParticipantSignUpController {
     @FXML
     private void YesBTNPress(ActionEvent event) {
         try {
-            if(!signedUpCheck.isSelected()) {
+            if (!signedUpCheck.isSelected()) {
                 if (ticketTable.getSelectionModel().getSelectedItem() != null) {
-
+                    int tickedid = ticketModel.addTempTicket(ticketTable.getSelectionModel().getSelectedItem().getTicketTypeID());
                     Participant participant = new Participant(currentPerson.getID(), currentPerson.getUsername(),
                             currentPerson.getEmail(), currentPerson.getType(),
                             currentPerson.getFirstName(), currentPerson.getLastName(),
-                            selectedEvent.getEventID(), ticketTable.getSelectionModel().getSelectedItem().getTicketTypeID(),
+                            selectedEvent.getEventID(),tickedid,
                             false);
 
                     personModel.addParticipant(participant);
 
                     Stage stagebtnwindow = (Stage) basePrice.getScene().getWindow();
                     stagebtnwindow.close();
-                }
-                else alertWarning("You need to select a ticketType");
-            }
-            else alertWarning("You are already signed up");
-        }
-        catch (DALException e){
+                } else alertWarning("You need to select a ticketType");
+            } else alertWarning("You are already signed up");
+        } catch (DALException e) {
             alertWarning(e.getMessage());
         }
     }
