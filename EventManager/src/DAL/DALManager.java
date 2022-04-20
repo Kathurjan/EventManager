@@ -56,8 +56,8 @@ public class DALManager implements DALInterface{
     }
 
     @Override
-    public boolean verifyAdmin(String username, String password, int type) throws DALException {
-        return personDAO.verifyAdmin(username, password,type);
+    public Person verifyAdmin(String username, String password) throws DALException {
+        return personDAO.verifyAdmin(username, password);
     }
 
     @Override

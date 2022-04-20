@@ -1,5 +1,6 @@
 package Gui.Controller;
 
+import BE.Person;
 import DAL.DALException;
 import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -55,9 +56,11 @@ public class LoginController implements Initializable {
         }
         // Checks of the username and password text field is empty and if the username and password matches the admins
         // It will allow them to log in.
+
         try {
             if (!UserName.getText().isBlank() && !PassWord.getText().isBlank()) {
-                if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 0)) {
+                Person person = personModel.verifyAdmin(UserName.getText(), PassWord.getText());
+                if (person != null && person.getType() == 0) {
                     try {
                         Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
                         Stage stage = new Stage();
@@ -73,7 +76,7 @@ public class LoginController implements Initializable {
                         System.out.println(ex);
 
                     }
-                } else if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 1)) {
+                } else if (person != null && person.getType() == 1) {
                     try {
                         Parent part = FXMLLoader.load(getClass().getResource("../view/EventManagerPage.fxml"));
                         Stage stage = new Stage();
@@ -88,7 +91,7 @@ public class LoginController implements Initializable {
                     } catch (NullPointerException | IOException ex) {
                         System.out.println(ex);
                     }
-                } else if (personModel.verifyAdmin(UserName.getText(), PassWord.getText(), 2)) {
+                } else if (person != null && person.getType() == 2) {
                     try {
                         Parent parent = FXMLLoader.load(getClass().getResource("../view/UserPageView.fxml"));
                         Stage stage = new Stage();

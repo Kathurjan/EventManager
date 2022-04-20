@@ -22,8 +22,8 @@ public class PersonModel {
         return personObservableList;
     }
 
-    public boolean verifyAdmin(String username, String password, int type) throws DALException {
-        return BLLInterface.verifyAdmin(username,password,type);
+    public Person verifyAdmin(String username, String password) throws DALException {
+        return BLLInterface.verifyAdmin(username,password);
     }
 
     public void addPerson(String username, String password, String email, int type) throws DALException {

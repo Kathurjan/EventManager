@@ -73,18 +73,23 @@ public class PersonDAO {
         }
     }
 
-    public boolean verifyAdmin(String username, String password, int type) throws DALException {
+    public Person verifyAdmin(String username, String password) throws DALException {
         try (Connection connection = db.getConnection()) {
-            String sqlquery = "SELECT * FROM Person WHERE userName= ? AND userPassWord = ? AND Type =?";
+            String sqlquery = "SELECT * FROM Person WHERE userName= ? AND userPassWord = ?";
             PreparedStatement statement = connection.prepareStatement(sqlquery);
             statement.setString(1, username);
             statement.setString(2, password);
-            statement.setInt(3, type);
             ResultSet resultSet = statement.executeQuery();
-            if(resultSet != null){
-                return true;
+            if(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String email = resultSet.getString("email");
+                String firstname = resultSet.getString("FirstName");
+                String lastname = resultSet.getString("LastName");
+                int type = resultSet.getInt("type");
+                Person person = new Person(id, username, email, type, firstname, lastname);// Creating a person object from the retrieved values
+                return person;
             }
-            else return false;
+            else return null;
         } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error", throwables);
         }
