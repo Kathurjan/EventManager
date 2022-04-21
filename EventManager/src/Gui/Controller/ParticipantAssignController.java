@@ -17,6 +17,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -25,9 +27,11 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import javax.mail.Message;
 import javax.mail.Part;
+import javax.mail.internet.MimeMessage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,9 +67,9 @@ public class ParticipantAssignController implements Initializable {
     @FXML
     private Label eventNameLabel;
     @FXML
-    private Label ticketTypeLabel;
-    @FXML
     private Pane ticketPane = new Pane();
+    @FXML
+    private ImageView imageView;
 
 
     private PersonModel personModel;
@@ -94,6 +98,8 @@ public class ParticipantAssignController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         ticketTypeMap = new HashMap<>();
         ticketMap = new HashMap<>();
+        setTicketBorder();
+
     }
 
     @FXML
@@ -343,11 +349,18 @@ public class ParticipantAssignController implements Initializable {
 
     @FXML
     private void sendBTNPress(ActionEvent event) throws IOException {
-        WritableImage writableImage = new WritableImage((int) ticketPane.getWidth() + 20, (int) ticketPane.getHeight() + 20);
+        WritableImage writableImage = new WritableImage((int) ticketPane.getWidth(), (int) ticketPane.getHeight() -2);
         ticketPane.snapshot(null, writableImage);
         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
         ImageIO.write(renderedImage, "png", new File("Res/ticket.png"));  //Write the snapshot to the chosen file
         System.out.println("done");
-        
+
+
+    }
+
+    private void setTicketBorder()
+    {
+        File f = new File("Res/ticketSth.png");
+        imageView.setImage(new Image(f.toURI().toString()));
     }
 }
