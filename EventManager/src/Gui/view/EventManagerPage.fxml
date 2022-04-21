@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="569.0" prefWidth="857.0" stylesheets="@../CSS/EventManagerPage.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
+<AnchorPane prefHeight="475.0" prefWidth="850.0" stylesheets="@../CSS/EventManagerPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
    <children>
-      <TableView fx:id="eventTableView"  onMousePressed="#selectEvent" layoutX="21.0" layoutY="21.0" prefHeight="370.0" prefWidth="425.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="eventTableView" layoutX="10.0" layoutY="50.0" onMousePressed="#selectEvent" prefHeight="370.0" prefWidth="425.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="75.0" styleClass="collumnStyling" text="Name" />
           <TableColumn fx:id="locationColumn" prefWidth="75.0" styleClass="collumnStyling" text="Location" />
@@ -18,26 +18,26 @@
             <TableColumn fx:id="startTimeColumn" prefWidth="123.0" styleClass="collumnStyling" text="Start time" />
         </columns>
       </TableView>
-      <TableView fx:id="participantTable" layoutX="601.0" layoutY="50.0" prefHeight="370.0" prefWidth="245.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="601.0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="participantTable" layoutX="591.0" layoutY="50.0" prefHeight="370.0" prefWidth="245.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="591.0" AnchorPane.topAnchor="50.0">
         <columns>
           <TableColumn fx:id="participantColumnFirstname" prefWidth="116.79998779296875" styleClass="collumnStyling" text="First name" />
           <TableColumn fx:id="participantColumnLastname" prefWidth="127.199951171875" styleClass="collumnStyling" text="Last name" />
         </columns>
       </TableView>
-      <Button layoutX="31.0" layoutY="427.0" mnemonicParsing="false" onAction="#addEventPress" styleClass="Button" text="Create Event" />
-      <Button layoutX="147.0" layoutY="427.0" mnemonicParsing="false" onAction="#editEventPress" styleClass="Button" text="Edit Event" />
-      <Button layoutX="88.0" layoutY="472.0" mnemonicParsing="false" styleClass="Button" text="Delete Event" />
-      <Label layoutX="86.0" layoutY="14.0" text="Events">
+      <Button layoutX="21.0" layoutY="427.0" mnemonicParsing="false" onAction="#addEventPress" styleClass="Button" text="Create Event" />
+      <Button layoutX="137.0" layoutY="427.0" mnemonicParsing="false" onAction="#editEventPress" styleClass="Button" text="Edit Event" />
+      <Button layoutX="237.0" layoutY="427.0" mnemonicParsing="false" styleClass="Button" text="Delete Event" />
+      <Label layoutX="193.0" layoutY="14.0" text="Events">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="666.0" layoutY="14.0" text="Participants">
+      <Label layoutX="656.0" layoutY="14.0" text="Participants">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="668.0" layoutY="445.0" mnemonicParsing="false" onAction="#assignParticipantsBTNPress" styleClass="Button" text="Add participant" />
-      <Button fx:id="logoutButton" layoutX="388.0" layoutY="508.0" mnemonicParsing="false" onAction="#logoutBTN" styleClass="Button" text="Log out" />
+      <Button layoutX="450.0" layoutY="218.0" mnemonicParsing="false" onAction="#assignParticipantsBTNPress" styleClass="Button" text="Add participant" />
+      <Button fx:id="logoutButton" layoutX="746.0" layoutY="429.0" mnemonicParsing="false" onAction="#logoutBTN" styleClass="Button" text="Log out" />
    </children>
 </AnchorPane>

@@ -7,23 +7,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchaorpane" prefHeight="400.0" prefWidth="355.0" stylesheets="@../CSS/UserCreation.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.UserCreationController">
+<AnchorPane fx:id="anchaorpane" prefHeight="400.0" prefWidth="355.0" stylesheets="@../CSS/UserCreation.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.UserCreationController">
    <children>
       <Label fx:id="errorLabel" layoutX="155.0" layoutY="14.0" prefHeight="18.0" prefWidth="51.0" />
-      <Label fx:id="Header" layoutX="110.0" layoutY="23.0" text="Create new user">
+      <Label fx:id="Header" layoutX="108.0" layoutY="21.0" text="Create new user">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="emailTxt" layoutX="107.0" layoutY="83.0" promptText="Email" />
-      <TextField fx:id="userNameTxt" layoutX="107.0" layoutY="115.0" promptText="Username" />
-      <TextField fx:id="password1stTxt" layoutX="108.0" layoutY="147.0" promptText="Password" />
-      <TextField fx:id="password2ndTxt" layoutX="108.0" layoutY="179.0" promptText="Repeat password" />
-      <Label fx:id="userCheckBoxLabel" layoutX="123.0" layoutY="210.0" text="Choose user type" />
-      <ChoiceBox fx:id="userCheckBox" layoutX="106.0" layoutY="232.0" prefWidth="150.0" />
+      <TextField fx:id="emailTxt" layoutX="99.0" layoutY="61.0" promptText="Email" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" />
+      <TextField fx:id="userNameTxt" layoutX="99.0" layoutY="93.0" promptText="Username" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" />
+      <TextField fx:id="password1stTxt" layoutX="100.0" layoutY="125.0" promptText="Password" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" />
+      <TextField fx:id="password2ndTxt" layoutX="100.0" layoutY="157.0" promptText="Repeat password" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" />
+      <Label fx:id="userCheckBoxLabel" layoutX="123.0" layoutY="192.0" text="Choose user type" />
+      <ChoiceBox fx:id="userCheckBox" layoutX="95.0" layoutY="214.0" prefWidth="150.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" />
       <Button layoutX="59.0" layoutY="336.0" mnemonicParsing="false" onAction="#onAddUserBTNPress" styleClass="Button" stylesheets="@../CSS/UserCreation.css" text="Create user" />
       <Button layoutX="225.0" layoutY="336.0" mnemonicParsing="false" onAction="#onCancelBTNPress" styleClass="Button" text="Cancel" />
-      <TextField fx:id="firstNameTxt" layoutX="107.0" layoutY="271.0" promptText="First name" />
-      <TextField fx:id="lastNameTxt" layoutX="107.0" layoutY="305.0" promptText="Last name" />
+      <TextField fx:id="firstNameTxt" layoutX="95.0" layoutY="257.0" promptText="First name" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" />
+      <TextField fx:id="lastNameTxt" layoutX="95.0" layoutY="291.0" promptText="Last name" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" />
    </children>
 </AnchorPane>
