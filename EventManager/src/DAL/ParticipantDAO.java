@@ -39,6 +39,7 @@ public class ParticipantDAO {
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         }
         catch (SQLException throwables){
+            System.out.println(throwables);
             throw new DALException("The data access layer met with an error, delete participant operation", throwables);
         }
     }

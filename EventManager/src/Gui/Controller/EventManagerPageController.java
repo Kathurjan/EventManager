@@ -1,8 +1,10 @@
 package Gui.Controller;
 
 import BE.Event;
+import BE.Participant;
 import DAL.DALException;
 import Gui.Model.EventModel;
+import Gui.Model.PersonModel;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
@@ -35,14 +38,22 @@ public class EventManagerPageController implements Initializable{
     private TableColumn<Event, Date> dateColumn;
     @FXML
     private TableView<Event> eventTableView;
+    @FXML
+    private TableView<Participant> participantTable;
+    @FXML
+    private TableColumn<Participant, String> participantColumnFirstname;
+    @FXML
+    private TableColumn<Participant, String> participantColumnLastname;
 
     private EventModel eventModel;
+    private PersonModel personModel;
 
     // This is our constructor.
     public EventManagerPageController() {
         eventModel = new EventModel();
-    }
+        personModel = new PersonModel();
 
+    }
 
     // Here we do a initialize for our tableview.
     @Override
@@ -63,12 +74,21 @@ public class EventManagerPageController implements Initializable{
             priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
             startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("StateTime"));
             eventTableView.setItems(eventModel.getAllEvents());
-            System.out.println(eventModel.getAllEvents());
         }
         catch (DALException e){
             alertWarning(e.getMessage());
         }
+    }
 
+    private void populateParticipantTable(int id){
+        participantColumnFirstname.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
+        participantColumnLastname.setCellValueFactory(new PropertyValueFactory<>("LastName"));
+        try {
+            participantTable.setItems(personModel.getPersonsInEvent(id));
+        }
+        catch (DALException e){
+            alertWarning(e.getMessage());
+        }
     }
 
 
@@ -93,6 +113,11 @@ public class EventManagerPageController implements Initializable{
         catch (IOException ex){
             alertWarning("Failed setting up the Event Creator");
         }
+    }
+
+    @FXML
+    public void selectEvent(MouseEvent mouseEvent) {
+        populateParticipantTable(eventTableView.getSelectionModel().getSelectedItem().getEventID());
     }
 
     private void setupEventCreator(boolean edit) throws IOException {

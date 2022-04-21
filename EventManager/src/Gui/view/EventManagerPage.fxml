@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="569.0" prefWidth="857.0" stylesheets="@../CSS/EventManagerPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
+<AnchorPane prefHeight="569.0" prefWidth="857.0" stylesheets="@../CSS/EventManagerPage.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
    <children>
-      <TableView fx:id="eventTableView" layoutX="21.0" layoutY="21.0" prefHeight="370.0" prefWidth="425.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="eventTableView"  onMousePressed="#selectEvent" layoutX="21.0" layoutY="21.0" prefHeight="370.0" prefWidth="425.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="50.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="75.0" styleClass="collumnStyling" text="Name" />
           <TableColumn fx:id="locationColumn" prefWidth="75.0" styleClass="collumnStyling" text="Location" />
@@ -15,28 +18,26 @@
             <TableColumn fx:id="startTimeColumn" prefWidth="123.0" styleClass="collumnStyling" text="Start time" />
         </columns>
       </TableView>
-      <TableView layoutX="601.0" layoutY="50.0" prefHeight="370.0" prefWidth="245.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="601.0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="participantTable" layoutX="601.0" layoutY="50.0" prefHeight="370.0" prefWidth="245.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="601.0" AnchorPane.topAnchor="50.0">
         <columns>
-          <TableColumn prefWidth="130.0" styleClass="collumnStyling" text="TicketName" />
-          <TableColumn prefWidth="113.0" styleClass="collumnStyling" text="TicketPrice" />
+          <TableColumn fx:id="participantColumnFirstname" prefWidth="116.79998779296875" styleClass="collumnStyling" text="First name" />
+          <TableColumn fx:id="participantColumnLastname" prefWidth="127.199951171875" styleClass="collumnStyling" text="Last name" />
         </columns>
       </TableView>
       <Button layoutX="31.0" layoutY="427.0" mnemonicParsing="false" onAction="#addEventPress" styleClass="Button" text="Create Event" />
       <Button layoutX="147.0" layoutY="427.0" mnemonicParsing="false" onAction="#editEventPress" styleClass="Button" text="Edit Event" />
-      <Button layoutX="733.0" layoutY="427.0" mnemonicParsing="false" styleClass="Button" text="Delete Ticket" />
-      <Button layoutX="636.0" layoutY="427.0" mnemonicParsing="false" styleClass="Button" text="Edit Ticket" />
       <Button layoutX="88.0" layoutY="472.0" mnemonicParsing="false" styleClass="Button" text="Delete Event" />
       <Label layoutX="86.0" layoutY="14.0" text="Events">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="696.0" layoutY="14.0" text="Tickets">
+      <Label layoutX="666.0" layoutY="14.0" text="Participants">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="685.0" layoutY="472.0" mnemonicParsing="false" onAction="#assignParticipantsBTNPress" styleClass="Button" text="Create Ticket" />
-      <Button fx:id="logoutButton" layoutX="413.0" layoutY="513.0" mnemonicParsing="false" onAction="#logoutBTN" styleClass="Button" text="Log out" />
+      <Button layoutX="668.0" layoutY="445.0" mnemonicParsing="false" onAction="#assignParticipantsBTNPress" styleClass="Button" text="Add participant" />
+      <Button fx:id="logoutButton" layoutX="388.0" layoutY="508.0" mnemonicParsing="false" onAction="#logoutBTN" styleClass="Button" text="Log out" />
    </children>
 </AnchorPane>

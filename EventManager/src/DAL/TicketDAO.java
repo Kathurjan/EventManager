@@ -65,6 +65,7 @@ public class TicketDAO {
             pstm.addBatch();
             pstm.executeBatch();
         } catch (SQLException throwables) {
+            System.out.println(throwables);
             throw new DALException("The Data access layer met with an error", throwables);
         }
     }
