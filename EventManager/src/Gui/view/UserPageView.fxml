@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="520.0" prefWidth="650.0" stylesheets="@../CSS/UserPage.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.UserPageController">
+<AnchorPane prefHeight="450.0" prefWidth="650.0" stylesheets="@../CSS/UserPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.UserPageController">
    <children>
-      <TableView fx:id="eventTableView" layoutX="14.0" layoutY="70.0" onMouseClicked="#handleShopParticipants" prefHeight="345.0" prefWidth="380.0" styleClass="eventTableView_ticket" AnchorPane.leftAnchor="15.0">
+      <TableView fx:id="eventTableView" layoutX="15.0" layoutY="51.0" onMouseClicked="#handleShopParticipants" prefHeight="345.0" prefWidth="380.0" styleClass="eventTableView_ticket" AnchorPane.leftAnchor="15.0">
          <columns>
             <TableColumn fx:id="nameColumn" prefWidth="75.0" styleClass="collumnStyling" text="Name" />
             <TableColumn fx:id="locationColumn" prefWidth="75.0" styleClass="collumnStyling" text="Location" />
@@ -20,7 +20,7 @@
             <TableColumn prefWidth="75.0" text="Column X" />
          </columns>
       </TableView>
-      <TableView fx:id="participantsTableView" layoutX="416.0" layoutY="70.0" prefHeight="345.0" prefWidth="220.0" AnchorPane.rightAnchor="14.0">
+      <TableView fx:id="participantsTableView" layoutX="416.0" layoutY="51.0" prefHeight="345.0" prefWidth="220.0" AnchorPane.rightAnchor="14.0">
         <columns>
           <TableColumn fx:id="userFirstNameColumn" prefWidth="110.0" styleClass="collumnStyling" text="First Name" />
             <TableColumn fx:id="userLastNameColumn" prefWidth="110.0" styleClass="collumnStyling" text="Last Name" />
@@ -35,12 +35,12 @@
             <Font size="30.0" />
          </font>
       </Label>
-      <Label layoutX="449.0" layoutY="14.0" text="Participants">
+      <Label layoutX="452.0" layoutY="14.0" text="Participants">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <Button fx:id="logoutButton" layoutX="14.0" layoutY="470.0" mnemonicParsing="false" onAction="#logoutBTN" styleClass="Button" text="Log out" />
-      <Button layoutX="579.0" layoutY="475.0" mnemonicParsing="false" onAction="#setupSignUpPage" text="Sign up" />
+      <Button fx:id="logoutButton" layoutX="555.0" layoutY="401.0" mnemonicParsing="false" onAction="#logoutBTN" styleClass="Button" text="Log out" />
+      <Button layoutX="17.0" layoutY="401.0" mnemonicParsing="false" onAction="#setupSignUpPage" styleClass="Button" text="Sign up" />
    </children>
 </AnchorPane>
