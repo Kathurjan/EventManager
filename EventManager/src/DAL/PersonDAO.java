@@ -22,7 +22,9 @@ public class PersonDAO {
                     String username = rs.getString("userName");
                     String email = rs.getString("email");
                     int type = rs.getInt("type");
-                    Person person = new Person(id, username, email, type, null, null);// Creating a person object from the retrieved values
+                    String firstName = rs.getString("firstName");
+                    String lastName = rs.getString("lastName");
+                    Person person = new Person(id, username, email, type, firstName, lastName);// Creating a person object from the retrieved values
                     personList.add(person); // Adding the person to  list
                 }
             }

@@ -70,6 +70,7 @@ public class UserCreationController implements Initializable {
         isEditing = true;
         userNameTxt.setText(person.getUsername());
         emailTxt.setText(person.getEmail());
+        System.out.println(person.getFirstName());
         firstNameTxt.setText(person.getFirstName());
         lastNameTxt.setText(person.getLastName());
         if(selectedPerson.getType() != 0) {
