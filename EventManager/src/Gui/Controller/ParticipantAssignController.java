@@ -72,7 +72,6 @@ public class ParticipantAssignController implements Initializable {
     private TicketTypeModel ticketTypeModel;
     private HashMap<String, Double> ticketTypeMap;
     private HashMap<Integer, String> ticketMap;
-    private List<Ticket> listOfTickets;
     private TicketModel ticketModel;
     private EventModel eventModel;
     private Event selectedEvent;
@@ -86,7 +85,6 @@ public class ParticipantAssignController implements Initializable {
         ticketTypeModel = new TicketTypeModel();
         personModel = new PersonModel();
         ticketModel = new TicketModel();
-        listOfTickets = new ArrayList<>();
         eventModel = new EventModel();
     }
 
@@ -97,7 +95,7 @@ public class ParticipantAssignController implements Initializable {
     }
 
     @FXML
-    private void cancelBTNPress(ActionEvent event) {
+    private void cancelBTNPress(ActionEvent event) { // Since all changes can be easily reversed it just closes the window
         Stage stage = (Stage) availableParticipatingSearchfield.getScene().getWindow();
         stage.close();
     }
@@ -109,7 +107,7 @@ public class ParticipantAssignController implements Initializable {
             for (Participant particpant : currentParticipantObservable) {
                 if (particpant.getID() == tempParticipant.getID()) {
                     alertWarning("This participant is already on the list, how did we get here?");
-                    return;
+                    return; //Cancels the method if the participant is already on the list
                 }
             }
             if (hasPayedCheck.isSelected()) { // Checks if the ticket is already payed for
@@ -143,7 +141,6 @@ public class ParticipantAssignController implements Initializable {
                 participant.setEventID(-1);
                 participant.setHasPayed(false);
                 participant.setTicketID(-1);
-                participant.setEventID(-1);
             } catch (DALException e) {
                 alertWarning(e.getMessage());
             }
@@ -156,11 +153,11 @@ public class ParticipantAssignController implements Initializable {
     }
 
     @FXML
-    private void hasPayedCheckPress(ActionEvent event) {
+    private void hasPayedCheckPress(ActionEvent event) { //Pushes the change in payment status.
         if (currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
             Participant participant = currentlyParticipatingTable.getSelectionModel().getSelectedItem();
             try {
-                personModel.editParticipant(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getID(), selectedEvent.getEventID(), hasPayedCheck.isSelected());
+                personModel.editParticipant(participant.getID(), selectedEvent.getEventID(), hasPayedCheck.isSelected());
             } catch (DALException e) {
                 alertWarning(e.getMessage());
             }
@@ -192,7 +189,7 @@ public class ParticipantAssignController implements Initializable {
     private void selectAvailableParticipant(MouseEvent mouseEvent) {
         currentlyParticipatingTable.getSelectionModel().select(null);
         if (availableParticipatingTable.getSelectionModel().getSelectedItem() != null) {
-            choiceBox.getSelectionModel().select(1);
+            choiceBox.getSelectionModel().select(0);
             priceTxt.setText("");
             hasPayedCheck.setSelected(false);
         }
@@ -267,7 +264,7 @@ public class ParticipantAssignController implements Initializable {
         alert.showAndWait();
     }
 
-    private void setUpChoiceBox() {
+    private void setUpChoiceBox() { //Set up the choicebox and attaches the ticketType name and extra fee to a hashmap for later use.
         ObservableList<String> tempList = FXCollections.observableArrayList();
         for (TicketType ticketype : ticketTypeObservableList) {
             tempList.add(ticketype.getTicketName().trim());
@@ -276,14 +273,14 @@ public class ParticipantAssignController implements Initializable {
         }
     }
 
-    private Participant ticketCreation(Participant tempParticipant) {
+    private Participant ticketCreation(Participant tempParticipant) { //Creation of the "temp" ticket to use in passing into the participant object
         try {
             int ticketTypeID = ticketTypeObservableList.get(choiceBox.getSelectionModel().getSelectedIndex()).getTicketTypeID();
-            int tempid = ticketModel.addTempTicket(ticketTypeID);
-            Ticket ticket = new Ticket(tempid, ticketTypeID);
-            listOfTickets.add(ticket);
-            tempParticipant.setTicketID(tempid);
-            ticketMap.put(tempid, ticketTypeObservableList.get(choiceBox.getSelectionModel().getSelectedIndex()).getTicketName());
+            int id = ticketModel.addTempTicket(ticketTypeID); //gets an id for the ticket
+            tempParticipant.setTicketID(id);
+
+            //the ticketmap keeps track of the ticketID and ticketType relation for each participant
+            ticketMap.put(id, ticketTypeObservableList.get(choiceBox.getSelectionModel().getSelectedIndex()).getTicketName());
             return tempParticipant;
         } catch (DALException e) {
             alertWarning(e.getMessage());
@@ -297,7 +294,7 @@ public class ParticipantAssignController implements Initializable {
 
     }
 
-    private void choiceBoxUpdate(String input) {
+    private void choiceBoxUpdate(String input) { // Sets the price in the price fields from the event and ticketTypeMap
         String str = ticketTypeModel.convertDoubleToString(selectedEvent.getPrice() + ticketTypeMap.get(input));
         priceTxt.setText(str);
         choiceBox.setValue(input);
@@ -307,19 +304,11 @@ public class ParticipantAssignController implements Initializable {
         selectedEvent = event;
         try {
             ticketTypeObservableList = ticketTypeModel.getTicketTypes(selectedEvent.getEventID());
-            listOfTickets = ticketModel.getAllTicketPerType(ticketTypeObservableList);
         } catch (DALException e) {
             alertWarning(e.getMessage());
         }
-        for (TicketType ticketType : ticketTypeObservableList) {
-            for (Ticket ticket : listOfTickets) {
-                if (ticket.getTicketTypeID() == ticketType.getTicketTypeID()) {
-                    ticketMap.put(ticket.getID(), ticketType.getTicketName());
-                }
-            }
-        }
         setUpChoiceBox();
-        try {
+        try { // Fetches the available and current participants lists
             availParticipantObservable = personModel.getPersonsNotInEvent(selectedEvent.getEventID());
             currentParticipantObservable = personModel.getPersonsInEvent(selectedEvent.getEventID());
         } catch (DALException e) {
