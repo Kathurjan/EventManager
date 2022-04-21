@@ -21,7 +21,7 @@ public interface BLLInterface {
 
     void deletePerson(Person selectedPerson) throws DALException;
 
-    void editPerson(Person selectedPerson, String username, String password, String email, int type) throws DALException;
+    void editPerson(Person selectedPerson, String username, String password, String email, int type, String firstName, String lastName) throws DALException;
 
     Person verifyAdmin(String username, String password) throws DALException;
 

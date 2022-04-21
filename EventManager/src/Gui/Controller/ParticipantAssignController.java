@@ -23,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
+import javax.mail.Message;
 import javax.mail.Part;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -64,7 +65,7 @@ public class ParticipantAssignController implements Initializable {
     @FXML
     private Label ticketTypeLabel;
     @FXML
-    private Pane ticketPane;
+    private Pane ticketPane = new Pane();
 
 
     private PersonModel personModel;
@@ -181,8 +182,7 @@ public class ParticipantAssignController implements Initializable {
             try {
                 choiceBoxUpdate(ticketMap.get(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getTicketID()));
                 hasPayedCheck.setSelected(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getHasPayed());
-            }
-            catch (NullPointerException e){
+            } catch (NullPointerException e) {
 
             }
         }
@@ -292,8 +292,8 @@ public class ParticipantAssignController implements Initializable {
     }
 
     private void refreshTables() {
-            currentlyParticipatingTable.setItems(currentParticipantObservable);
-            availableParticipatingTable.setItems(availParticipantObservable);
+        currentlyParticipatingTable.setItems(currentParticipantObservable);
+        availableParticipatingTable.setItems(availParticipantObservable);
 
     }
 
@@ -334,22 +334,20 @@ public class ParticipantAssignController implements Initializable {
     }
 
 
-
     public void setTicket() throws DALException {
         firstNameLabel.setText(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getFirstName());
         lastNameLabel.setText(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getLastName());
         emailLabel.setText(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getEmail());
-        eventNameLabel.setText(eventModel.getAllEvents().get(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getEventID()-1).getEventName());
+        eventNameLabel.setText(eventModel.getAllEvents().get(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getEventID() - 1).getEventName());
     }
 
     @FXML
     private void sendBTNPress(ActionEvent event) throws IOException {
-        ticketPane = new Pane();
-        WritableImage writableImage = new WritableImage((int)ticketPane.getWidth() + 20, (int)ticketPane.getHeight() + 20);
+        WritableImage writableImage = new WritableImage((int) ticketPane.getWidth() + 20, (int) ticketPane.getHeight() + 20);
         ticketPane.snapshot(null, writableImage);
         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
-        ImageIO.write(renderedImage, "png", new File("/ticket.png"));  //Write the snapshot to the chosen file
+        ImageIO.write(renderedImage, "png", new File("Res/ticket.png"));  //Write the snapshot to the chosen file
         System.out.println("done");
+        
     }
-
 }

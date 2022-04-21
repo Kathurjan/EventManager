@@ -70,6 +70,9 @@ public class UserCreationController implements Initializable {
         isEditing = true;
         userNameTxt.setText(person.getUsername());
         emailTxt.setText(person.getEmail());
+        System.out.println(person.getFirstName());
+        firstNameTxt.setText(person.getFirstName());
+        lastNameTxt.setText(person.getLastName());
         if(selectedPerson.getType() != 0) {
             userCheckBox.getSelectionModel().select(selectedPerson.getType());
         }
@@ -94,7 +97,7 @@ public class UserCreationController implements Initializable {
                                 Stage stage = (Stage) emailTxt.getScene().getWindow();
                                 stage.close();
                             } else
-                                personModel.editPerson(selectedPerson, userNameTxt.getText(), password1stTxt.getText(), emailTxt.getText(), 0);
+                                personModel.editPerson(selectedPerson, userNameTxt.getText(), password1stTxt.getText(), emailTxt.getText(), 0, firstNameTxt.getText(), lastNameTxt.getText());
                             Stage stage = (Stage) emailTxt.getScene().getWindow();
                             stage.close();
                         } catch (DALException e) {
