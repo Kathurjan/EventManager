@@ -35,8 +35,8 @@ public class PersonModel {
         BLLInterface.deletePerson(selectedPerson);
     }
 
-    public void editPerson(Person selectedPerson, String username, String password, String email, int type) throws DALException {
-        BLLInterface.editPerson(selectedPerson, username, password, email, type);
+    public void editPerson(Person selectedPerson, String username, String password, String email, int type, String firstName, String lastName ) throws DALException {
+        BLLInterface.editPerson(selectedPerson, username, password, email, type, firstName, lastName);
     }
 
     public ObservableList<Participant> getAllParticipants(int EventID) throws DALException{

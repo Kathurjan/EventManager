@@ -48,8 +48,8 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public void editPerson(Person selectedPerson, String username, String password, String email, int type) throws DALException {
-        dalInterface.editPerson(selectedPerson, username, password, email, type);
+    public void editPerson(Person selectedPerson, String username, String password, String email, int type, String firstName, String lastName) throws DALException {
+        dalInterface.editPerson(selectedPerson, username, password, email, type, firstName, lastName);
     }
 
     @Override

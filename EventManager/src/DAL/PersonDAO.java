@@ -49,15 +49,17 @@ public class PersonDAO {
         }
     }
 
-    public void editPerson(Person selectedPerson, String username, String password, String email, int type) throws DALException {
+    public void editPerson(Person selectedPerson, String username, String password, String email, int type, String firstName, String lastName) throws DALException {
         try (Connection con = db.getConnection()) {
-            String query = "UPDATE Person set username = ?,password = ?,name = ?, type = ?, WHERE id = ?";
+            String query = "UPDATE Person set username = ?,password = ?,email = ?, type = ?, firstname = ?, lastname = ?, WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setString(1, username);
             pstm.setString(2, password);
             pstm.setString(3, email);
             pstm.setInt(4, type);
-            pstm.setInt(5, selectedPerson.getID());
+            pstm.setString(5, firstName);
+            pstm.setString(6, lastName);
+            pstm.setInt(7, selectedPerson.getID());
             pstm.executeUpdate(); // Executing the prepared statement with the specified parameters
         } catch (SQLException throwables) {
             throw new DALException("The Data access layer met with an error, edit person operation", throwables);

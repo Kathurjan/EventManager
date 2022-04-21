@@ -51,8 +51,8 @@ public class DALManager implements DALInterface{
     }
 
     @Override
-    public void editPerson(Person selectedPerson, String username, String password, String email, int type) throws DALException {
-        personDAO.editPerson(selectedPerson, username, password, email, type);
+    public void editPerson(Person selectedPerson, String username, String password, String email, int type, String firstName, String lastName) throws DALException {
+        personDAO.editPerson(selectedPerson, username, password, email, type, firstName, lastName);
     }
 
     @Override
