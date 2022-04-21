@@ -45,12 +45,20 @@ public class ParticipantSignUpController {
     private TextArea ticketInfo;
     @FXML
     private CheckBox signedUpCheck;
+    @FXML
+    private Button yesBTN;
+    @FXML
+    private Button noBTN;
+    @FXML
+    private Button cancelBTN;
+
 
     private UserPageController controller;
     private EventModel eventModel;
     private TicketTypeModel ticketTypeModel;
     private PersonModel personModel;
     private Event selectedEvent;
+    private Participant participant;
     private Person currentPerson;
     private TicketModel ticketModel;
     private ObservableList<TicketType> ticketTypeObservableList;
@@ -64,6 +72,7 @@ public class ParticipantSignUpController {
         ticketTypeObservableList = FXCollections.observableArrayList();
         checkList = FXCollections.observableArrayList();
         currentPerson = CurrentUserStorage.getInstance().getCurrentPerson();
+        setParticipant();
     }
 
     public void setController(UserPageController userPageController) {
@@ -73,7 +82,14 @@ public class ParticipantSignUpController {
     public void setItems(Event event) { //Set up all the information regarding the event
         try {
             selectedEvent = event;
-            checkIfInEvent();
+            if (!checkIfInEvent()) {
+                yesBTN.setVisible(false);
+                yesBTN.setDisable(true);
+                noBTN.setVisible(false);
+                noBTN.setDisable(true);
+                cancelBTN.setVisible(true);
+                cancelBTN.setDisable(false);
+            }
             String[] arr = eventModel.convertStartTimeToTwoString(selectedEvent.getStateTime()); // Converts startTime to 2 strings.
             eventName.setText(selectedEvent.getEventName());
             eventLocation.setText(selectedEvent.getEventLocation());
@@ -89,6 +105,15 @@ public class ParticipantSignUpController {
         }
     }
 
+    private void setParticipant() {
+        participant = new Participant(currentPerson.getID(), currentPerson.getUsername(),
+                currentPerson.getEmail(), currentPerson.getType(),
+                currentPerson.getFirstName(), currentPerson.getLastName(),
+                selectedEvent.getEventID(), 0,
+                false);
+
+    }
+
     private void populateTableview() {
         // This dot, method populates the ticket type table view (Space comma here) dot mads (Non dash captilized) this is where you rage & try to fix this exclamantion mark dot
         ticketTypeColumn.setCellValueFactory(new PropertyValueFactory<>("ticketName"));
@@ -96,18 +121,19 @@ public class ParticipantSignUpController {
         ticketTable.setItems(ticketTypeObservableList);
     }
 
-    private void checkIfInEvent() {
+    private boolean checkIfInEvent() {
         try {
             checkList = personModel.getPersonsInEvent(selectedEvent.getEventID());
             for (Participant part : checkList) {
                 if (part.getID() == currentPerson.getID()) {
                     signedUpCheck.setSelected(true);
+                    return true;
                 }
             }
         } catch (DALException e) {
             alertWarning(e.getMessage());
         }
-
+        return false;
     }
 
     @FXML
@@ -123,12 +149,7 @@ public class ParticipantSignUpController {
         try {
             if (!signedUpCheck.isSelected()) {
                 if (ticketTable.getSelectionModel().getSelectedItem() != null) {
-                    int tickedid = ticketModel.addTempTicket(ticketTable.getSelectionModel().getSelectedItem().getTicketTypeID());
-                    Participant participant = new Participant(currentPerson.getID(), currentPerson.getUsername(),
-                            currentPerson.getEmail(), currentPerson.getType(),
-                            currentPerson.getFirstName(), currentPerson.getLastName(),
-                            selectedEvent.getEventID(),tickedid,
-                            false);
+                    participant.setTicketID(ticketModel.addTempTicket(ticketTable.getSelectionModel().getSelectedItem().getTicketTypeID()));
 
                     personModel.addParticipant(participant);
 
@@ -143,6 +164,19 @@ public class ParticipantSignUpController {
 
     @FXML
     private void NoBTNPress(ActionEvent event) {
+        Stage stagebtnwindow = (Stage) basePrice.getScene().getWindow();
+        stagebtnwindow.close();
+    }
+
+    @FXML
+    private void cancelSignUpBTNPress(ActionEvent event) {
+        try {
+            ticketModel.deleteSingleTicket(participant.getTicketID());
+            personModel.deleteParticipant(participant.getID(), selectedEvent.getEventID());
+        } catch (DALException e) {
+            alertWarning(e.getMessage());
+        }
+
         Stage stagebtnwindow = (Stage) basePrice.getScene().getWindow();
         stagebtnwindow.close();
     }

@@ -2,13 +2,14 @@ package Gui.Model;
 
 import BE.Participant;
 import BE.Person;
+import BLL.BLLInterface;
 import BLL.BLLManager;
 import DAL.DALException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class PersonModel {
-    private BLLManager BLLInterface;
+    private BLLInterface BLLInterface;
     private ObservableList<Person> personObservableList;
     private ObservableList<Participant> participantObservableList;
 

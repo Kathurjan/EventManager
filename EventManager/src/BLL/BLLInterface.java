@@ -15,7 +15,7 @@ public interface BLLInterface {
 
     ObservableList<Event> getAllEvents() throws DALException;
 
-    List<TicketType> getTicketTypes(int eventID) throws SQLServerException, DALException;
+    List<TicketType> getTicketTypes(int eventID) throws DALException;
 
     void addPerson(String username, String password, String email, int type) throws DALException;
 
@@ -33,7 +33,7 @@ public interface BLLInterface {
 
     void addTicketTypes(List<TicketType> simpleList, int eventID) throws DALException;
 
-    void creatEvent() throws SQLServerException, DALException;
+    void creatEvent()throws DALException;
 
     int selectLatest() throws DALException;
 

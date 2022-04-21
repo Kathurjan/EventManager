@@ -2,6 +2,7 @@ package Gui.Model;
 
 import BE.TicketType;
 import BLL.BLLException;
+import BLL.BLLInterface;
 import BLL.BLLManager;
 import DAL.DALException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -11,7 +12,7 @@ import javafx.collections.ObservableList;
 import java.util.List;
 
 public class TicketTypeModel {
-    private BLLManager bllInterface;
+    private BLLInterface bllInterface;
 
     private ObservableList<TicketType> ticketTypeObservableList;
 

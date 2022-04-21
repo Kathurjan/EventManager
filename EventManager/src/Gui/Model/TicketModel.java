@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TicketModel {
 
-    private BLLManager BLLInterface;
+    private BLLInterface BLLInterface;
 
     public TicketModel(){
         BLLInterface = new BLLManager();

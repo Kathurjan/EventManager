@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import java.sql.Date;
 
 public class EventModel {
-    private BLLManager BLLInterface;
+    private BLLInterface BLLInterface;
 
     public EventModel() {
         BLLInterface = new BLLManager();
