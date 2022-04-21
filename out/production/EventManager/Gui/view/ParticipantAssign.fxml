@@ -92,7 +92,7 @@
                   </AnchorPane>
                   <AnchorPane prefHeight="40.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#sendBTNPress" text="Send mail" />
+                        <Button layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#sendBTNPress" text="Send ticket" />
                      </children>
                   </AnchorPane>
                   <BorderPane prefHeight="20.0" prefWidth="200.0" />
@@ -107,7 +107,6 @@
             <Label fx:id="firstNameLabel" layoutX="24.0" layoutY="30.0" />
             <Label fx:id="lastNameLabel" layoutX="24.0" layoutY="72.0" />
             <Label fx:id="eventNameLabel" layoutX="187.0" layoutY="30.0" />
-            <Label fx:id="ticketTypeLabel" layoutX="192.0" layoutY="97.0" text="tickettype" />
             <Label fx:id="emailLabel" layoutX="37.0" layoutY="114.0" />
             <Label layoutX="24.0" layoutY="13.0" text="First Name" />
             <Label layoutX="25.0" layoutY="55.0" text="Last Name" />

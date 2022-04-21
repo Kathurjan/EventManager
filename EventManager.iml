@@ -17,6 +17,6 @@
     <orderEntry type="library" name="guicedee.services.javax.activation" level="project" />
     <orderEntry type="library" name="javax.mail" level="project" />
     <orderEntry type="library" name="lib" level="project" />
-    <orderEntry type="library" name="Aspose_Email_Java_for_IntelliJ(Maven)" level="project" />
+    <orderEntry type="library" name="aspose-email-22.3-java" level="project" />
   </component>
 </module>

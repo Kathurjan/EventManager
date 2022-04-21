@@ -29,14 +29,18 @@ import javax.mail.Message;
 import javax.mail.Part;
 import javax.mail.internet.MimeMessage;
 import java.awt.image.RenderedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ParticipantAssignController implements Initializable {
 
@@ -337,13 +341,12 @@ public class ParticipantAssignController implements Initializable {
     }
 
     @FXML
-    private void sendBTNPress(ActionEvent event) throws IOException {
-        WritableImage writableImage = new WritableImage((int) ticketPane.getWidth(), (int) ticketPane.getHeight() -2);
+    private void sendBTNPress(ActionEvent event) throws IOException, DALException {
+        WritableImage writableImage = new WritableImage((int) ticketPane.getWidth(), (int) ticketPane.getHeight() - 2);
         ticketPane.snapshot(null, writableImage);
         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
         ImageIO.write(renderedImage, "png", new File("Res/ticket.png"));  //Write the snapshot to the chosen file
-        System.out.println("done");
-
+        sendTicket(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getEmail(), new File("Res/ticket.png"));//Open OutLook and set an email
 
     }
 
@@ -351,5 +354,47 @@ public class ParticipantAssignController implements Initializable {
     {
         File f = new File("Res/ticketSth.png");
         imageView.setImage(new Image(f.toURI().toString()));
+    }
+
+
+
+    private static String getOutlookPath() throws IOException{
+        Process p = Runtime.getRuntime()
+                .exec(new String[]{"cmd.exe", "/c", "assoc", ".pst"});
+        BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        String extensionType = input.readLine();
+        input.close();
+        // extract type
+        if (extensionType == null) {
+            throw new IOException("Could not find extension type!");
+        } else {
+            String[] fileType = extensionType.split("=");
+
+            p = Runtime.getRuntime().exec(
+                    new String[]{"cmd.exe", "/c", "ftype", fileType[1]});
+            input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            String fileAssociation = input.readLine();
+            // extract path
+            Pattern pattern = Pattern.compile("\".*?\"");
+            Matcher m = pattern.matcher(fileAssociation);
+            if (m.find()) {
+                return m.group(0);
+            } else {
+                throw new IOException("Could not find outlook path!");
+            }
+        }
+    }
+
+    public void sendTicket(String recipient, File ticketFile) throws IOException, DALException {
+        String outlookPath = getOutlookPath();
+
+        String subject = "Your ticket for event " + eventModel.getAllEvents().get(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getEventID() - 1).getEventName();
+        String body = currentlyParticipatingTable.getSelectionModel().getSelectedItem().getFirstName() + ",\n" +
+                "\nYour ticket for " + eventModel.getAllEvents().get(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getEventID() - 1).getEventName()
+                + " is attached to this email.\n" + "\nBest regards.\n";
+        String mString = (recipient + "?subject=" + subject + "&body=" + body).replace(" ", "%20").replace("\n", "%0A");
+
+        String outlookCommand = " /c ipm.note /m \"" + mString + "\" /a \"" + ticketFile.getAbsolutePath() + "\"";
+        Runtime.getRuntime().exec(outlookPath + outlookCommand);
     }
 }
