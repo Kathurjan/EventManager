@@ -112,18 +112,11 @@ public class LoginController implements Initializable {
                     // If it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
                     alertWarning("Wrong username or password.");
                 }
-            }else {
-                // If it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
-                alertWarning("Wrong username or password.");
             }
         }
         catch (DALException e){
             alertWarning(e.getMessage());
         }
-
-
-            // If it doesn't  match it will open up the below alert window alerting the user to incorrect username and password.
-        //alertWarning();
     }
 
     // Used to close the stage
