@@ -27,8 +27,8 @@ public class PersonModel {
         return BLLInterface.verifyAdmin(username,password);
     }
 
-    public void addPerson(String username, String password, String email, int type) throws DALException {
-        BLLInterface.addPerson(username, password, email, type);
+    public void addPerson(String username, String password, String email, int type, String firstName, String lastName) throws DALException {
+        BLLInterface.addPerson(username, password, email, type, firstName, lastName);
     }
 
     public void deletePerson(Person selectedPerson) throws DALException {

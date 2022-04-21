@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchaorpane" prefHeight="344.0" prefWidth="355.0" stylesheets="@../CSS/UserCreation.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.UserCreationController">
+<AnchorPane fx:id="anchaorpane" prefHeight="400.0" prefWidth="355.0" stylesheets="@../CSS/UserCreation.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.UserCreationController">
    <children>
       <Label fx:id="errorLabel" layoutX="155.0" layoutY="14.0" prefHeight="18.0" prefWidth="51.0" />
       <Label fx:id="Header" layoutX="110.0" layoutY="23.0" text="Create new user">
@@ -21,7 +21,9 @@
       <TextField fx:id="password2ndTxt" layoutX="108.0" layoutY="179.0" promptText="Repeat password" />
       <Label fx:id="userCheckBoxLabel" layoutX="123.0" layoutY="210.0" text="Choose user type" />
       <ChoiceBox fx:id="userCheckBox" layoutX="106.0" layoutY="232.0" prefWidth="150.0" />
-      <Button layoutX="68.0" layoutY="276.0" mnemonicParsing="false" onAction="#onAddUserBTNPress" styleClass="Button" stylesheets="@../CSS/UserCreation.css" text="Create user" />
-      <Button layoutX="230.0" layoutY="276.0" mnemonicParsing="false" onAction="#onCancelBTNPress" styleClass="Button" text="Cancel" />
+      <Button layoutX="59.0" layoutY="336.0" mnemonicParsing="false" onAction="#onAddUserBTNPress" styleClass="Button" stylesheets="@../CSS/UserCreation.css" text="Create user" />
+      <Button layoutX="225.0" layoutY="336.0" mnemonicParsing="false" onAction="#onCancelBTNPress" styleClass="Button" text="Cancel" />
+      <TextField fx:id="firstNameTxt" layoutX="107.0" layoutY="271.0" promptText="First name" />
+      <TextField fx:id="lastNameTxt" layoutX="107.0" layoutY="305.0" promptText="Last name" />
    </children>
 </AnchorPane>

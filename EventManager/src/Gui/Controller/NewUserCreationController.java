@@ -23,7 +23,7 @@ import java.util.Objects;
 public class NewUserCreationController {
 
     @FXML
-    private TextField userNameTxt, emailTxt;
+    private TextField userNameTxt, emailTxt, firstNameTxt, lastNameTxt;
     @FXML
     private PasswordField password1stTxt, password2ndTxt;
     @FXML
@@ -43,20 +43,21 @@ public class NewUserCreationController {
     private void onAddUserBTNPress(ActionEvent actionEvent) throws IOException {
         if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // Checks the length of the input to ensure minimum safety
             if (verifyEmail()) { // If controller is in editing mode -> skip email verification step
-                if (verifyPassword()) {
-                    try {
-                        personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), 2);
+                if (verifyNames()) {
+                    if (verifyPassword()) {
+                        try {
+                            personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), 2, firstNameTxt.getText(), lastNameTxt.getText());
+                        } catch (DALException e) {
+                            alertWarning(e.getMessage());
+                        }
+                        Stage stage = (Stage) emailTxt.getScene().getWindow();
+                        stage.close();
+                        Parent part = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
+                        Stage stage1 = new Stage();
+                        Scene scene = new Scene(part);
+                        stage1.setScene(scene);
+                        stage1.show();
                     }
-                    catch (DALException e){
-                        alertWarning(e.getMessage());
-                    }
-                    Stage stage = (Stage) emailTxt.getScene().getWindow();
-                    stage.close();
-                    Parent part = FXMLLoader.load(getClass().getResource("../view/Login.fxml"));
-                    Stage stage1 = new Stage();
-                    Scene scene = new Scene(part);
-                    stage1.setScene(scene);
-                    stage1.show();
                 }
             }
         } else {
@@ -117,6 +118,14 @@ public class NewUserCreationController {
         }
         errorLabel.setText("Your password needs at least one number");
         return false;
+    }
+
+    private boolean verifyNames()
+    {
+        if(firstNameTxt.getText() == null && lastNameTxt.getText() == null){
+            errorLabel.setText("Insert your name");
+            return false;}else
+                return true;
     }
 
     private void alertWarning(String input){
