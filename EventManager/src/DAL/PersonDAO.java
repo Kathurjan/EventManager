@@ -32,14 +32,16 @@ public class PersonDAO {
         return personList;
     }
 
-    public void addPerson(String username, String password, String email, int type) throws DALException {
-        String sqlStatement = "INSERT INTO Person(userName, userPassWord, email, Type) VALUES (?,?,?,?)";
+    public void addPerson(String username, String password, String email, int type, String firstName, String lastName) throws DALException {
+        String sqlStatement = "INSERT INTO Person(userName, userPassWord, email, Type, FirstName, LastName) VALUES (?,?,?,?,?,?)";
         try (Connection con = db.getConnection()) {
             PreparedStatement pstm = con.prepareStatement(sqlStatement);
             pstm.setString(1, username);
             pstm.setString(2, password);
             pstm.setString(3, email);
             pstm.setInt(4, type);
+            pstm.setString(5, firstName);
+            pstm.setString(6, lastName);
             pstm.addBatch(); // Adding to the statement
             pstm.executeBatch(); // Executing the added parameters, and  executing the statement
         } catch (SQLException throwables) {

@@ -17,7 +17,7 @@ public interface BLLInterface {
 
     List<TicketType> getTicketTypes(int eventID) throws SQLServerException, DALException;
 
-    void addPerson(String username, String password, String email, int type) throws DALException;
+    void addPerson(String username, String password, String email, int type, String firstName, String lastName) throws DALException;
 
     void deletePerson(Person selectedPerson) throws DALException;
 

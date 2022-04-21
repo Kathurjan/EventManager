@@ -35,10 +35,7 @@ public class UserCreationController implements Initializable {
     private Label userCheckBoxLabel;
 
     @FXML
-    private TextField userNameTxt;
-
-    @FXML
-    private TextField emailTxt;
+    private TextField userNameTxt, emailTxt, firstNameTxt, lastNameTxt;
 
     @FXML
     private TextField password1stTxt;
@@ -88,25 +85,25 @@ public class UserCreationController implements Initializable {
         type = userCheckBox.getSelectionModel().getSelectedIndex();
         if (userNameTxt.getText().length() > 3 && userNameTxt.getText().length() < 21) { // checks the length of the input to ensure minimum safety
             if (verifyEmail() | isEditing) { // if controller is in editing mode -> skip email verification step
+                if(verifyNames()){
                 if (verifyPassword()) {
-                    if(type != -1){
+                    if (type != -1) {
                         try {
-                            if(!isEditing){ // does the check of the isEditing variable
-                                personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), type);
-                                Stage stage =  (Stage) emailTxt.getScene().getWindow();
+                            if (!isEditing) { // does the check of the isEditing variable
+                                personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), type, firstNameTxt.getText(), lastNameTxt.getText());
+                                Stage stage = (Stage) emailTxt.getScene().getWindow();
                                 stage.close();
-                            }
-                            else personModel.editPerson(selectedPerson, userNameTxt.getText(), password1stTxt.getText(), emailTxt.getText(), 0);
-                            Stage stage =  (Stage) emailTxt.getScene().getWindow();
+                            } else
+                                personModel.editPerson(selectedPerson, userNameTxt.getText(), password1stTxt.getText(), emailTxt.getText(), 0);
+                            Stage stage = (Stage) emailTxt.getScene().getWindow();
                             stage.close();
-                        }
-                        catch (DALException e){
+                        } catch (DALException e) {
                             alertWarning(e.getMessage());
                         }
-                    }
-                    else {
+                    } else {
                         errorLabel.setText("Please choose a user type");
                     }
+                }
                 }
             }
         }
@@ -166,6 +163,15 @@ public class UserCreationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         userCheckBox.setItems(TypeofUser);
+    }
+
+    private boolean verifyNames()
+    {
+        if(firstNameTxt.getText() == null && lastNameTxt.getText() == null){
+            errorLabel.setText("Insert name");
+            return false;}
+        else
+            return true;
     }
 
     private void alertWarning(String input){
