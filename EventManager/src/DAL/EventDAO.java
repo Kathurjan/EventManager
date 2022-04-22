@@ -93,7 +93,7 @@ public class EventDAO {
 
     public void deleteEventWithID(int eventID) throws DALException{
         try(Connection con = db.getConnection()){
-            String query = "DELETE FROM Person WHERE id = ?";
+            String query = "DELETE FROM Event WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
             pstm.setInt(1,eventID);
             pstm.executeUpdate(); // Executing the statement

@@ -179,4 +179,14 @@ public class EventManagerPageController implements Initializable {
         Stage stagebtnwindow = (Stage) logoutButton.getScene().getWindow();
         stagebtnwindow.close();
     }
+
+    public void deleteEventPress(ActionEvent actionEvent) throws DALException {
+        if (eventTableView.getSelectionModel().getSelectedItem() != null){
+        eventModel.deleteEventWithID(eventTableView.getSelectionModel().getSelectedItem().getEventID());
+        eventTableView.setItems(eventModel.getAllEvents());
+
+        }
+        else
+        { alertWarning("Select an event");}
+    }
 }
