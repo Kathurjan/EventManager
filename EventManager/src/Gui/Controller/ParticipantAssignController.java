@@ -100,7 +100,6 @@ public class ParticipantAssignController implements Initializable {
         ticketTypeMap = new HashMap<>();
         ticketMap = new HashMap<>();
         setTicketBorder();
-
     }
 
     @FXML
@@ -340,36 +339,25 @@ public class ParticipantAssignController implements Initializable {
     }
 
     @FXML
-<<<<<<< Updated upstream
     private void sendBTNPress(ActionEvent event) throws IOException, DALException {
-        if(currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
+        if (currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
             WritableImage writableImage = new WritableImage((int) ticketPane.getWidth(), (int) ticketPane.getHeight() - 2);
             ticketPane.snapshot(null, writableImage);
             RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
             ImageIO.write(renderedImage, "png", new File("Res/ticket.png"));  //Write the snapshot to the chosen file
             sendTicket(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getEmail(), new File("Res/ticket.png"));//Open OutLook and set an email
-        }
-        else {
+        } else {
             alertWarning("You need to select a current participant");
         }
-=======
-    private void sendBTNPress(ActionEvent event) throws IOException {
-        WritableImage writableImage = new WritableImage((int) ticketPane.getWidth(), (int) ticketPane.getHeight() -2);
-        ticketPane.snapshot(null, writableImage);
-        RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
-        ImageIO.write(renderedImage, "png", new File("Res/ticket.png"));  //Write the snapshot to the chosen file
->>>>>>> Stashed changes
     }
 
-    private void setTicketBorder()
-    {
+    private void setTicketBorder() {
         File f = new File("Res/ticketSth.png");
         imageView.setImage(new Image(f.toURI().toString()));
     }
 
 
-
-    private static String getOutlookPath() throws IOException{
+    private static String getOutlookPath() throws IOException {
         Process p = Runtime.getRuntime()
                 .exec(new String[]{"cmd.exe", "/c", "assoc", ".pst"});
         BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));

@@ -96,12 +96,7 @@ public class EventManagerPageController implements Initializable {
             } catch (IOException ex) {
                 alertWarning("Failed setting up the edit window");
             }
-<<<<<<< Updated upstream
-        } else System.out.println("Put this in an error label or something (edit event missing selected item)");
-=======
-        }
-        else alertWarning("Put this in an error label or something (edit event missing selected item");
->>>>>>> Stashed changes
+        } else alertWarning("Put this in an error label or something (edit event missing selected item");
     }
 
     @FXML
