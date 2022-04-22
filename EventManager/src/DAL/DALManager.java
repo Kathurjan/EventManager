@@ -61,7 +61,7 @@ public class DALManager implements DALInterface{
     }
 
     @Override
-    public void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id) {
+    public void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id) throws DALException{
         eventDAO.editEvent(eventName,startDate,eventLocation,price,startTime,warningLabel,id);
     }
 

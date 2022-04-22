@@ -58,7 +58,7 @@ public class BLLManager implements BLLInterface {
     }
 
     @Override
-    public void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id) {
+    public void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id) throws DALException {
         dalInterface.editEvent(eventName, startDate, eventLocation, price, startTime, warningLabel, id);
     }
 

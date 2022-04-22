@@ -25,7 +25,7 @@ public interface DALInterface {
 
     Person verifyAdmin(String username, String password) throws DALException;
 
-    void editEvent(String eventname, Date startdate, String eventlocation, double price, String startTime, String warningLabel, int id);
+    void editEvent(String eventname, Date startdate, String eventlocation, double price, String startTime, String warningLabel, int id) throws DALException;
 
     void addTicketTypes(List<TicketType> simpleList, int eventID) throws DALException;
 

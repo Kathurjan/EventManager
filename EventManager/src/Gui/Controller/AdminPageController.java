@@ -60,7 +60,7 @@ public class AdminPageController implements Initializable {
         if(adminTable.getSelectionModel().getSelectedItem() != null){
             setupPersonWindow(true);
         }
-        else System.out.println("Please select a user from the list");
+        else alertWarning("Please select a user from the list");
     }
 
     // This is our how we open our person window and make it editable.

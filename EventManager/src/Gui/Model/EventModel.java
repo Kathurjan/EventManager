@@ -21,7 +21,7 @@ public class EventModel {
         return BLLInterface.getAllEvents();
     }
 
-    public void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id){
+    public void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id) throws DALException{
         BLLInterface.editEvent(eventName,startDate,eventLocation,price,startTime,warningLabel,id);
     }
 
