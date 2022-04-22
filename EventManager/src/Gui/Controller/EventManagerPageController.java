@@ -180,7 +180,7 @@ public class EventManagerPageController implements Initializable {
         stagebtnwindow.close();
     }
     
-    public void refreshTable(){
+    public void refreshTable() throws DALException {
         eventTableView.setItems(eventModel.getAllEvents());
     }
 
