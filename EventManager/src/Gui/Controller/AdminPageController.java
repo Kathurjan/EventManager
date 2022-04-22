@@ -3,7 +3,6 @@ package Gui.Controller;
 import BE.Person;
 import DAL.DALException;
 import Gui.Model.PersonModel;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +19,6 @@ import org.assertj.core.internal.Classes;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.Buffer;
 import java.util.ResourceBundle;
 
 public class AdminPageController implements Initializable {
@@ -35,7 +33,7 @@ public class AdminPageController implements Initializable {
 
     private PersonModel personModel;
 
-    // Here we do a initialize for our tableview.
+    // Here we do initialize for our tableview.
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {

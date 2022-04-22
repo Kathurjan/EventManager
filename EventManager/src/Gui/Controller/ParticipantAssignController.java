@@ -6,7 +6,6 @@ import Gui.Model.EventModel;
 import Gui.Model.PersonModel;
 import Gui.Model.TicketModel;
 import Gui.Model.TicketTypeModel;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;

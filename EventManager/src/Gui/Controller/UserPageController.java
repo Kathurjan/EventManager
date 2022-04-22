@@ -2,17 +2,14 @@ package Gui.Controller;
 
 import BE.Event;
 import BE.Participant;
-import BE.Person;
+
 import DAL.DALException;
 import Gui.Model.EventModel;
 import Gui.Model.PersonModel;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -22,7 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Date;
 

@@ -3,7 +3,6 @@ package Gui.Controller;
 import BE.Person;
 import DAL.DALException;
 import Gui.Model.PersonModel;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,7 +62,7 @@ public class LoginController implements Initializable {
                 CurrentUserStorage.getInstance().setCurrentPerson(person); // Uses a singleton class to store the user for later use.
                 if (person != null && person.getType() == 0) { // Checks if the object is null
                     try {
-                        CurrentUserStorage.getInstance().setCurrentPerson(person);
+
                         Parent part = FXMLLoader.load(getClass().getResource("../view/AdminPage.fxml"));
                         Stage stage = new Stage();
                         Scene scene = new Scene(part);
@@ -80,7 +79,6 @@ public class LoginController implements Initializable {
                     }
                 } else if (person != null && person.getType() == 1) {
                     try {
-                        CurrentUserStorage.getInstance().setCurrentPerson(person);
                         Parent part = FXMLLoader.load(getClass().getResource("../view/EventManagerPage.fxml"));
                         Stage stage = new Stage();
                         Scene scene = new Scene(part);

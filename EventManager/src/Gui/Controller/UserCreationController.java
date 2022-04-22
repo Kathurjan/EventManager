@@ -1,10 +1,7 @@
 package Gui.Controller;
-
-import BE.Participant;
 import BE.Person;
 import DAL.DALException;
 import Gui.Model.PersonModel;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,11 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
-import org.controlsfx.control.CheckComboBox;
-import org.w3c.dom.Text;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +20,6 @@ import java.util.ResourceBundle;
 
 public class UserCreationController implements Initializable {
 
-    Stage stage;
 
     @FXML
     private ChoiceBox userCheckBox;

@@ -5,7 +5,6 @@ import BE.Participant;
 import DAL.DALException;
 import Gui.Model.EventModel;
 import Gui.Model.PersonModel;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,20 +19,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
-import org.junit.jupiter.api.TestFactory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class EventManagerPageController implements Initializable{
+public class EventManagerPageController implements Initializable {
     @FXML
     private Button logoutButton;
     @FXML
     private TableColumn<Event, String> nameColumn, locationColumn, startTimeColumn;
     @FXML
-    private TableColumn<Event,Double> priceColumn;
+    private TableColumn<Event, Double> priceColumn;
     @FXML
     private TableColumn<Event, Date> dateColumn;
     @FXML
@@ -66,7 +64,7 @@ public class EventManagerPageController implements Initializable{
     }
 
     // Here we populate our event table view.
-    private void populateEventTableView(){
+    private void populateEventTableView() {
         try {
             nameColumn.setCellValueFactory(new PropertyValueFactory<>("EventName"));
             locationColumn.setCellValueFactory(new PropertyValueFactory<>("EventLocation"));
@@ -74,43 +72,38 @@ public class EventManagerPageController implements Initializable{
             priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
             startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("StateTime"));
             eventTableView.setItems(eventModel.getAllEvents());
-        }
-        catch (DALException e){
+        } catch (DALException e) {
             alertWarning(e.getMessage());
         }
     }
 
-    private void populateParticipantTable(int id){
+    private void populateParticipantTable(int id) {
         participantColumnFirstname.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
         participantColumnLastname.setCellValueFactory(new PropertyValueFactory<>("LastName"));
         try {
             participantTable.setItems(personModel.getPersonsInEvent(id));
-        }
-        catch (DALException e){
+        } catch (DALException e) {
             alertWarning(e.getMessage());
         }
     }
 
 
     @FXML
-    private void editEventPress(ActionEvent actionEvent){
-        if(eventTableView.getSelectionModel().getSelectedItem() != null){
+    private void editEventPress(ActionEvent actionEvent) {
+        if (eventTableView.getSelectionModel().getSelectedItem() != null) {
             try {
                 setupEventCreator(true);
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 alertWarning("Failed setting up the edit window");
             }
-        }
-        else System.out.println("Put this in an error label or something (edit event missing selected item)");
+        } else System.out.println("Put this in an error label or something (edit event missing selected item)");
     }
 
     @FXML
-    private void addEventPress(ActionEvent actionEvent){
+    private void addEventPress(ActionEvent actionEvent) {
         try {
             setupEventCreator(false);
-        }
-        catch (IOException ex){
+        } catch (IOException ex) {
             alertWarning("Failed setting up the Event Creator");
         }
     }
@@ -127,10 +120,10 @@ public class EventManagerPageController implements Initializable{
             Parent root = (Parent) fxmlLoader.load();
             EventCreatorController addEvent = fxmlLoader.getController();
             addEvent.setController(this);
-            if (edit){
+            if (edit) {
                 fxmlLoader.<EventCreatorController>getController().setEdit(eventTableView.getSelectionModel().getSelectedItem());
             }
-            if(!edit){
+            if (!edit) {
                 fxmlLoader.<EventCreatorController>getController().createTempEvent();
             }
             fxmlLoader.<EventCreatorController>getController();
@@ -138,60 +131,13 @@ public class EventManagerPageController implements Initializable{
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             alertWarning("Failed to load the create/edit event window");
         }
     }
 
 
-
-     /* TODO mail address, username, password, title and body
-
-    sendMail("mail address");  // Mail address you want to send an email
-
-
-    //making connection and then sent the mail
-    public static void sendMail(String recepient) throws Exception{
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp.gmail.com");
-        properties.put("mail.smtp.port", "587");
-        String username = "your acc mail"; //Your account
-        String password = "xxxxxxxx";      //Your password
-
-        Session session = Session.getInstance(properties, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
-        Message message = prepareMessage(session, username, recepient);
-
-        Transport.send(message);
-        System.out.println("mail sent");
-    }
-    //prepare message to send
-    private static Message prepareMessage(Session session, String username, String recepient) {
-
-        try {
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
-            message.setSubject("title");        //title of the message
-            message.setText("body of email");   //body of the message
-            return message;
-        } catch (AddressException e) {
-            e.printStackTrace();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    */
-
-    private void alertWarning(String input){
+    private void alertWarning(String input) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning!");
         alert.setHeaderText(input);
@@ -202,7 +148,7 @@ public class EventManagerPageController implements Initializable{
 
 
     public void assignParticipantsBTNPress(ActionEvent event) {
-        if(eventTableView.getSelectionModel().getSelectedItem() != null) {
+        if (eventTableView.getSelectionModel().getSelectedItem() != null) {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("../view/ParticipantAssign.fxml"));
@@ -218,8 +164,7 @@ public class EventManagerPageController implements Initializable{
             } catch (IOException e) {
                 alertWarning("Failed to load the create/edit event window");
             }
-        }
-        else {
+        } else {
             alertWarning("You must select an event to add participants to");
         }
     }
