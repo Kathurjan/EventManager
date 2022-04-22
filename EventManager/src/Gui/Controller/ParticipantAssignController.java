@@ -341,12 +341,16 @@ public class ParticipantAssignController implements Initializable {
 
     @FXML
     private void sendBTNPress(ActionEvent event) throws IOException, DALException {
-        WritableImage writableImage = new WritableImage((int) ticketPane.getWidth(), (int) ticketPane.getHeight() - 2);
-        ticketPane.snapshot(null, writableImage);
-        RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
-        ImageIO.write(renderedImage, "png", new File("Res/ticket.png"));  //Write the snapshot to the chosen file
-        sendTicket(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getEmail(), new File("Res/ticket.png"));//Open OutLook and set an email
-
+        if(currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
+            WritableImage writableImage = new WritableImage((int) ticketPane.getWidth(), (int) ticketPane.getHeight() - 2);
+            ticketPane.snapshot(null, writableImage);
+            RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+            ImageIO.write(renderedImage, "png", new File("Res/ticket.png"));  //Write the snapshot to the chosen file
+            sendTicket(currentlyParticipatingTable.getSelectionModel().getSelectedItem().getEmail(), new File("Res/ticket.png"));//Open OutLook and set an email
+        }
+        else {
+            alertWarning("You need to select a current participant");
+        }
     }
 
     private void setTicketBorder()

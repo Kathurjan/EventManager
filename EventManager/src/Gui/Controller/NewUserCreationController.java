@@ -46,7 +46,8 @@ public class NewUserCreationController {
                 if (verifyNames()) {
                     if (verifyPassword()) {
                         try {
-                            personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(), 2, firstNameTxt.getText(), lastNameTxt.getText());
+                            personModel.addPerson(userNameTxt.getText(), password2ndTxt.getText(), emailTxt.getText(),
+                                    2, firstNameTxt.getText(), lastNameTxt.getText());
                         } catch (DALException e) {
                             alertWarning(e.getMessage());
                         }

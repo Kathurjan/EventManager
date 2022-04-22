@@ -74,7 +74,7 @@ public class UserPageController {
         userFirstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         userLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         try{
-            participantsTableView.setItems((ObservableList<Participant>) personModel.getAllParticipants(eventTableView.getSelectionModel().getSelectedItem().getEventID()));
+            participantsTableView.setItems(personModel.getAllParticipants(eventTableView.getSelectionModel().getSelectedItem().getEventID()));
         } catch (DALException e){
             alertWarning(e.getMessage());
         }
