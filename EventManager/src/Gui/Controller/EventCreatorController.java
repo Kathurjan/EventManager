@@ -142,12 +142,14 @@ public class EventCreatorController implements Initializable {
                             if(!isEditing) { //Checks if the window is not in edit mode
                                 ticketTypeModel.addTicketTypes(ticketTypeObservableList, eventID);
                                 eventModel.editEvent(eventNameTxt.getText(), date, locationTxt.getText(), eventModel.convertStringToDouble(priceTxt.getText()), starttime, warningLabelTxt.getText(), eventID);
+                                eventManagerPageController.refreshTable();
                                 Stage stage =  (Stage) eventNameTxt.getScene().getWindow();
                                 stage.close();
                             }
                             if (isEditing){
                                 ticketTypeModel.addTicketTypes(editList, selectedEvent.getEventID());
                                 eventModel.editEvent(eventNameTxt.getText(), date, locationTxt.getText(), eventModel.convertStringToDouble(priceTxt.getText()), starttime, warningLabelTxt.getText(), selectedEvent.getEventID());
+                                eventManagerPageController.refreshTable();
                                 Stage stage =  (Stage) eventNameTxt.getScene().getWindow();
                                 stage.close();
                             }
