@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="475.0" prefWidth="850.0" stylesheets="@../CSS/EventManagerPage.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
+<AnchorPane prefHeight="475.0" prefWidth="850.0" stylesheets="@../CSS/EventManagerPage.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Gui.Controller.EventManagerPageController">
    <children>
       <TableView fx:id="eventTableView" layoutX="10.0" layoutY="50.0" onMousePressed="#selectEvent" prefHeight="370.0" prefWidth="425.0" styleClass="TableviewEvent_ticket" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
         <columns>
@@ -26,7 +26,7 @@
       </TableView>
       <Button layoutX="21.0" layoutY="427.0" mnemonicParsing="false" onAction="#addEventPress" styleClass="Button" text="Create Event" />
       <Button layoutX="137.0" layoutY="427.0" mnemonicParsing="false" onAction="#editEventPress" styleClass="Button" text="Edit Event" />
-      <Button layoutX="237.0" layoutY="427.0" mnemonicParsing="false" styleClass="Button" text="Delete Event" />
+      <Button layoutX="237.0" layoutY="427.0" mnemonicParsing="false" onAction="#deleteEventPress" styleClass="Button" text="Delete Event" />
       <Label layoutX="193.0" layoutY="14.0" text="Events">
          <font>
             <Font size="24.0" />
