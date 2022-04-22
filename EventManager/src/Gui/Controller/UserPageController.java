@@ -124,7 +124,6 @@ public class UserPageController {
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException e) {
-                System.out.println(e);
                 alertWarning("Failed to load the create/edit event window");
             }
         }

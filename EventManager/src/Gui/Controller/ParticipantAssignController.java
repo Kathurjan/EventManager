@@ -340,6 +340,7 @@ public class ParticipantAssignController implements Initializable {
     }
 
     @FXML
+<<<<<<< Updated upstream
     private void sendBTNPress(ActionEvent event) throws IOException, DALException {
         if(currentlyParticipatingTable.getSelectionModel().getSelectedItem() != null) {
             WritableImage writableImage = new WritableImage((int) ticketPane.getWidth(), (int) ticketPane.getHeight() - 2);
@@ -351,6 +352,13 @@ public class ParticipantAssignController implements Initializable {
         else {
             alertWarning("You need to select a current participant");
         }
+=======
+    private void sendBTNPress(ActionEvent event) throws IOException {
+        WritableImage writableImage = new WritableImage((int) ticketPane.getWidth(), (int) ticketPane.getHeight() -2);
+        ticketPane.snapshot(null, writableImage);
+        RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+        ImageIO.write(renderedImage, "png", new File("Res/ticket.png"));  //Write the snapshot to the chosen file
+>>>>>>> Stashed changes
     }
 
     private void setTicketBorder()

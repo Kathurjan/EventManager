@@ -25,7 +25,7 @@ public interface BLLInterface {
 
     Person verifyAdmin(String username, String password) throws DALException;
 
-    void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id);
+    void editEvent(String eventName, Date startDate, String eventLocation, double price, String startTime, String warningLabel, int id) throws DALException;
 
     double convertTextToDouble(String input) throws BLLException;
 

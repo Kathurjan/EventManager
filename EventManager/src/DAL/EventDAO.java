@@ -48,7 +48,7 @@ public class EventDAO {
         }
     }
 
-    public void editEvent(String eventName, java.sql.Date eventDate, String eventLocation, double eventPrice, String startTime, String warningLabel, int eventID) {
+    public void editEvent(String eventName, java.sql.Date eventDate, String eventLocation, double eventPrice, String startTime, String warningLabel, int eventID) throws DALException {
         try (Connection con = db.getConnection()) {
             String query = "UPDATE Event set EventName = ?, EventDate = ?, EventLocation = ?, EventPrice = ?, StartTime = ?, WarningLabel = ? WHERE id = ?";
             PreparedStatement pstm = con.prepareStatement(query);
@@ -61,7 +61,7 @@ public class EventDAO {
             pstm.setInt(7, eventID);
             pstm.executeUpdate(); // Executing the prepared statement with the specified parameters
         } catch (SQLException ex) {
-            System.out.println(ex);
+            throw new DALException("The Data access layer met with an error", ex);
         }
     }
 
@@ -89,17 +89,6 @@ public class EventDAO {
             throw new DALException("The Data access layer met with an error", throwables);
         }
         return eventsList;
-    }
-
-    public void deleteEvent(Event selectedEvent) throws DALException{
-        try(Connection con = db.getConnection()){
-            String query = "DELETE FROM Person WHERE id = ?";
-            PreparedStatement pstm = con.prepareStatement(query);
-            pstm.setInt(1,selectedEvent.getEventID());
-            pstm.executeUpdate(); // Executing the statement
-        } catch(SQLException throwables){
-            throw new DALException("The Data access layer met with an error", throwables);
-        }
     }
 
     public void deleteEventWithID(int eventID) throws DALException{
