@@ -61,7 +61,7 @@
 
 .collumnStyling {
     -fx-background-color: transparent;
-    -fx-text-background-color:white;
+    -fx-text-background-color:black;
     -fx-border-width:0.5;
     -fx-border-style: hidden dashed solid hidden;
     -fx-border-color:white;
